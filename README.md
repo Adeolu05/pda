@@ -53,7 +53,7 @@ Built with **React**, **TypeScript**, and **Framer Motion**, the site explores a
 
 ## 📬 Contact
 
-- **Email:** p.david.adeoluwa@gmail.com
+- **Email:** peluoladavid123@gmail.com
 - **LinkedIn:** [Peluola David Adeoluwa](https://linkedin.com/in/david-adeoluwa)
 - **Twitter:** [@davidadeoluwa_](https://x.com/davidadeoluwa_)
 
