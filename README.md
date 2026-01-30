@@ -1,7 +1,7 @@
 # David Adeoluwa | Frontend Architect & Web3 Creative Strategist
 
 <div align="center">
-  <img width="1200" alt="Portfolio Preview" src="/portfolio image - Imgur.jpg" />
+  <img width="1200" alt="Portfolio Preview" src="public/portfolio%20image%20-%20Imgur.jpg" />
 </div>
 
 ## 🚀 Overview
