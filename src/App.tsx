@@ -5,10 +5,12 @@ import WorkSection from './components/sections/WorkSection';
 import AboutSkills from './components/sections/AboutSkills';
 import Contact from './components/sections/Contact';
 import Resume from './components/sections/Resume';
+import SEO from './components/common/SEO';
 
 const App: React.FC = () => {
   return (
     <MainLayout>
+      <SEO />
       <header>
         <Hero />
       </header>
