@@ -15,7 +15,7 @@ export const SOCIAL_LINKS = {
 };
 
 export const CONTACT_INFO = {
-    email: "peluoladavid123$@gmail.com",
+    email: "hello@dpeluola.com",
     label: "Peluola David Adeoluwa",
     shortName: "P.D.A",
     domain: "dpeluola.com",
