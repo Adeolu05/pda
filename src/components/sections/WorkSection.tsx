@@ -5,54 +5,94 @@ import { ArrowUpRight, X, ExternalLink } from 'lucide-react';
 const projects = [
     {
         id: 1,
-        title: 'BCCS Hub',
-        desc: 'Landing page for Blue Collar Crypto Society, empowering community members with crypto literacy.',
-        tag: 'Web / Brand',
-        img: 'https://i.imgur.com/MPAYCq0.png',
-        link: 'https://bccshub.com'
+        title: 'Forever Yours',
+        desc: 'An interactive, emotion-driven Valentine’s Day web application designed to create shareable, personalized digital experiences with smooth UI constraints.',
+        tag: 'Web Application / UX Design',
+        img: '/images/work/forever-yours.png',
+        link: 'https://valentine.dpeluola.com'
     },
     {
         id: 2,
-        title: 'Onion Price Bot',
-        desc: 'A Python-powered Telegram bot delivering real-time meme project analytics, including price, market cap, and volume updates.',
-        tag: 'Python / Automation',
-        img: 'https://i.imgur.com/pkkAa0O.jpeg',
-        link: 'https://t.me/myoniontokenupdate_bot'
+        title: 'BCCS Hub',
+        desc: 'Landing page for Blue Collar Crypto Society, empowering community members with crypto literacy.',
+        tag: 'Web / Brand',
+        img: '/images/work/bccs-hub.png',
+        link: 'https://bccshub.com'
     },
     {
         id: 3,
-        title: 'Chain Alephium',
-        desc: 'Fun, educational Web3 content series explaining the Alephium ecosystem through high-energy visual storytelling.',
-        tag: 'Web3 Content Creation',
-        img: 'https://i.imgur.com/Oef9GhS.jpeg',
-        link: 'https://www.tiktok.com/@chain.alephium'
+        title: 'Chef Olamide',
+        desc: 'A premium, high-fidelity culinary portfolio for a UK-based Chef de Partie, showcasing modern gastronomy and professional kitchen experience.',
+        tag: 'Web Architecture',
+        img: '/images/work/chef-olamide.png',
+        link: 'https://chefolamide.com'
     }
 ];
 
 const archiveProjects = [
     {
         id: 4,
-        title: 'Inboxx',
-        desc: 'A sophisticated platform enabling users to connect with creators through paid messaging, built with modern frontend architecture.',
-        tag: 'Web Platform',
-        img: 'https://i.imgur.com/7kK4DUZ.png',
-        link: 'https://inboxx-1e45.vercel.app/'
+        title: 'Onion Price Bot',
+        desc: 'A Python-powered Telegram bot delivering real-time meme project analytics, including price, market cap, and volume updates.',
+        tag: 'Python / Automation',
+        img: '/images/work/onion-price-bot.jpg',
+        link: 'https://t.me/myoniontokenupdate_bot'
     },
     {
         id: 5,
-        title: 'Hijo Masterpieces',
-        desc: 'A timeless landing page for a luxury timepiece brand, focusing on high-end aesthetics.',
-        tag: 'E-Commerce / Web',
-        img: 'https://i.imgur.com/6YiyNnq.png',
-        link: 'https://hijo.vercel.app/'
+        title: 'Chain Alephium',
+        desc: 'Fun, educational Web3 content series explaining the Alephium ecosystem through high-energy visual storytelling.',
+        tag: 'Web3 Content Creation',
+        img: '/images/work/chain-alephium.jpg',
+        link: 'https://www.tiktok.com/@chain.alephium'
     },
     {
         id: 6,
+        title: 'Inboxx',
+        desc: 'A sophisticated platform enabling users to connect with creators through paid messaging, built with modern frontend architecture.',
+        tag: 'Web Platform',
+        img: '/images/work/inboxx.png',
+        link: 'https://inboxx-1e45.vercel.app/'
+    },
+    {
+        id: 7,
+        title: 'Hijo Masterpieces',
+        desc: 'A timeless landing page for a luxury timepiece brand, focusing on high-end aesthetics.',
+        tag: 'E-Commerce / Web',
+        img: '/images/work/hijo-masterpieces.png',
+        link: 'https://hijo.vercel.app/'
+    },
+    {
+        id: 8,
         title: 'Babelonsol',
         desc: 'Converting AI-generated static imagery into viral TikTok content for the Babel ecosystem on Solana.',
         tag: 'Web3 / Content',
-        img: 'https://i.imgur.com/e0D3LcP.jpeg',
+        img: '/images/work/babelonsol.jpg',
         link: 'https://www.tiktok.com/@babelonsol'
+    },
+    {
+        id: 9,
+        title: 'Grok Freedom',
+        desc: 'Official platform and Web3 creative strategy hub for the Grok Freedom ecosystem, bridging technical blockchain concepts with community engagement.',
+        tag: 'Web3 / Digital Strategy',
+        img: '/images/work/grok-freedom.png',
+        link: 'https://grokfreedom.com'
+    },
+    {
+        id: 10,
+        title: 'Herdentity',
+        desc: 'A sleek, modern landing page dedicated to identity-rooted confidence for women, featuring sections for mentorship, community building, and leadership skills.',
+        tag: 'Frontend Engineering',
+        img: '/images/work/herdentity.png',
+        link: 'https://herdentity.vercel.app'
+    },
+    {
+        id: 11,
+        title: 'Hijo Platform',
+        desc: 'A modern, responsive web interface engineered with optimal frontend architecture for high performance and a streamlined user experience.',
+        tag: 'React Application',
+        img: '/images/work/hijo-platform.png',
+        link: 'https://hijo.vercel.app'
     }
 ];
 
@@ -61,7 +101,7 @@ const WorkSection: React.FC = () => {
 
     return (
         <div className="relative">
-            <header className="mb-20 md:mb-24">
+            <header className="mb-12 md:mb-16">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
@@ -75,7 +115,7 @@ const WorkSection: React.FC = () => {
                 </motion.div>
             </header>
 
-            <div className="grid grid-cols-1 gap-20 md:gap-32">
+            <div className="grid grid-cols-1 gap-12 md:gap-20">
                 {projects.map((project, idx) => (
                     <motion.div
                         key={project.id}
@@ -116,7 +156,7 @@ const WorkSection: React.FC = () => {
                 ))}
             </div>
 
-            <div className="mt-32 flex justify-center">
+            <div className="mt-16 flex justify-center">
                 <motion.button
                     onClick={() => setIsArchiveOpen(true)}
                     whileHover={{ scale: 1.05 }}

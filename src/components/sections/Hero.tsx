@@ -27,11 +27,9 @@ const Hero: React.FC = () => {
             color: '#FFFFFF',
             textColor: '#0F172A',
             target: '#work',
-            parallaxSpeed: -0.1,
-            position: 'top-[26%] left-[6%] md:top-[30%] md:left-[10%] lg:top-[22%] lg:left-[22%]',
+            position: 'top-[15%] -left-20 sm:-left-24 md:-left-44',
             rotation: -4,
-            glow: 'shadow-[0_0_30px_rgba(139,92,246,0.15)]',
-            jumpDelay: 0
+            glow: 'shadow-[0_0_30px_rgba(139,92,246,0.15)]'
         },
         {
             label: 'My Story',
@@ -39,11 +37,9 @@ const Hero: React.FC = () => {
             color: '#8B5CF6',
             textColor: '#FFFFFF',
             target: '#about',
-            parallaxSpeed: -0.12,
-            position: 'top-[28%] right-[6%] md:top-[28%] md:right-[10%] lg:right-[22%]',
+            position: 'top-[15%] -right-20 sm:-right-24 md:-right-44',
             rotation: 6,
-            glow: 'shadow-[0_0_40px_rgba(139,92,246,0.4)]',
-            jumpDelay: 0.2
+            glow: 'shadow-[0_0_40px_rgba(139,92,246,0.4)]'
         },
         {
             label: 'Digital Lab',
@@ -51,11 +47,9 @@ const Hero: React.FC = () => {
             color: '#1E1B4B',
             textColor: '#E0E7FF',
             target: '#work',
-            parallaxSpeed: 0.1,
-            position: 'bottom-[38%] left-[6%] md:bottom-[40%] md:left-[10%] lg:bottom-[24%] lg:left-[24%]',
+            position: 'bottom-[15%] -left-20 sm:-left-24 md:-left-44',
             rotation: 3,
-            glow: 'shadow-[0_0_30_px_rgba(79,70,229,0.2)]',
-            jumpDelay: 0.4
+            glow: 'shadow-[0_0_30_px_rgba(79,70,229,0.2)]'
         },
         {
             label: 'Say Hello',
@@ -63,11 +57,9 @@ const Hero: React.FC = () => {
             color: '#0F172A',
             textColor: '#FFFFFF',
             target: '#contact',
-            parallaxSpeed: 0.12,
-            position: 'bottom-[42%] right-[6%] md:bottom-[42%] md:right-[10%] lg:bottom-[28%] lg:right-[24%]',
+            position: 'bottom-[15%] -right-20 sm:-right-24 md:-right-44',
             rotation: -6,
-            glow: 'shadow-[0_0_20px_rgba(0,0,0,0.1)]',
-            jumpDelay: 0.6
+            glow: 'shadow-[0_0_20px_rgba(0,0,0,0.1)]'
         }
     ];
 
@@ -127,129 +119,136 @@ const Hero: React.FC = () => {
 
             {/* Central Portrait Container */}
             <div className="relative z-40 px-4 flex flex-col items-center">
-                <motion.div
-                    initial={{ y: 50, opacity: 0, scale: 0.9, rotateY: 20 }}
-                    animate={{ y: 0, opacity: 1, scale: 1, rotateY: 0 }}
-                    transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
-                    className="relative group p-2 md:p-4 bg-white/60 backdrop-blur-2xl border border-white/40 shadow-2xl rounded-[2.2rem] md:rounded-[3rem] transform-gpu"
-                >
-                    <div className="w-[220px] sm:w-[280px] md:w-[360px] lg:w-[380px] aspect-[4/5] bg-slate-950 rounded-[1.8rem] md:rounded-[2.4rem] relative overflow-hidden flex items-center justify-center">
-                        {!imageError ? (
-                            <motion.img
-                                initial={{ scale: 1.8 }}
-                                animate={{ scale: 1.5 }}
-                                transition={{ duration: 2, ease: "easeOut" }}
-                                src={PROFILE_IMAGE}
-                                onError={() => setImageError(true)}
-                                alt="Peluola David Adeoluwa"
-                                className="w-full h-full object-cover object-center brightness-[0.55] contrast-[1.2] transition-all duration-1000 group-hover:brightness-[0.65] group-hover:scale-[1.55] transform-gpu"
-                            />
-                        ) : (
-                            <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center p-12 text-center gap-4">
-                                <span className="text-white font-display italic text-6xl opacity-40">PDA</span>
-                                <p className="text-white/20 text-[8px] uppercase tracking-widest font-bold">Image load failed</p>
+                <div className="relative">
+                    {/* Navigation Links - Anchored to Frame */}
+                    {menuItems.map((item, idx) => (
+                        <motion.a
+                            key={idx}
+                            href={item.target}
+                            onClick={(e) => scrollToSection(e, item.target)}
+                            style={{
+                                backgroundColor: item.color,
+                                color: item.textColor
+                            }}
+                            initial={{ opacity: 0, x: idx % 2 === 0 ? -20 : 20 }}
+                            animate={{
+                                opacity: 1,
+                                x: 0,
+                                rotate: item.rotation
+                            }}
+                            whileHover={{
+                                scale: 1.05,
+                                rotate: 0,
+                                boxShadow: "0 25px 50px rgba(139,92,246,0.2)",
+                                zIndex: 70
+                            }}
+                            whileTap={{ scale: 0.95 }}
+                            transition={{
+                                opacity: { delay: 2.5 + idx * 0.1 },
+                                x: { delay: 2.5 + idx * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] },
+                                rotate: { delay: 3 }
+                            }}
+                            className={`
+                                absolute z-50 flex items-center gap-2 md:gap-3 px-4 md:px-7 py-2 md:py-3.5 rounded-full border border-slate-200 font-bold md:font-black shadow-xl cursor-pointer text-[8px] md:text-[10px] uppercase tracking-widest transition-all group/label transform-gpu whitespace-nowrap
+                                ${item.position} ${item.glow}
+                            `}
+                        >
+                            <div className="flex items-center gap-2 md:gap-3">
+                                <div className="p-0.5 md:p-1 bg-black/5 rounded-full">
+                                    {item.icon}
+                                </div>
+                                <span>{item.label}</span>
+                                <ArrowUpRight className="w-2.5 h-2.5 md:w-3.5 md:h-3.5 opacity-40 group-hover/label:opacity-100 group-hover/label:translate-x-0.5 md:group-hover/label:translate-x-1 group-hover/label:-translate-y-0.5 md:group-hover/label:-translate-y-1 transition-all" />
                             </div>
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-40"></div>
-                    </div>
+                        </motion.a>
+                    ))}
 
-                    {/* Jumping 'Available' badge */}
                     <motion.div
-                        initial={{ opacity: 0, x: 20, rotate: 15 }}
-                        animate={{
-                            opacity: 1,
-                            x: 0,
-                            y: [0, -4, 0],
-                            rotate: [15, 13, 15]
-                        }}
-                        transition={{
-                            opacity: { delay: 2 },
-                            x: { delay: 2 },
-                            y: { repeat: Infinity, duration: 4, ease: "easeInOut" },
-                            rotate: { repeat: Infinity, duration: 4, ease: "easeInOut" }
-                        }}
-                        className="absolute -top-2 -right-2 md:top-6 md:-right-6 bg-slate-950 px-3 py-1.5 md:px-5 md:py-2.5 rounded-full border border-white/10 shadow-2xl z-[60] flex items-center gap-2 pointer-events-none transform-gpu"
+                        initial={{ y: 50, opacity: 0, scale: 0.9, rotateY: 20 }}
+                        animate={{ y: 0, opacity: 1, scale: 1, rotateY: 0 }}
+                        transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                        className="relative group p-2 md:p-4 bg-white/60 backdrop-blur-2xl border border-white/40 shadow-2xl rounded-[2.2rem] md:rounded-[3rem] transform-gpu"
                     >
-                        <div className="w-1.5 md:w-2.5 h-1.5 md:h-2.5 bg-green-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(74,222,128,0.5)]"></div>
-                        <span className="text-[8px] md:text-[11px] font-black uppercase tracking-widest text-white">Available Now</span>
+                        <div className="w-[220px] sm:w-[280px] md:w-[360px] lg:w-[380px] aspect-[4/5] bg-slate-950 rounded-[1.8rem] md:rounded-[2.4rem] relative overflow-hidden flex items-center justify-center">
+                            {!imageError ? (
+                                <motion.img
+                                    initial={{ scale: 1.8 }}
+                                    animate={{ scale: 1.5 }}
+                                    transition={{ duration: 2, ease: "easeOut" }}
+                                    src={PROFILE_IMAGE}
+                                    onError={() => setImageError(true)}
+                                    alt="Peluola David Adeoluwa"
+                                    className="w-full h-full object-cover object-center brightness-[0.55] contrast-[1.2] transition-all duration-1000 group-hover:brightness-[0.65] group-hover:scale-[1.55] transform-gpu"
+                                />
+                            ) : (
+                                <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center p-12 text-center gap-4">
+                                    <span className="text-white font-display italic text-6xl opacity-40">PDA</span>
+                                    <p className="text-white/20 text-[8px] uppercase tracking-widest font-bold">Image load failed</p>
+                                </div>
+                            )}
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-40"></div>
+                        </div>
+
+                        {/* Available badge */}
+                        <motion.div
+                            initial={{ opacity: 0, x: 20, rotate: 15 }}
+                            animate={{
+                                opacity: 1,
+                                x: 0,
+                                y: [0, -4, 0],
+                                rotate: [15, 13, 15]
+                            }}
+                            transition={{
+                                opacity: { delay: 2 },
+                                x: { delay: 2 },
+                                y: { repeat: Infinity, duration: 4, ease: "easeInOut" },
+                                rotate: { repeat: Infinity, duration: 4, ease: "easeInOut" }
+                            }}
+                            className="absolute -top-2 -right-2 md:top-6 md:-right-6 bg-slate-950 px-3 py-1.5 md:px-5 md:py-2.5 rounded-full border border-white/10 shadow-2xl z-[60] flex items-center gap-2 pointer-events-none transform-gpu"
+                        >
+                            <div className="w-1.5 md:w-2.5 h-1.5 md:h-2.5 bg-green-400 rounded-full animate-pulse shadow-[0_0_10px_rgba(74,222,128,0.5)]"></div>
+                            <span className="text-[8px] md:text-[11px] font-black uppercase tracking-widest text-white">Available Now</span>
+                        </motion.div>
                     </motion.div>
-                </motion.div>
+                </div>
 
                 {/* Name Title */}
                 <div className="mt-8 text-center overflow-hidden pointer-events-none">
                     <motion.h1
-                        initial={{ y: 50, opacity: 0 }}
+                        initial={{ y: 100, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1, delay: 1.8 }}
+                        transition={{ duration: 1.2, delay: 1, ease: [0.16, 1, 0.3, 1] }}
                         className="text-slate-900 text-4xl md:text-7xl font-display italic mb-2 tracking-[-0.03em] leading-none"
                     >
-                        Peluola David Adeoluwa
+                        {Array.from("Peluola David Adeoluwa").map((char, i) => (
+                            <motion.span
+                                key={i}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.5, delay: 1.2 + i * 0.03 }}
+                            >
+                                {char}
+                            </motion.span>
+                        ))}
                     </motion.h1>
                     <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: "100%" }}
-                        transition={{ duration: 1, delay: 2.2 }}
+                        transition={{ duration: 1.5, delay: 2, ease: "easeInOut" }}
                         className="h-[0.5px] md:h-px bg-gradient-to-r from-transparent via-violet-600/30 to-transparent mb-2"
                     />
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
+                    <motion.div
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 1, delay: 2.5 }}
-                        className="text-slate-500 text-[8px] md:text-xs uppercase tracking-[0.4em] md:tracking-[0.5em] font-bold"
+                        className="flex flex-col items-center gap-2"
                     >
-                        Frontend Architect • Web3 Creative Strategist
-                    </motion.p>
+                        <p className="text-slate-500 text-[8px] md:text-xs uppercase tracking-[0.4em] md:tracking-[0.5em] font-bold">
+                            Frontend Architect • Web3 Creative Strategist
+                        </p>
+                    </motion.div>
                 </div>
             </div>
-
-            {/* Interactive Labels */}
-            {menuItems.map((item, idx) => {
-                const itemY = useTransform(smoothScrollY, [0, 1000], [0, 1000 * item.parallaxSpeed], { clamp: true });
-
-                return (
-                    <motion.a
-                        key={idx}
-                        href={item.target}
-                        onClick={(e) => scrollToSection(e, item.target)}
-                        style={{
-                            backgroundColor: item.color,
-                            color: item.textColor,
-                            y: itemY
-                        }}
-                        initial={{ opacity: 0, scale: 0, rotate: 0 }}
-                        animate={{
-                            opacity: 1,
-                            scale: 1,
-                            rotate: item.rotation
-                        }}
-                        whileHover={{
-                            scale: 1.05,
-                            rotate: 0,
-                            boxShadow: "0 25px 50px rgba(139,92,246,0.3)",
-                            zIndex: 70
-                        }}
-                        whileTap={{ scale: 0.95 }}
-                        transition={{
-                            opacity: { delay: 2.2 + idx * 0.15 },
-                            scale: { delay: 2.2 + idx * 0.15, type: "spring" },
-                            rotate: { delay: 2.2 + idx * 0.15, type: "spring" }
-                        }}
-                        className={`
-              absolute z-50 flex items-center gap-2 md:gap-3 px-3.5 md:px-9 py-2 md:py-4 rounded-full border border-slate-200 font-bold md:font-black shadow-xl cursor-pointer text-[8px] md:text-xs uppercase tracking-widest transition-all group/label transform-gpu
-              ${item.position} ${item.glow}
-            `}
-                    >
-                        {/* Content container - animation removed for stability */}
-                        <div className="flex items-center gap-2 md:gap-3">
-                            <div className="p-0.5 md:p-1 bg-black/5 rounded-full">
-                                {item.icon}
-                            </div>
-                            <span className="whitespace-nowrap">{item.label}</span>
-                            <ArrowUpRight className="w-2.5 h-2.5 md:w-4 md:h-4 opacity-40 group-hover/label:opacity-100 group-hover/label:translate-x-0.5 md:group-hover/label:translate-x-1 group-hover/label:-translate-y-0.5 md:group-hover/label:-translate-y-1 transition-all" />
-                        </div>
-                    </motion.a>
-                );
-            })}
 
             {/* Decorative Side Text */}
             <motion.div

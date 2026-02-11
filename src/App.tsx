@@ -15,7 +15,7 @@ const App: React.FC = () => {
         <Hero />
       </header>
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-16 md:py-24 space-y-24 md:space-y-32">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12 py-12 md:py-20 space-y-12 md:space-y-20">
         <section id="work" className="scroll-mt-24">
           <WorkSection />
         </section>

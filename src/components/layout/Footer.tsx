@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
     ];
 
     return (
-        <footer className="py-24 border-t border-slate-100 flex flex-col items-center gap-12">
+        <footer className="py-12 border-t border-slate-100 flex flex-col items-center gap-8">
             <div className="flex flex-col items-center gap-4">
                 <div className="text-slate-900 font-display italic text-4xl">{CONTACT_INFO.shortName}</div>
                 <div className="h-px w-12 bg-violet-600/20"></div>
