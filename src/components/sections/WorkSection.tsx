@@ -101,55 +101,60 @@ const WorkSection: React.FC = () => {
 
     return (
         <div className="relative">
-            <header className="mb-12 md:mb-16">
+            <header className="mb-20 md:mb-32">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="flex flex-col gap-4"
+                    className="flex flex-col gap-6"
                 >
-                    <span className="text-[10px] font-black uppercase tracking-[0.4em] text-violet-600/60">Selected Portfolio / 2022-25</span>
-                    <h2 className="text-[12vw] md:text-[8vw] font-display italic text-slate-900 leading-[0.8] tracking-[-0.04em]">
+                    <span className="text-[10px] font-black uppercase tracking-[0.5em] text-violet-600/80">Selected Portfolio / 2022-25</span>
+                    <h2 className="text-[12vw] md:text-[9vw] font-display italic text-slate-950 leading-[0.75] tracking-[-0.04em]">
                         Digital <br /> <span className="text-violet-600">Creations.</span>
                     </h2>
                 </motion.div>
             </header>
 
-            <div className="grid grid-cols-1 gap-12 md:gap-20">
+            <div className="flex flex-col gap-32 md:gap-48">
                 {projects.map((project, idx) => (
                     <motion.div
                         key={project.id}
                         initial={{ opacity: 0, y: 60 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                        className="group grid grid-cols-1 lg:grid-cols-12 gap-8 md:gap-12 items-center"
+                        transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                        className={`group grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center ${idx % 2 === 1 ? 'lg:direction-rtl' : ''
+                            }`}
                     >
-                        <div className="lg:col-span-7 overflow-hidden rounded-[2rem] md:rounded-[3rem] bg-slate-100 aspect-[16/10] relative shadow-2xl border border-slate-100">
+                        <div className={`lg:col-span-7 overflow-hidden rounded-[2.5rem] md:rounded-[4rem] bg-slate-100 aspect-[16/10] relative shadow-2xl border border-slate-100/50 group-hover:shadow-violet-600/10 transition-all duration-700 ${idx % 2 === 1 ? 'lg:order-last' : ''
+                            }`}>
                             <motion.img
                                 src={project.img}
                                 alt={project.title}
-                                className="w-full h-full object-cover transition-all duration-1000 group-hover:scale-105"
+                                className="w-full h-full object-cover transition-all duration-[1.5s] group-hover:scale-105"
                             />
                             <div className="absolute inset-0 bg-violet-600/5 mix-blend-multiply opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                         </div>
 
-                        <div className="lg:col-span-5 flex flex-col items-start px-4">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.3em] text-slate-400 mb-6">0{idx + 1} // {project.tag}</span>
-                            <h3 className="text-5xl md:text-7xl font-display italic text-slate-900 mb-6 leading-none tracking-tight transition-colors group-hover:text-violet-600">
+                        <div className="lg:col-span-5 flex flex-col items-start px-4 lg:px-8">
+                            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400 mb-8 flex items-center gap-4">
+                                <span className="w-8 h-[1px] bg-slate-200"></span>
+                                0{idx + 1} // {project.tag}
+                            </span>
+                            <h3 className="text-5xl md:text-6xl font-display italic text-slate-950 mb-8 leading-[0.9] tracking-tight transition-colors group-hover:text-violet-600">
                                 {project.title}
                             </h3>
-                            <p className="text-slate-500 text-lg md:text-xl leading-relaxed mb-10 text-balance font-light">
+                            <p className="text-slate-500 text-lg md:text-xl leading-relaxed mb-12 text-balance font-light max-w-md">
                                 {project.desc}
                             </p>
                             <a
                                 href={project.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group/link flex items-center gap-2 text-slate-900 font-black text-[10px] uppercase tracking-[0.2em] border-b border-slate-900 pb-1 hover:text-violet-600 hover:border-violet-600 transition-all"
+                                className="group/link flex items-center gap-3 text-slate-950 font-black text-[10px] uppercase tracking-[0.3em] border-b-2 border-slate-950 pb-2 hover:text-violet-600 hover:border-violet-600 transition-all duration-300"
                             >
                                 Launch Experience
-                                <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5" />
+                                <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
                             </a>
                         </div>
                     </motion.div>
