@@ -6,7 +6,7 @@ const projects = [
     {
         id: 1,
         title: 'Forever Yours',
-        desc: 'An interactive, emotion-driven Valentine’s Day web application designed to create shareable, personalized digital experiences with smooth UI constraints.',
+        desc: "An interactive, emotion-driven Valentine's Day web application designed to create shareable, personalized digital experiences with smooth UI constraints.",
         tag: 'Web Application / UX Design',
         img: '/images/work/forever-yours.png',
         link: 'https://valentine.dpeluola.com'
@@ -108,7 +108,7 @@ const WorkSection: React.FC = () => {
                     viewport={{ once: true }}
                     className="flex flex-col gap-6"
                 >
-                    <span className="text-[10px] font-black uppercase tracking-[0.5em] text-violet-600/80">Selected Portfolio / 2022-25</span>
+                    <span className="text-[10px] font-black uppercase tracking-[0.5em] text-violet-600/80">Selected Portfolio / 2022-26</span>
                     <h2 className="text-[12vw] md:text-[9vw] font-display italic text-slate-950 leading-[0.75] tracking-[-0.04em]">
                         Digital <br /> <span className="text-violet-600">Creations.</span>
                     </h2>
@@ -123,8 +123,7 @@ const WorkSection: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: "-100px" }}
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                        className={`group grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center ${idx % 2 === 1 ? 'lg:direction-rtl' : ''
-                            }`}
+                        className="group grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center"
                     >
                         <div className={`lg:col-span-7 overflow-hidden rounded-[2.5rem] md:rounded-[4rem] bg-slate-100 aspect-[16/10] relative shadow-2xl border border-slate-100/50 group-hover:shadow-violet-600/10 transition-all duration-700 ${idx % 2 === 1 ? 'lg:order-last' : ''
                             }`}>

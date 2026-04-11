@@ -51,13 +51,16 @@ const Resume: React.FC = () => {
                             The Path <br /> <span className="text-violet-600">Taken.</span>
                         </h2>
                     </div>
-                    <motion.button
+                    <motion.a
+                        href="/Peluola_David_Resume.docx"
+                        target="_blank"
+                        rel="noopener noreferrer"
                         whileHover={{ y: -5 }}
                         className="flex items-center gap-4 px-8 py-4 bg-slate-950 text-white rounded-full font-black text-[10px] uppercase tracking-[0.3em] hover:bg-violet-600 transition-all shadow-xl"
                     >
                         <Download className="w-4 h-4" />
-                        Download PDF
-                    </motion.button>
+                        View Resume
+                    </motion.a>
                 </header>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20">

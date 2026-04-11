@@ -1,4 +1,4 @@
-export const PROFILE_IMAGE = "/portfolio image - Imgur.jpg";
+export const PROFILE_IMAGE = "/profile.jpg";
 
 export const NAV_ITEMS = [
     { label: 'Work', href: '#work' },

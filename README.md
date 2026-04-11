@@ -1,7 +1,7 @@
 # David Adeoluwa | Frontend Architect & Web3 Creative Strategist
 
 <div align="center">
-  <img width="1200" alt="Portfolio Preview" src="public/portfolio%20image%20-%20Imgur.jpg" />
+  <img width="1200" alt="Portfolio Preview" src="public/profile.jpg" />
 </div>
 
 ## 🚀 Overview
@@ -53,12 +53,13 @@ Built with **React**, **TypeScript**, and **Framer Motion**, the site explores a
 
 ## 📬 Contact
 
-- **Email:** peluoladavid123@gmail.com
-- **LinkedIn:** [Peluola David Adeoluwa](https://linkedin.com/in/david-adeoluwa)
-- **Twitter:** [@davidadeoluwa_](https://x.com/davidadeoluwa_)
+- **Email:** hello@dpeluola.com
+- **LinkedIn:** [Peluola David Adeoluwa](https://linkedin.com/in/david-peluola-6b45761b4)
+- **Twitter:** [@alphvibes](https://twitter.com/alphvibes)
+- **GitHub:** [Adeolu05](https://github.com/Adeolu05)
 
 ---
 
 <div align="center">
-  Built with React & Precision by David Adeoluwa © 2025
+  Built with React & Precision by David Adeoluwa © 2026
 </div>

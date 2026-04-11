@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
-import { Briefcase, User, Beaker, Mail, ArrowUpRight } from 'lucide-react';
+import { Briefcase, User, FileText, Mail, ArrowUpRight } from 'lucide-react';
 import { PROFILE_IMAGE } from '../../config/constants';
 
 const Hero: React.FC = () => {
@@ -42,14 +42,14 @@ const Hero: React.FC = () => {
             glow: 'shadow-[0_0_40px_rgba(139,92,246,0.4)]'
         },
         {
-            label: 'Digital Lab',
-            icon: <Beaker className="w-3.5 h-3.5 md:w-5 md:h-5" />,
+            label: 'My Resume',
+            icon: <FileText className="w-3.5 h-3.5 md:w-5 md:h-5" />,
             color: '#1E1B4B',
             textColor: '#E0E7FF',
-            target: '#work',
+            target: '#resume',
             position: 'bottom-[15%] -left-20 sm:-left-24 md:-left-44',
             rotation: 3,
-            glow: 'shadow-[0_0_30_px_rgba(79,70,229,0.2)]'
+            glow: 'shadow-[0_0_30px_rgba(79,70,229,0.2)]'
         },
         {
             label: 'Say Hello',

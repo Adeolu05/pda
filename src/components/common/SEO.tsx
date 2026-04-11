@@ -8,9 +8,9 @@ interface SEOProps {
 }
 
 export default function SEO({
-    title = "D. Peluola | Software Developer",
-    description = "Portfolio of D. Peluola, a Software Developer specializing in React and TypeScript.",
-    name = "D. Peluola",
+    title = "David Adeoluwa | Frontend Architect",
+    description = "Peluola David Adeoluwa is a Frontend Architect and Web3 Creative Strategist specializing in high-fidelity web interfaces, React development, and visual storytelling.",
+    name = "Peluola David Adeoluwa",
     type = "website"
 }: SEOProps) {
     return (
