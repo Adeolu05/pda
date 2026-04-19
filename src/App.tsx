@@ -1,4 +1,5 @@
 import React from 'react';
+import { Analytics } from "@vercel/analytics/react";
 import MainLayout from './components/layout/MainLayout';
 import Hero from './components/sections/Hero';
 import WorkSection from './components/sections/WorkSection';
@@ -32,6 +33,7 @@ const App: React.FC = () => {
           <Resume />
         </section>
       </div>
+      <Analytics />
     </MainLayout>
   );
 };
