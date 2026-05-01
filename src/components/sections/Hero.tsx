@@ -178,6 +178,11 @@ const Hero: React.FC = () => {
                                     src={PROFILE_IMAGE}
                                     onError={() => setImageError(true)}
                                     alt="Peluola David Adeoluwa"
+                                    width={760}
+                                    height={950}
+                                    loading="eager"
+                                    decoding="async"
+                                    fetchPriority="high"
                                     className="w-full h-full object-cover object-center brightness-[0.55] contrast-[1.2] transition-all duration-1000 group-hover:brightness-[0.65] group-hover:scale-[1.55] transform-gpu"
                                 />
                             ) : (

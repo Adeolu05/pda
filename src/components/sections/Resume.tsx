@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Download, Layers, MessageSquare, Code2, Globe, Cpu } from 'lucide-react';
+import { Download, ExternalLink, Layers, MessageSquare, Code2, Globe, Cpu } from 'lucide-react';
+import { RESUME_FILES } from '../../config/constants';
 
 const Resume: React.FC = () => {
     const experiences = [
@@ -51,16 +52,27 @@ const Resume: React.FC = () => {
                             The Path <br /> <span className="text-violet-600">Taken.</span>
                         </h2>
                     </div>
-                    <motion.a
-                        href="/Peluola_David_Resume.docx"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        whileHover={{ y: -5 }}
-                        className="flex items-center gap-4 px-8 py-4 bg-slate-950 text-white rounded-full font-black text-[10px] uppercase tracking-[0.3em] hover:bg-violet-600 transition-all shadow-xl"
-                    >
-                        <Download className="w-4 h-4" />
-                        View Resume
-                    </motion.a>
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 w-full md:w-auto">
+                        <motion.a
+                            href={RESUME_FILES.pdf}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            whileHover={{ y: -5 }}
+                            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-950 text-white rounded-full font-black text-[10px] uppercase tracking-[0.3em] hover:bg-violet-600 transition-all shadow-xl"
+                        >
+                            <ExternalLink className="w-4 h-4" aria-hidden />
+                            View resume
+                        </motion.a>
+                        <motion.a
+                            href={RESUME_FILES.docx}
+                            download="Peluola_David_Resume.docx"
+                            whileHover={{ y: -5 }}
+                            className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-black text-[10px] uppercase tracking-[0.3em] border-2 border-slate-200 text-slate-900 hover:border-violet-600 hover:text-violet-600 transition-all"
+                        >
+                            <Download className="w-4 h-4" aria-hidden />
+                            Word (.docx)
+                        </motion.a>
+                    </div>
                 </header>
 
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20">

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Mail, ArrowRight, Instagram, Linkedin, Github } from 'lucide-react';
-import { SOCIAL_LINKS, CONTACT_INFO } from '../../config/constants';
+import { SOCIAL_LINKS, CONTACT_INFO, CONTACT_PRIVACY_NOTE } from '../../config/constants';
 import XIcon from '../common/XIcon';
 
 const Contact: React.FC = () => {
@@ -12,10 +12,10 @@ const Contact: React.FC = () => {
     });
 
     const socialLinks = [
-        { Icon: Github, href: SOCIAL_LINKS.github },
-        { Icon: Linkedin, href: SOCIAL_LINKS.linkedIn },
-        { Icon: XIcon, href: SOCIAL_LINKS.twitter },
-        { Icon: Instagram, href: SOCIAL_LINKS.instagram }
+        { Icon: Github, href: SOCIAL_LINKS.github, label: 'GitHub' },
+        { Icon: Linkedin, href: SOCIAL_LINKS.linkedIn, label: 'LinkedIn' },
+        { Icon: XIcon, href: SOCIAL_LINKS.twitter, label: 'X (Twitter)' },
+        { Icon: Instagram, href: SOCIAL_LINKS.instagram, label: 'Instagram' }
     ];
 
     const handleSubmit = (e: React.FormEvent) => {
@@ -48,16 +48,17 @@ const Contact: React.FC = () => {
                         </a>
 
                         <div className="pt-8 flex gap-6">
-                            {socialLinks.map(({ Icon, href }, i) => (
+                            {socialLinks.map(({ Icon, href, label }, i) => (
                                 <motion.a
                                     key={i}
                                     whileHover={{ y: -5, scale: 1.1 }}
                                     href={href}
                                     target="_blank"
                                     rel="noopener noreferrer"
+                                    aria-label={label}
                                     className="text-slate-500 hover:text-white transition-colors"
                                 >
-                                    <Icon className="w-6 h-6" />
+                                    <Icon className="w-6 h-6" aria-hidden />
                                 </motion.a>
                             ))}
                         </div>
@@ -99,6 +100,9 @@ const Contact: React.FC = () => {
                                 placeholder="What are we building?"
                             />
                         </div>
+                        <p id="contact-privacy" className="text-slate-500 text-xs md:text-sm font-light leading-relaxed">
+                            {CONTACT_PRIVACY_NOTE}
+                        </p>
                         <motion.button
                             type="submit"
                             whileHover={{ scale: 1.02 }}

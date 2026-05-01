@@ -6,10 +6,10 @@ import XIcon from '../common/XIcon';
 
 const Footer: React.FC = () => {
     const socialLinks = [
-        { Icon: Github, href: SOCIAL_LINKS.github },
-        { Icon: Linkedin, href: SOCIAL_LINKS.linkedIn },
-        { Icon: XIcon, href: SOCIAL_LINKS.twitter },
-        { Icon: Instagram, href: SOCIAL_LINKS.instagram }
+        { Icon: Github, href: SOCIAL_LINKS.github, label: 'GitHub' },
+        { Icon: Linkedin, href: SOCIAL_LINKS.linkedIn, label: 'LinkedIn' },
+        { Icon: XIcon, href: SOCIAL_LINKS.twitter, label: 'X (Twitter)' },
+        { Icon: Instagram, href: SOCIAL_LINKS.instagram, label: 'Instagram' }
     ];
 
     return (
@@ -20,16 +20,17 @@ const Footer: React.FC = () => {
             </div>
 
             <div className="flex gap-8">
-                {socialLinks.map(({ Icon, href }, i) => (
+                {socialLinks.map(({ Icon, href, label }, i) => (
                     <motion.a
                         key={i}
                         whileHover={{ y: -3, scale: 1.1 }}
                         href={href}
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label={label}
                         className="text-slate-400 hover:text-slate-900 transition-colors"
                     >
-                        <Icon className="w-5 h-5" />
+                        <Icon className="w-5 h-5" aria-hidden />
                     </motion.a>
                 ))}
             </div>

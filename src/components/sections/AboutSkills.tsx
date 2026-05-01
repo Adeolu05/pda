@@ -14,6 +14,7 @@ const AboutSkills: React.FC = () => {
 
     const imageScale = useTransform(scrollYProgress, [0, 1], [1.4, 1.6]);
     const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
+    const blurOrbY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
     const stack = [
         { category: 'Frontend', items: ['React / TypeScript', 'Next.js / Vercel', 'Tailwind CSS', 'Bootstrap'] },
@@ -60,7 +61,7 @@ const AboutSkills: React.FC = () => {
                         </div>
 
                         <motion.div
-                            style={{ y: useTransform(scrollYProgress, [0, 1], [0, 80]) }}
+                            style={{ y: blurOrbY }}
                             className="absolute -top-10 -right-10 w-64 h-64 bg-violet-600/10 blur-[100px] rounded-full -z-0"
                         ></motion.div>
                     </motion.div>
