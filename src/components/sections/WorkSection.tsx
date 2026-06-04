@@ -29,7 +29,7 @@ const projects: FeaturedProject[] = [
         img: '/images/work/hijo-hijolux.jpg',
         link: 'https://hijoluxwatches.com',
         studioTheme: 'light',
-        stackPills: ['Next.js', 'Tailwind', 'Sanity', 'Vercel'],
+        stackPills: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Sanity CMS', 'WhatsApp', 'Vercel'],
         accent: '#7C3AED',
     },
     {
@@ -38,7 +38,7 @@ const projects: FeaturedProject[] = [
         desc: 'High-intent landing that explains the workflow in one scroll, right leads self-select before they enquire.',
         img: '/images/work/printnest.jpg',
         link: 'https://printnest.vercel.app',
-        stackPills: ['React', 'Tailwind', 'Vercel'],
+        stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Landing Page', 'Vercel'],
         accent: '#4F46E5',
     },
     {
@@ -47,7 +47,7 @@ const projects: FeaturedProject[] = [
         desc: 'Structured Web3 learning gateway, plain hierarchy so newcomers stay oriented instead of overwhelmed.',
         img: '/images/work/bccs-hub.png',
         link: 'https://bccshub.com',
-        stackPills: ['React', 'TypeScript', 'Tailwind', 'Web3 UI'],
+        stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Web3 UI', 'Vercel'],
         accent: '#DB2777',
     },
 ];
@@ -61,6 +61,7 @@ interface ArchiveProject {
     tag: string;
     img: string;
     link: string;
+    stackPills: string[];
     /** Mascot / logo art: show full frame on dark bg */
     thumbContainOnDark?: boolean;
     /** Wait for decode before showing (heavy remote screenshots) */
@@ -98,6 +99,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Python / Automation',
         img: '/images/work/onion-price-bot.jpg',
         link: 'https://t.me/myoniontokenupdate_bot',
+        stackPills: ['Python', 'Telegram Bot', 'Automation', 'API'],
     },
     {
         id: 5,
@@ -106,6 +108,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web3 Content Creation',
         img: '/images/work/chain-alephium.jpg',
         link: 'https://www.tiktok.com/@chain.alephium',
+        stackPills: ['TikTok', 'Web3 Content', 'Video Editing', 'Alephium'],
     },
     {
         id: 6,
@@ -114,6 +117,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web Platform',
         img: '/images/work/inboxx.png',
         link: 'https://inboxx-ebon.vercel.app/',
+        stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     },
     {
         id: 8,
@@ -122,6 +126,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web3 / Content',
         img: '/images/work/babelonsol.jpg',
         link: 'https://www.tiktok.com/@babelonsol',
+        stackPills: ['TikTok', 'Web3', 'Solana', 'Content Creation'],
     },
     {
         id: 9,
@@ -130,6 +135,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web3 / Digital Strategy',
         img: '/images/work/grok-freedom.png',
         link: 'https://grokfreedom.com',
+        stackPills: ['React', 'Web3', 'Tailwind CSS', 'Vercel'],
     },
     {
         id: 10,
@@ -138,6 +144,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Frontend Engineering',
         img: '/images/work/herdentity.png',
         link: 'https://herdentity.vercel.app',
+        stackPills: ['React', 'Tailwind CSS', 'Landing Page', 'Vercel'],
     },
     {
         id: 11,
@@ -146,6 +153,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'React Application',
         img: '/images/work/hijo-platform.png',
         link: 'https://hijo.vercel.app',
+        stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     },
     {
         id: 12,
@@ -154,6 +162,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web Application / UX Design',
         img: '/images/work/forever-yours.png',
         link: 'https://valentine.dpeluola.com',
+        stackPills: ['React', 'Interactive UI', 'Tailwind CSS', 'Vercel'],
     },
     {
         id: 13,
@@ -162,6 +171,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web Architecture',
         img: '/images/work/chef-olamide.png',
         link: 'https://chefolamide.com',
+        stackPills: ['Next.js', 'Tailwind CSS', 'Portfolio', 'Vercel'],
     },
     {
         id: 14,
@@ -171,6 +181,7 @@ const archiveProjects: ArchiveProject[] = [
         img: '/images/work/onionlab.png',
         link: 'https://t.me/onionlab_bot',
         thumbContainOnDark: true,
+        stackPills: ['Node.js', 'Telegram Bot', 'REST API', 'Alephium', 'Web3'],
     },
     {
         id: 15,
@@ -179,6 +190,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'TypeScript / Automation',
         img: '/images/work/lms-pdf-downloader.jpg',
         link: 'https://lms-pdf-downloader.vercel.app',
+        stackPills: ['TypeScript', 'Playwright', 'Automation', 'Vercel'],
     },
     {
         id: 16,
@@ -187,6 +199,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web / Landing',
         img: '/images/work/jumpa-homepage.jpg',
         link: 'https://jumpa-homepage.vercel.app',
+        stackPills: ['React', 'Tailwind CSS', 'Landing Page', 'Vercel'],
     },
     {
         id: 17,
@@ -195,6 +208,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web / Community',
         img: '/images/work/celebration-house.jpg',
         link: 'https://celebration-house.vercel.app',
+        stackPills: ['React', 'Tailwind CSS', 'Community Site', 'Vercel'],
     },
     {
         id: 18,
@@ -203,6 +217,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web / Portfolio',
         img: '/images/work/dami-olatunji.png',
         link: 'https://damiolatunji.com',
+        stackPills: ['Next.js', 'Tailwind CSS', 'Portfolio', 'Vercel'],
     },
     {
         id: 19,
@@ -211,6 +226,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web / Small Business',
         img: '/images/work/tomijoke.jpg',
         link: 'https://tomijoke-cakes.vercel.app',
+        stackPills: ['Next.js', 'Tailwind CSS', 'WhatsApp', 'Vercel'],
     },
     {
         id: 20,
@@ -219,6 +235,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web / Small Business',
         img: '/images/work/lara-collection.jpg',
         link: 'https://larascollection.vercel.app',
+        stackPills: ['Next.js', 'Tailwind CSS', 'WhatsApp', 'Vercel'],
     },
     {
         id: 21,
@@ -227,6 +244,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web / Small Business',
         img: '/images/work/sweet-zoey.jpg',
         link: 'https://sweet-zoey.vercel.app',
+        stackPills: ['Next.js', 'Tailwind CSS', 'WhatsApp', 'Vercel'],
     },
     {
         id: 22,
@@ -235,6 +253,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web / Small Business',
         img: '/images/work/gods-favour.jpg',
         link: 'https://godsfavour-pi.vercel.app',
+        stackPills: ['Next.js', 'Tailwind CSS', 'Live Chat', 'Vercel'],
     },
     {
         id: 23,
@@ -243,6 +262,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web / Small Business',
         img: '/images/work/2401-cakes.jpg',
         link: 'https://24-01.vercel.app',
+        stackPills: ['Next.js', 'Tailwind CSS', 'Landing Page', 'Vercel'],
     },
     {
         id: 24,
@@ -251,6 +271,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web / Personal Brand',
         img: '/images/work/shuuby.jpg',
         link: 'https://shubby-eta.vercel.app',
+        stackPills: ['Next.js', 'Tailwind CSS', 'Newsletter', 'Vercel'],
     },
     {
         id: 25,
@@ -259,6 +280,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web / Personal Brand',
         img: '/images/work/oluwaseun-akinola.jpg',
         link: 'https://oluwaseunakinola.vercel.app',
+        stackPills: ['Next.js', 'Tailwind CSS', 'Forms', 'Vercel'],
     },
     {
         id: 26,
@@ -267,6 +289,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'SaaS / Automation',
         img: '/images/work/transcriptflow.jpg',
         link: 'https://www.usetranscriptflow.com',
+        stackPills: ['TypeScript', 'Telegram Bot', 'SaaS', 'PDF Export'],
     },
     {
         id: 27,
@@ -275,6 +298,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web3 / dApp',
         img: '/images/work/bitguess.jpg',
         link: 'https://bitguess.vercel.app',
+        stackPills: ['React', 'Web3', 'Alephium', 'Wallet Connect', 'Vercel'],
     },
     {
         id: 28,
@@ -283,6 +307,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'React / AI Tool',
         img: '/images/work/livestream-ai-avatar.jpg',
         link: 'https://livestream-ai-avatar.vercel.app',
+        stackPills: ['React', 'Google AI', 'Real-time UI', 'Vercel'],
     },
     {
         id: 29,
@@ -291,6 +316,7 @@ const archiveProjects: ArchiveProject[] = [
         tag: 'Web / Community',
         img: '/images/work/ogp12-church.jpg',
         link: 'https://ogp12.vercel.app',
+        stackPills: ['Next.js', 'Tailwind CSS', 'Forms', 'Vercel'],
     },
 ];
 
@@ -473,7 +499,7 @@ const WorkSection: React.FC = () => {
                     return '';
                 }
             })();
-            const hay = `${project.title} ${project.desc} ${project.tag} ${host}`.toLowerCase();
+            const hay = `${project.title} ${project.desc} ${project.tag} ${project.stackPills.join(' ')} ${host}`.toLowerCase();
             return hay.includes(q);
         });
     }, [archiveSearch, archiveFilter]);
@@ -728,6 +754,16 @@ const WorkSection: React.FC = () => {
                                                         <ExternalLink className="w-4 h-4 shrink-0 mt-1 text-slate-300 transition-colors group-hover:text-[var(--accent)]" aria-hidden />
                                                     </h3>
                                                     <p className="flex-1 text-[15px] font-normal leading-relaxed text-slate-700 line-clamp-3">{project.desc}</p>
+                                                    <div className="mt-4 flex flex-wrap gap-1.5">
+                                                        {project.stackPills.map((pill) => (
+                                                            <span
+                                                                key={pill}
+                                                                className="rounded-full border border-slate-200/90 bg-slate-50 px-2.5 py-1 font-sans text-[11px] font-medium tracking-tight text-slate-700"
+                                                            >
+                                                                {pill}
+                                                            </span>
+                                                        ))}
+                                                    </div>
                                                     <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
                                                         <span className="max-w-[65%] truncate font-sans text-[13px] text-slate-500">
                                                             {previewChromeUrl(project.link)}

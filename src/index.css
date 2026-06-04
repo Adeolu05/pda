@@ -134,21 +134,36 @@
 }
 
 @keyframes tech-marquee-ltr {
+    from {
+        transform: translate3d(0, 0, 0);
+    }
     to {
         transform: translate3d(-50%, 0, 0);
     }
 }
 
 .tech-marquee-track {
+    display: flex;
+    flex-wrap: nowrap;
     width: max-content;
     animation: tech-marquee-ltr var(--tech-marquee-duration, 88s) linear infinite;
+    -webkit-animation: tech-marquee-ltr var(--tech-marquee-duration, 88s) linear infinite;
     will-change: transform;
+    transform: translate3d(0, 0, 0);
     backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+}
+
+@media (max-width: 767px) {
+    .tech-marquee-hover-wrap {
+        --tech-marquee-duration: 42s;
+    }
 }
 
 @media (prefers-reduced-motion: reduce) {
     .tech-marquee-track {
         animation: none;
+        -webkit-animation: none;
     }
 }
 

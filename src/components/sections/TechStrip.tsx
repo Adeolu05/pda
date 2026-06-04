@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { Code2 } from 'lucide-react';
 import type { IconType } from 'react-icons';
 import {
@@ -73,9 +74,72 @@ function LogoCapsule({ label, Icon }: ToolEntry) {
     );
 }
 
-const TechStrip: React.FC = () => {
-    const stripTools = [...MARQUEE_TOOLS, ...MARQUEE_TOOLS];
+function TechMarquee({ tools }: { tools: ToolEntry[] }) {
+    const reduceMotion = useReducedMotion();
+    const trackRef = useRef<HTMLDivElement>(null);
+    const [loopWidth, setLoopWidth] = useState(0);
+    const stripTools = [...tools, ...tools];
 
+    useEffect(() => {
+        const measure = () => {
+            if (!trackRef.current) return;
+            setLoopWidth(trackRef.current.scrollWidth / 2);
+        };
+
+        measure();
+        window.addEventListener('resize', measure);
+        return () => window.removeEventListener('resize', measure);
+    }, [tools]);
+
+    if (reduceMotion) {
+        return (
+            <div className="flex flex-wrap items-center justify-center gap-3 px-2 md:gap-4">
+                {tools.map((tool) => (
+                    <LogoCapsule key={tool.label} {...tool} />
+                ))}
+            </div>
+        );
+    }
+
+    if (loopWidth > 0) {
+        const duration = Math.max(loopWidth / 42, 28);
+
+        return (
+            <motion.div
+                ref={trackRef}
+                className="tech-marquee-track flex items-center gap-7 md:gap-9 lg:gap-11"
+                animate={{ x: [0, -loopWidth] }}
+                transition={{
+                    x: {
+                        repeat: Infinity,
+                        repeatType: 'loop',
+                        duration,
+                        ease: 'linear',
+                    },
+                }}
+                style={{ animation: 'none', WebkitAnimation: 'none' }}
+            >
+                {stripTools.map((tool, index) => (
+                    <LogoCapsule key={`${tool.label}-${index}`} {...tool} />
+                ))}
+            </motion.div>
+        );
+    }
+
+    return (
+        <div
+            ref={trackRef}
+            className="tech-marquee-track flex items-center gap-7 md:gap-9 lg:gap-11"
+            style={{ animation: 'none', WebkitAnimation: 'none' }}
+        >
+            {stripTools.map((tool, index) => (
+                <LogoCapsule key={`${tool.label}-${index}`} {...tool} />
+            ))}
+        </div>
+    );
+}
+
+const TechStrip: React.FC = () => {
     return (
         <section
             className="relative overflow-x-hidden border-y border-slate-200/70 bg-[#F6F4FC]"
@@ -114,12 +178,7 @@ const TechStrip: React.FC = () => {
                                 aria-hidden
                             />
                             <div
-                                className="tech-marquee-hover-wrap relative overflow-hidden rounded-[inherit] border border-slate-200/55 bg-white/[0.58] py-8 shadow-[0_20px_52px_-34px_rgba(124,58,237,0.14),0_12px_36px_-28px_rgba(15,23,42,0.1),inset_0_1px_0_0_rgba(255,255,255,0.75)] backdrop-blur-[14px] md:py-10 lg:py-[2.65rem]"
-                                style={
-                                    {
-                                        '--tech-marquee-duration': '96s',
-                                    } as React.CSSProperties
-                                }
+                                className="tech-marquee-hover-wrap relative overflow-hidden rounded-[inherit] border border-slate-200/55 bg-white/[0.88] py-8 shadow-[0_20px_52px_-34px_rgba(124,58,237,0.14),0_12px_36px_-28px_rgba(15,23,42,0.1),inset_0_1px_0_0_rgba(255,255,255,0.75)] md:bg-white/[0.58] md:py-10 md:backdrop-blur-[14px] lg:py-[2.65rem]"
                             >
                                 <div
                                     className="pointer-events-none absolute inset-y-0 left-0 z-[2] w-[5rem] sm:w-24 md:w-36 lg:w-[10.5rem] xl:w-[12rem]"
@@ -133,11 +192,7 @@ const TechStrip: React.FC = () => {
                                 />
 
                                 <div className="relative px-4 md:px-7 lg:px-10">
-                                    <div className="tech-marquee-track flex items-center gap-7 md:gap-9 lg:gap-11">
-                                        {stripTools.map((tool, index) => (
-                                            <LogoCapsule key={`${tool.label}-${index}`} {...tool} />
-                                        ))}
-                                    </div>
+                                    <TechMarquee tools={MARQUEE_TOOLS} />
                                 </div>
                             </div>
                         </div>
