@@ -223,7 +223,7 @@ const Hero: React.FC = () => {
                         initial={{ y: 100, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ duration: 1.2, delay: 1, ease: [0.16, 1, 0.3, 1] }}
-                        className="text-slate-900 text-4xl md:text-7xl font-display italic mb-2 tracking-[-0.03em] leading-none"
+                        className="text-slate-950 text-4xl md:text-7xl font-display font-semibold not-italic mb-2 tracking-tight leading-[1.06]"
                     >
                         {Array.from("Peluola David Adeoluwa").map((char, i) => (
                             <motion.span

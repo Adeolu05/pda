@@ -1,116 +1,213 @@
 import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Mail, ArrowRight, Instagram, Linkedin, Github } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Mail, ArrowRight, Instagram, Linkedin, Github, CheckCircle2 } from 'lucide-react';
 import { SOCIAL_LINKS, CONTACT_INFO, CONTACT_PRIVACY_NOTE } from '../../config/constants';
 import XIcon from '../common/XIcon';
+
+const PROJECT_TYPES = [
+    'Landing Page',
+    'Business Website',
+    'Catalogue / E-commerce',
+    'Web3 Interface',
+    'Other',
+];
+
+const BUDGET_RANGES = ['₦100k - ₦200k', '₦200k - ₦500k', '₦500k+', 'Not sure yet'];
 
 const Contact: React.FC = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
-        brief: ''
+        projectType: PROJECT_TYPES[0],
+        budget: BUDGET_RANGES[3],
+        message: '',
     });
+    const [submitted, setSubmitted] = useState(false);
 
     const socialLinks = [
         { Icon: Github, href: SOCIAL_LINKS.github, label: 'GitHub' },
         { Icon: Linkedin, href: SOCIAL_LINKS.linkedIn, label: 'LinkedIn' },
-        { Icon: XIcon, href: SOCIAL_LINKS.twitter, label: 'X (Twitter)' },
-        { Icon: Instagram, href: SOCIAL_LINKS.instagram, label: 'Instagram' }
+        { Icon: XIcon, href: SOCIAL_LINKS.twitter, label: 'X' },
+        { Icon: Instagram, href: SOCIAL_LINKS.instagram, label: 'Instagram' },
     ];
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
-        const subject = encodeURIComponent(`Inquiry: ${formData.name} from Portfolio`);
-        const body = encodeURIComponent(`Hello David,\n\nMy name is ${formData.name} (${formData.email}).\n\nProject Brief:\n${formData.brief}\n\nSent from your Portfolio.`);
+        const subject = encodeURIComponent(`Project inquiry, ${formData.projectType}, ${formData.name}`);
+        const body = encodeURIComponent(
+            `Hi,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nProject type: ${formData.projectType}\nBudget: ${formData.budget}\n\nMessage:\n${formData.message}\n\nSent from ${CONTACT_INFO.websiteUrl}`,
+        );
         window.location.href = `mailto:${CONTACT_INFO.email}?subject=${subject}&body=${body}`;
+        setSubmitted(true);
+        window.setTimeout(() => setSubmitted(false), 6000);
     };
 
     return (
-        <div className="bg-slate-950 rounded-[3rem] md:rounded-[4rem] p-8 md:p-20 overflow-hidden relative">
-            <div className="absolute top-0 right-0 w-[50%] h-full bg-violet-600/10 blur-[150px] -z-0"></div>
+        <div
+            id="contact"
+            className="relative scroll-mt-28 overflow-hidden rounded-[2.25rem] bg-slate-950 p-7 sm:p-8 md:rounded-[3rem] md:p-14 lg:p-20"
+        >
+            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_80%_0%,rgba(124,58,237,0.18),transparent)]" />
+            <span className="ui-blob -top-16 -left-10 h-72 w-72 bg-violet-600/20 blur-[110px]" aria-hidden />
+            <span className="ui-blob ui-blob-alt -bottom-20 right-10 h-72 w-72 bg-fuchsia-600/15 blur-[120px]" aria-hidden />
+            <span className="ui-blob bottom-24 -left-16 h-56 w-56 bg-indigo-600/15 blur-[110px]" aria-hidden />
 
-            <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
-                <div className="max-w-xl">
-                    <span className="text-[10px] font-black uppercase tracking-[0.5em] text-violet-500 mb-6 block">Inquiries / Bookings</span>
-                    <h2 className="text-5xl md:text-7xl font-display italic text-white leading-[0.9] tracking-tighter mb-10">
-                        Let's build <br /> <span className="text-violet-500">tomorrow</span> today.
+            <div className="relative z-10 grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-10">
+                <div className="lg:max-w-xl">
+                    <span className="ui-eyebrow ui-eyebrow-light">Start a project</span>
+                    <h2 className="mt-4 break-words font-display text-[clamp(2.05rem,5.5vw,3.55rem)] font-semibold not-italic leading-[1.08] tracking-tight text-white">
+                        Ready when you are. Let&apos;s ship{' '}
+                        <span className="text-violet-300">what&apos;s next.</span>
                     </h2>
-                    <p className="text-slate-400 text-lg leading-relaxed mb-12 font-light">
-                        My schedule is currently open for selective collaborations. If you're building the future, I'm here to help you architect it.
+                    <p className="mt-6 text-[15px] leading-[1.72] text-slate-200 md:text-[16px] md:leading-relaxed">
+                        Send a tight brief, links, goals and timeline, and you&apos;ll hear back with honest fit, estimated
+                        turnaround and what &quot;done&quot; includes before we touch code.
                     </p>
 
-                    <div className="space-y-8">
-                        <a href={`mailto:${CONTACT_INFO.email}`} className="group flex items-center gap-5 text-white/80 hover:text-white transition-colors">
-                            <div className="w-14 h-14 rounded-full border border-white/10 flex items-center justify-center group-hover:bg-violet-600 transition-all">
-                                <Mail className="w-5 h-5" />
-                            </div>
-                            <span className="text-2xl font-display italic break-all">{CONTACT_INFO.email}</span>
-                        </a>
+                    <a
+                        href={`mailto:${CONTACT_INFO.email}`}
+                        className="mt-10 group flex flex-wrap items-center gap-4 text-white transition-colors hover:text-violet-200"
+                    >
+                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5">
+                            <Mail className="h-5 w-5" aria-hidden />
+                        </span>
+                        <span className="min-w-0 break-all font-sans text-lg font-semibold tracking-tight text-white sm:text-xl">{CONTACT_INFO.email}</span>
+                    </a>
 
-                        <div className="pt-8 flex gap-6">
-                            {socialLinks.map(({ Icon, href, label }, i) => (
-                                <motion.a
-                                    key={i}
-                                    whileHover={{ y: -5, scale: 1.1 }}
-                                    href={href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    aria-label={label}
-                                    className="text-slate-500 hover:text-white transition-colors"
-                                >
-                                    <Icon className="w-6 h-6" aria-hidden />
-                                </motion.a>
-                            ))}
-                        </div>
+                    <div className="mt-12 flex flex-wrap gap-6">
+                        {socialLinks.map(({ Icon, href, label }) => (
+                            <motion.a
+                                key={label}
+                                whileHover={{ y: -3 }}
+                                href={href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={label}
+                                className="text-slate-500 transition-colors hover:text-white"
+                            >
+                                <Icon className="h-5 w-5" aria-hidden />
+                            </motion.a>
+                        ))}
                     </div>
                 </div>
 
-                <div className="bg-white/5 backdrop-blur-3xl border border-white/10 p-8 md:p-12 rounded-[2.5rem] shadow-2xl">
-                    <form className="space-y-10" onSubmit={handleSubmit}>
-                        <div className="space-y-2">
-                            <label className="text-[8px] font-bold uppercase tracking-[0.3em] text-slate-500">01 // Your Name</label>
+                <div
+                    id="contact-form"
+                    className="scroll-mt-28 rounded-[1.75rem] border border-white/12 bg-white/[0.05] p-6 shadow-[0_24px_64px_-24px_rgba(0,0,0,0.45)] backdrop-blur-md md:p-10"
+                >
+                    <p className="mb-8 text-[15px] font-medium leading-snug text-slate-300">All fields help me reply with something useful, nothing is stored on this site.</p>
+                    <form className="space-y-7" onSubmit={handleSubmit}>
+                        <div className="space-y-1.5">
+                            <label htmlFor="contact-name" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">
+                                Name
+                            </label>
                             <input
+                                id="contact-name"
                                 required
                                 type="text"
+                                autoComplete="name"
                                 value={formData.name}
                                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                className="w-full bg-transparent border-b border-white/10 py-2 outline-none focus:border-violet-500 transition-colors text-lg text-white font-light placeholder:text-slate-800"
-                                placeholder="Name or Brand"
+                                className="min-h-[3rem] w-full rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow,background-color] placeholder:text-slate-500 focus:border-violet-400/80 focus:bg-white/[0.09] focus:ring-4 focus:ring-violet-500/25"
+                                placeholder="Your name or company"
                             />
                         </div>
-                        <div className="space-y-2">
-                            <label className="text-[8px] font-bold uppercase tracking-[0.3em] text-slate-500">02 // Your Email</label>
+                        <div className="space-y-1.5">
+                            <label htmlFor="contact-email" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">
+                                Email
+                            </label>
                             <input
+                                id="contact-email"
                                 required
                                 type="email"
+                                autoComplete="email"
                                 value={formData.email}
                                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                className="w-full bg-transparent border-b border-white/10 py-2 outline-none focus:border-violet-500 transition-colors text-lg text-white font-light placeholder:text-slate-800"
-                                placeholder="email@example.com"
+                                className="min-h-[3rem] w-full rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow,background-color] placeholder:text-slate-500 focus:border-violet-400/80 focus:bg-white/[0.09] focus:ring-4 focus:ring-violet-500/25"
+                                placeholder="you@example.com"
                             />
+                        </div>
+                        <div className="grid gap-7 sm:grid-cols-2 sm:gap-6">
+                            <div className="space-y-2">
+                                <label htmlFor="contact-type" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">
+                                    Project type
+                                </label>
+                                <select
+                                    id="contact-type"
+                                    value={formData.projectType}
+                                    onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
+                                    className="min-h-[3rem] w-full cursor-pointer rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow] focus:border-violet-400/80 focus:ring-4 focus:ring-violet-500/25"
+                                >
+                                    {PROJECT_TYPES.map((t) => (
+                                        <option key={t} value={t} className="bg-slate-900 text-white">
+                                            {t}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <div className="space-y-2">
+                                <label htmlFor="contact-budget" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">
+                                    Budget range
+                                </label>
+                                <select
+                                    id="contact-budget"
+                                    value={formData.budget}
+                                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                                    className="min-h-[3rem] w-full cursor-pointer rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow] focus:border-violet-400/80 focus:ring-4 focus:ring-violet-500/25"
+                                >
+                                    {BUDGET_RANGES.map((b) => (
+                                        <option key={b} value={b} className="bg-slate-900 text-white">
+                                            {b}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
                         </div>
                         <div className="space-y-2">
-                            <label className="text-[8px] font-bold uppercase tracking-[0.3em] text-slate-500">03 // Project Brief</label>
+                            <label htmlFor="contact-message" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">
+                                What should I know?
+                            </label>
                             <textarea
+                                id="contact-message"
                                 required
-                                rows={3}
-                                value={formData.brief}
-                                onChange={(e) => setFormData({ ...formData, brief: e.target.value })}
-                                className="w-full bg-transparent border-b border-white/10 py-2 outline-none focus:border-violet-500 transition-colors text-lg text-white font-light placeholder:text-slate-800 resize-none"
-                                placeholder="What are we building?"
+                                rows={4}
+                                value={formData.message}
+                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                                className="w-full resize-none rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow,background-color] placeholder:text-slate-500 focus:border-violet-400/80 focus:bg-white/[0.09] focus:ring-4 focus:ring-violet-500/25"
+                                placeholder="Goals, deadline, links, competitors, short is fine."
                             />
                         </div>
-                        <p id="contact-privacy" className="text-slate-500 text-xs md:text-sm font-light leading-relaxed">
-                            {CONTACT_PRIVACY_NOTE}
-                        </p>
+                        <p className="text-[15px] leading-relaxed text-slate-400">{CONTACT_PRIVACY_NOTE}</p>
+                        <AnimatePresence>
+                            {submitted && (
+                                <motion.div
+                                    initial={{ opacity: 0, y: -6, height: 0 }}
+                                    animate={{ opacity: 1, y: 0, height: 'auto' }}
+                                    exit={{ opacity: 0, y: -6, height: 0 }}
+                                    transition={{ duration: 0.3 }}
+                                    className="flex items-start gap-3 overflow-hidden rounded-xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-emerald-200"
+                                    role="status"
+                                    aria-live="polite"
+                                >
+                                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" aria-hidden />
+                                    <p className="text-[14px] leading-snug">
+                                        Your email app should be opening with everything pre-filled, just hit send. If it
+                                        didn&apos;t, reach me at{' '}
+                                        <a className="font-semibold underline decoration-emerald-400/50 underline-offset-2" href={`mailto:${CONTACT_INFO.email}`}>
+                                            {CONTACT_INFO.email}
+                                        </a>.
+                                    </p>
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
                         <motion.button
                             type="submit"
-                            whileHover={{ scale: 1.02 }}
-                            whileTap={{ scale: 0.98 }}
-                            className="w-full bg-white text-slate-950 py-5 rounded-xl font-black text-[10px] uppercase tracking-[0.4em] flex items-center justify-center gap-3 hover:bg-violet-600 hover:text-white transition-all shadow-xl"
+                            whileHover={{ scale: 1.01 }}
+                            whileTap={{ scale: 0.99 }}
+                            className="flex min-h-[3.65rem] w-full items-center justify-center gap-2 rounded-xl bg-white px-6 text-[13px] font-bold uppercase tracking-[0.16em] text-slate-950 shadow-[0_16px_42px_-14px_rgba(124,58,237,0.35),0_8px_24px_-12px_rgba(0,0,0,0.35)] ring-1 ring-white/25 transition-colors hover:bg-violet-100 hover:shadow-[0_18px_48px_-14px_rgba(124,58,237,0.42)] md:text-[14px] md:tracking-[0.14em]"
                         >
-                            Send Inquiry
-                            <ArrowRight className="w-4 h-4" />
+                            Send Project Brief
+                            <ArrowRight className="h-4 w-4 md:h-[1.125rem] md:w-[1.125rem]" aria-hidden />
                         </motion.button>
                     </form>
                 </div>

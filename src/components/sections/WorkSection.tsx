@@ -1,71 +1,54 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowUpRight, X, ExternalLink, ChevronDown, Search } from 'lucide-react';
+import { ArrowUpRight, X, ExternalLink, Search } from 'lucide-react';
 import { PORTFOLIO_HIRE_SUBLINE } from '../../config/constants';
 
 type StudioTheme = 'dark' | 'light';
-
-interface CaseStudy {
-    problem: string;
-    role: string;
-    stack: string;
-    outcome: string;
-}
 
 interface FeaturedProject {
     id: number;
     title: string;
     desc: string;
-    tag: string;
     img: string;
     link: string;
     /** Light = soft surround for bright/romantic UIs; dark = default stage. */
     studioTheme?: StudioTheme;
-    caseStudy: CaseStudy;
+    stackPills: string[];
+    /** Per-project accent used on the number pill, underline, title + CTA hover. */
+    accent: string;
 }
+
+/** Shared accent palette so archive cards rotate through the same family. */
+const ACCENT_PALETTE = ['#7C3AED', '#4F46E5', '#DB2777', '#0EA5E9', '#16A34A', '#EA580C'];
 
 const projects: FeaturedProject[] = [
     {
         id: 1,
-        title: 'PrintNest',
-        desc: 'A one-click storefront generator with AI-assisted product descriptions—built so founders can spin up a credible shop surface without wrestling copy or layout first.',
-        tag: 'Product / AI + Commerce',
-        img: '/images/work/printnest.jpg',
-        link: 'https://printnest.vercel.app',
-        caseStudy: {
-            problem: 'Small sellers and creators need to go live quickly, but blank-page syndrome and weak product copy block momentum.',
-            role: 'Product UI, onboarding flow, storefront preview patterns, and production deploy on Vercel.',
-            stack: 'TypeScript, Next.js, Tailwind CSS, Vercel; AI-assisted copy in-product.',
-            outcome: 'A focused generator experience that turns inputs into a publishable storefront narrative—signals product thinking for clients who want landing pages and lightweight commerce.',
-        },
+        title: 'Hijo Lux Watches',
+        desc: 'Luxury catalogue with WhatsApp checkout, inventory and merchandising stay in the CMS, no engineer required for day-to-day updates.',
+        img: '/images/work/hijo-hijolux.jpg',
+        link: 'https://hijoluxwatches.com',
+        studioTheme: 'light',
+        stackPills: ['Next.js', 'Tailwind', 'Sanity', 'Vercel'],
+        accent: '#7C3AED',
     },
     {
         id: 2,
-        title: 'Hijo Lux Watches',
-        desc: 'Luxury timepiece digital flagship: editorial layout, sharp typography, and a calm e-commerce surface tuned for a premium watch brand.',
-        tag: 'E-Commerce / Brand UI',
-        img: '/images/work/hijo-hijolux.jpg',
-        link: 'https://hijoluxwatches.com',
-        caseStudy: {
-            problem: 'High-end watches need a site that feels like a salon, not a template—strong imagery hierarchy and restraint.',
-            role: 'Frontend build, component structure, responsive polish, and iterative releases aligned with the Hijo Lux product line.',
-            stack: 'TypeScript, React, Tailwind CSS, Vercel (repo: Adeolu05/hijo-timepiece; live: hijoluxwatches.com).',
-            outcome: 'A production experience that supports the Hijo Lux story with performance and craft suitable for luxury positioning.',
-        },
+        title: 'PrintNest',
+        desc: 'High-intent landing that explains the workflow in one scroll, right leads self-select before they enquire.',
+        img: '/images/work/printnest.jpg',
+        link: 'https://printnest.vercel.app',
+        stackPills: ['React', 'Tailwind', 'Vercel'],
+        accent: '#4F46E5',
     },
     {
         id: 3,
         title: 'BCCS Hub',
-        desc: 'Blue Collar Crypto Society hub and BCCS University—crypto literacy, Web3 onboarding, and community positioning in one branded surface.',
-        tag: 'Web / Brand',
+        desc: 'Structured Web3 learning gateway, plain hierarchy so newcomers stay oriented instead of overwhelmed.',
         img: '/images/work/bccs-hub.png',
         link: 'https://bccshub.com',
-        caseStudy: {
-            problem: 'Web3 education pages often feel dense or generic; BCCS needed a credible, dark-mode brand surface that feels premium and readable for beginners.',
-            role: 'Frontend architecture & UI implementation: hero, navigation, gradient systems, responsive layout, and production handoff.',
-            stack: 'React, TypeScript, Tailwind CSS, Vite, Vercel; content and brand owned by BCCS (repo: Bccs-Website).',
-            outcome: 'A clearer entry point for “start learning” journeys with consistent typography, disclaimers, and a layout tuned for wide hero art direction.',
-        },
+        stackPills: ['React', 'TypeScript', 'Tailwind', 'Web3 UI'],
+        accent: '#DB2777',
     },
 ];
 
@@ -183,7 +166,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 14,
         title: 'OnionLab',
-        desc: 'Premium Alephium market intelligence via Telegram—prices, charts, pools, farming, wallet summaries, holders, and network stats. Node.js bot with a small REST API for snapshots and future dashboard work.',
+        desc: 'Premium Alephium market intelligence via Telegram, prices, charts, pools, farming, wallet summaries, holders, and network stats. Node.js bot with a small REST API for snapshots and future dashboard work.',
         tag: 'Telegram / Web3',
         img: '/images/work/onionlab.png',
         link: 'https://t.me/onionlab_bot',
@@ -192,7 +175,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 15,
         title: 'LMS PDF Downloader',
-        desc: 'Student-facing tool that automates grabbing PDF course packs from LMS pages and sorts them by week—Playwright-style automation with a clean Vercel UI.',
+        desc: 'Student-facing tool that automates grabbing PDF course packs from LMS pages and sorts them by week, Playwright-style automation with a clean Vercel UI.',
         tag: 'TypeScript / Automation',
         img: '/images/work/lms-pdf-downloader.jpg',
         link: 'https://lms-pdf-downloader.vercel.app',
@@ -200,7 +183,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 16,
         title: 'Jumpa',
-        desc: 'Marketing homepage build—landing structure, responsive layout, and branded sections for product storytelling.',
+        desc: 'Marketing homepage build, landing structure, responsive layout, and branded sections for product storytelling.',
         tag: 'Web / Landing',
         img: '/images/work/jumpa-homepage.jpg',
         link: 'https://jumpa-homepage.vercel.app',
@@ -216,10 +199,98 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 18,
         title: 'Dami Olatunji',
-        desc: 'Personal brand and portfolio surface—presentational site with emphasis on clarity, hierarchy, and mobile reading.',
+        desc: 'Personal brand and portfolio surface, presentational site with emphasis on clarity, hierarchy, and mobile reading.',
         tag: 'Web / Portfolio',
         img: '/images/work/dami-olatunji.png',
         link: 'https://damiolatunji.com',
+    },
+    {
+        id: 19,
+        title: "Tomijoke's Cakes",
+        desc: 'Conversion-focused storefront for an Abeokuta bakery, fresh-cake catalogue, category guides, and one-tap WhatsApp ordering for birthdays, weddings, and events.',
+        tag: 'Web / Small Business',
+        img: '/images/work/tomijoke.jpg',
+        link: 'https://tomijoke-cakes.vercel.app',
+    },
+    {
+        id: 20,
+        title: "Lara's Confections",
+        desc: 'Warm, elegant landing for an Ogun State confectionery brand, treats showcase, simple order guide, and direct WhatsApp checkout.',
+        tag: 'Web / Small Business',
+        img: '/images/work/lara-collection.jpg',
+        link: 'https://larascollection.vercel.app',
+    },
+    {
+        id: 21,
+        title: 'Sweet Zoey Bakehouse',
+        desc: 'Soft, editorial bakery site with a menu, order walkthrough, and location section, built to turn browsers into WhatsApp orders.',
+        tag: 'Web / Small Business',
+        img: '/images/work/sweet-zoey.jpg',
+        link: 'https://sweet-zoey.vercel.app',
+    },
+    {
+        id: 22,
+        title: "God's Favor Cakes",
+        desc: 'Full bakery marketing site with a filterable gallery, transparent price guide, FAQs, and integrated live chat for fast custom-cake enquiries.',
+        tag: 'Web / Small Business',
+        img: '/images/work/gods-favour.jpg',
+        link: 'https://godsfavour-pi.vercel.app',
+    },
+    {
+        id: 23,
+        title: '24/01 Cakes',
+        desc: 'Moody, premium one-page site for a bespoke Abeokuta patisserie, signature collections, brand story, and a consultation booking CTA.',
+        tag: 'Web / Small Business',
+        img: '/images/work/2401-cakes.jpg',
+        link: 'https://24-01.vercel.app',
+    },
+    {
+        id: 24,
+        title: 'Shubby',
+        desc: 'Personal brand and newsletter hub for a storyteller and relationship curator, dark editorial layout with series, highlights, and subscribe flows.',
+        tag: 'Web / Personal Brand',
+        img: '/images/work/shuuby.jpg',
+        link: 'https://shubby-eta.vercel.app',
+    },
+    {
+        id: 25,
+        title: 'Oluwaseun Akinola',
+        desc: 'Speaker and advocacy portfolio for an emerging diplomat, impact pillars, speaking engagements, gallery, and a built-in invitation form.',
+        tag: 'Web / Personal Brand',
+        img: '/images/work/oluwaseun-akinola.jpg',
+        link: 'https://oluwaseunakinola.vercel.app',
+    },
+    {
+        id: 26,
+        title: 'TranscriptFlow',
+        desc: 'Product site for a YouTube and Vimeo transcript extractor, paste a link and get a clean TXT, PDF, or DOCX file via the web app or Telegram bot.',
+        tag: 'SaaS / Automation',
+        img: '/images/work/transcriptflow.jpg',
+        link: 'https://www.usetranscriptflow.com',
+    },
+    {
+        id: 27,
+        title: 'BitGuess',
+        desc: 'Web3 prediction game on Alephium, players stake ALPH on daily BTC move buckets with wallet connect, live pools, and on-chain settlement.',
+        tag: 'Web3 / dApp',
+        img: '/images/work/bitguess.jpg',
+        link: 'https://bitguess.vercel.app',
+    },
+    {
+        id: 28,
+        title: 'Live Stream AI Avatar',
+        desc: 'Interactive AI avatar that reads and responds to live-stream comments in real time, with a token-based usage model and a live transcript panel.',
+        tag: 'React / AI Tool',
+        img: '/images/work/livestream-ai-avatar.jpg',
+        link: 'https://livestream-ai-avatar.vercel.app',
+    },
+    {
+        id: 29,
+        title: 'RCCG Glorious Premier',
+        desc: 'Complete church website for RCCG Ogun Province 12, service schedules, ministries, events, copy-to-clipboard giving details, and a prayer-request form.',
+        tag: 'Web / Community',
+        img: '/images/work/ogp12-church.jpg',
+        link: 'https://ogp12.vercel.app',
     },
 ];
 
@@ -240,13 +311,14 @@ function ArchiveVaultThumb({
         >
             {project.deferThumbUntilLoaded && !loaded && (
                 <div
-                    className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-slate-100 text-center px-4"
-                    aria-hidden
+                    className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-2 bg-slate-100 px-4"
+                    aria-busy="true"
+                    aria-live="polite"
                 >
-                    <div className="h-1 w-12 rounded-full bg-slate-200 overflow-hidden">
-                        <div className="h-full w-1/2 rounded-full bg-violet-400 animate-pulse" />
+                    <span className="sr-only">Loading preview</span>
+                    <div className="h-1 w-12 overflow-hidden rounded-full bg-slate-200">
+                        <div className="h-full w-1/2 animate-pulse rounded-full bg-violet-400" />
                     </div>
-                    <span className="text-[9px] font-bold uppercase tracking-[0.2em] text-slate-400">Loading preview</span>
                 </div>
             )}
             <img
@@ -382,16 +454,8 @@ function ProjectPreview({ project, idx }: { project: FeaturedProject; idx: numbe
     );
 }
 
-const caseLabels: { key: keyof CaseStudy; label: string }[] = [
-    { key: 'problem', label: 'Problem' },
-    { key: 'role', label: 'Role' },
-    { key: 'stack', label: 'Stack' },
-    { key: 'outcome', label: 'Outcome' },
-];
-
 const WorkSection: React.FC = () => {
     const [isArchiveOpen, setIsArchiveOpen] = useState(false);
-    const [openCaseIds, setOpenCaseIds] = useState<Set<number>>(() => new Set());
     const [archiveSearch, setArchiveSearch] = useState('');
     const [archiveFilter, setArchiveFilter] = useState<ArchiveFilterTab>('all');
     const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -414,15 +478,6 @@ const WorkSection: React.FC = () => {
         });
     }, [archiveSearch, archiveFilter]);
 
-    const toggleCaseStudy = (id: number) => {
-        setOpenCaseIds((prev) => {
-            const next = new Set(prev);
-            if (next.has(id)) next.delete(id);
-            else next.add(id);
-            return next;
-        });
-    };
-
     useEffect(() => {
         if (!isArchiveOpen) return;
         const prevOverflow = document.body.style.overflow;
@@ -443,29 +498,25 @@ const WorkSection: React.FC = () => {
 
     return (
         <div className="relative">
-            <header className="mb-20 md:mb-32">
+            <header className="mb-14 md:mb-[4.5rem] lg:mb-[5.5rem]">
                 <motion.div
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    className="flex flex-col gap-6"
+                    className="flex max-w-3xl flex-col gap-6 md:gap-8"
                 >
-                    <span className="text-[10px] font-black uppercase tracking-[0.5em] text-violet-600/80">Selected Portfolio / 2022-26</span>
-                    <h2 className="text-[12vw] md:text-[9vw] font-display italic text-slate-950 leading-[0.75] tracking-[-0.04em]">
-                        Digital <br /> <span className="text-violet-600">Creations.</span>
+                    <span className="ui-eyebrow">Selected work</span>
+                    <h2 className="font-display text-[clamp(2.05rem,5.5vw,3.45rem)] font-semibold not-italic leading-[1.08] tracking-[-0.02em] text-slate-950">
+                        Selected builds you can <span className="text-violet-700">explore live</span>
                     </h2>
-                    <p className="max-w-2xl text-slate-500 text-base md:text-lg font-light leading-relaxed">
-                        I partner with teams and founders on{' '}
-                        <span className="text-slate-800 font-medium">landing pages, marketing sites, and product UI</span>
-                        —from first sketch to performant React in production. Open to full-time roles and selective freelance builds.
-                    </p>
-                    <p className="max-w-2xl text-slate-600 text-sm md:text-base font-light leading-relaxed border-l-2 border-violet-200 pl-5">
-                        {PORTFOLIO_HIRE_SUBLINE}
+                    <p className="max-w-2xl text-[15px] leading-[1.72] text-slate-800 md:text-[17px] md:leading-relaxed">
+                        Commerce, launches and Web3 surfaces, each row below is shipped code with a public URL.{' '}
+                        <span className="text-slate-900">{PORTFOLIO_HIRE_SUBLINE}</span>
                     </p>
                 </motion.div>
             </header>
 
-            <div className="flex flex-col gap-32 md:gap-48">
+            <div className="flex flex-col gap-[4.5rem] md:gap-28 lg:gap-[8.5rem]">
                 {projects.map((project, idx) => (
                     <motion.article
                         key={project.id}
@@ -473,83 +524,72 @@ const WorkSection: React.FC = () => {
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true, margin: '-100px' }}
                         transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                        className="group grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20 items-center"
+                        className="group grid grid-cols-1 items-center gap-14 md:gap-16 lg:grid-cols-12 lg:gap-x-14 lg:gap-y-6 xl:gap-x-20"
+                        style={{ ['--accent' as string]: project.accent }}
                         aria-labelledby={`project-title-${project.id}`}
                     >
                         <ProjectPreview project={project} idx={idx} />
 
-                        <div className="lg:col-span-5 flex flex-col items-start px-4 lg:px-8">
-                            <span className="text-[10px] font-bold uppercase tracking-[0.4em] text-slate-400 mb-8 flex items-center gap-4">
-                                <span className="w-8 h-[1px] bg-slate-200" />
-                                0{idx + 1} // {project.tag}
-                            </span>
+                        <div className="flex flex-col items-stretch lg:col-span-5 lg:pl-1 xl:pl-5">
+                            <div className="mb-5 flex items-center gap-3">
+                                <span
+                                    className="ui-pill"
+                                    style={{ backgroundColor: project.accent }}
+                                >
+                                    {String(idx + 1).padStart(2, '0')}
+                                </span>
+                                <span
+                                    className="ui-underline"
+                                    style={{ background: `linear-gradient(90deg, ${project.accent}, transparent)` }}
+                                    aria-hidden
+                                />
+                            </div>
                             <h3
                                 id={`project-title-${project.id}`}
-                                className="text-5xl md:text-6xl font-display italic text-slate-950 mb-8 leading-[0.9] tracking-tight transition-colors group-hover:text-violet-600"
+                                className="mb-5 font-sans text-[clamp(1.375rem,3.8vw,1.875rem)] font-semibold leading-snug tracking-tight text-slate-950 transition-colors group-hover:text-[var(--accent)] md:mb-6 md:text-[clamp(1.5rem,3vw,2rem)]"
                             >
                                 {project.title}
                             </h3>
-                            <p className="text-slate-500 text-lg md:text-xl leading-relaxed mb-8 text-balance font-light max-w-md">{project.desc}</p>
+                            <p className="mb-8 max-w-lg text-[16px] font-normal leading-relaxed text-slate-800 md:text-[17px] md:leading-[1.65]">
+                                {project.desc}
+                            </p>
 
-                            <button
-                                type="button"
-                                onClick={() => toggleCaseStudy(project.id)}
-                                aria-expanded={openCaseIds.has(project.id)}
-                                className="mb-8 flex items-center gap-2 text-violet-600 font-black text-[10px] uppercase tracking-[0.25em] hover:text-violet-500 transition-colors"
-                            >
-                                <span>Case study</span>
-                                <ChevronDown
-                                    className={`w-4 h-4 transition-transform duration-300 ${openCaseIds.has(project.id) ? 'rotate-180' : ''}`}
-                                    aria-hidden
-                                />
-                            </button>
-
-                            <AnimatePresence initial={false}>
-                                {openCaseIds.has(project.id) && (
-                                    <motion.div
-                                        initial={{ height: 0, opacity: 0 }}
-                                        animate={{ height: 'auto', opacity: 1 }}
-                                        exit={{ height: 0, opacity: 0 }}
-                                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                                        className="overflow-hidden w-full max-w-md mb-10"
+                            <div className="mb-10 flex flex-wrap gap-2 md:gap-2.5">
+                                {project.stackPills.map((pill) => (
+                                    <span
+                                        key={pill}
+                                        className="rounded-full border border-slate-200/90 bg-white px-3.5 py-1.5 font-sans text-[13px] font-medium tracking-tight text-slate-800 shadow-sm sm:px-4 sm:py-2"
                                     >
-                                        <dl className="space-y-6 border-l-2 border-violet-200 pl-6">
-                                            {caseLabels.map(({ key, label }) => (
-                                                <div key={key}>
-                                                    <dt className="text-[9px] font-black uppercase tracking-[0.35em] text-violet-600/90 mb-2">{label}</dt>
-                                                    <dd className="text-slate-600 text-sm md:text-base leading-relaxed font-light">{project.caseStudy[key]}</dd>
-                                                </div>
-                                            ))}
-                                        </dl>
-                                    </motion.div>
-                                )}
-                            </AnimatePresence>
+                                        {pill}
+                                    </span>
+                                ))}
+                            </div>
 
                             <a
                                 href={project.link}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="group/link inline-flex items-center gap-3 text-slate-950 font-black text-[10px] uppercase tracking-[0.3em] border-b-2 border-slate-950 pb-2 hover:text-violet-600 hover:border-violet-600 transition-all duration-300"
+                                className="inline-flex min-h-[2.875rem] w-full max-w-lg items-center justify-center gap-1.5 rounded-full bg-slate-950 px-5 text-[11px] font-bold uppercase tracking-[0.1em] text-white shadow-[0_10px_28px_-14px_rgba(15,23,42,0.45)] ring-1 ring-slate-950/80 ring-offset-2 ring-offset-[#FAF9FF] transition-[background-color,box-shadow,transform] hover:bg-[var(--accent)] hover:shadow-[0_14px_34px_-12px_var(--accent)] active:scale-[0.99] sm:min-h-12 sm:px-6 sm:text-[11.5px] sm:tracking-[0.11em]"
                             >
-                                Launch Experience
-                                <ArrowUpRight className="w-4 h-4 transition-transform group-hover/link:translate-x-1 group-hover/link:-translate-y-1" />
+                                View live site
+                                <ArrowUpRight className="h-3.5 w-3.5 shrink-0 sm:h-4 sm:w-4" aria-hidden />
                             </a>
                         </div>
                     </motion.article>
                 ))}
             </div>
 
-            <div className="mt-16 flex justify-center">
+            <div className="mt-20 flex justify-center px-4 md:mt-24">
                 <motion.button
                     type="button"
                     onClick={() => setIsArchiveOpen(true)}
                     aria-expanded={isArchiveOpen}
                     aria-haspopup="dialog"
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="px-14 py-6 bg-slate-950 text-white rounded-full font-bold text-[10px] uppercase tracking-[0.4em] shadow-2xl hover:bg-violet-600 transition-all duration-500 flex items-center gap-4"
+                    whileHover={{ y: -3 }}
+                    whileTap={{ scale: 0.98 }}
+                    className="flex min-h-[3.5rem] w-full max-w-md items-center justify-center rounded-full bg-slate-950 px-8 text-[11px] font-bold uppercase tracking-[0.22em] text-white shadow-xl transition-colors hover:bg-violet-600 sm:w-auto sm:min-w-[280px]"
                 >
-                    Explore Full Archive
+                    More projects in the vault
                 </motion.button>
             </div>
 
@@ -578,12 +618,11 @@ const WorkSection: React.FC = () => {
                             <div className="shrink-0 px-6 pt-6 pb-5 md:px-10 md:pt-10 md:pb-6 border-b border-slate-200/70 bg-[#FAFAFE]/95 backdrop-blur-md">
                                 <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between sm:gap-8">
                                     <header className="min-w-0 flex-1">
-                                        <span className="text-[10px] font-black uppercase tracking-[0.45em] text-violet-600 mb-2 block">The Vault</span>
-                                        <h2 id="archive-modal-title" className="text-4xl sm:text-5xl md:text-6xl font-display italic text-slate-950 leading-[0.95] tracking-tighter">
-                                            More <span className="text-violet-600">work.</span>
+                                        <h2 id="archive-modal-title" className="text-[clamp(1.85rem,4.5vw,3.25rem)] font-display font-semibold not-italic leading-[1.08] tracking-tight text-slate-950">
+                                            Archive.
                                         </h2>
-                                        <p id="archive-modal-desc" className="mt-3 text-slate-500 text-sm md:text-base font-light leading-relaxed max-w-xl">
-                                            Filter by type or search—websites, Web3 & content, and automation projects live here.
+                                        <p id="archive-modal-desc" className="mt-3 max-w-xl text-[15px] font-normal leading-relaxed text-slate-700 md:text-[16px]">
+                                            Filter by type or search, websites, Web3 & content, and automation projects live here.
                                         </p>
                                     </header>
                                     <button
@@ -614,7 +653,7 @@ const WorkSection: React.FC = () => {
                                                     aria-selected={active}
                                                     onClick={() => setArchiveFilter(tab.id)}
                                                     className={`
-                                                        px-4 py-2 rounded-full text-[9px] font-black uppercase tracking-[0.2em] transition-all duration-300
+                                                        px-4 py-2 rounded-full text-[10px] font-semibold uppercase tracking-[0.18em] transition-all duration-300
                                                         ${active ? 'bg-slate-950 text-white shadow-md' : 'bg-white text-slate-500 ring-1 ring-slate-200/80 hover:ring-violet-300 hover:text-slate-800'}
                                                     `}
                                                 >
@@ -641,16 +680,16 @@ const WorkSection: React.FC = () => {
                                     </div>
                                 </div>
 
-                                <p className="mt-4 text-[10px] font-bold uppercase tracking-[0.35em] text-slate-400" aria-live="polite">
-                                    Showing {filteredArchive.length} of {archiveProjects.length} projects
+                                <p className="mt-4 text-[14px] text-slate-600" aria-live="polite">
+                                    {filteredArchive.length} of {archiveProjects.length} projects
                                 </p>
                             </div>
 
                             <div className="flex-1 min-h-0 overflow-y-auto overscroll-contain px-6 py-8 md:px-10 md:py-10">
                                 {filteredArchive.length === 0 ? (
                                     <div className="flex flex-col items-center justify-center rounded-[2rem] border border-dashed border-slate-200 bg-slate-50/80 px-8 py-20 text-center">
-                                        <p className="text-slate-600 text-lg font-display italic">No matches in the vault.</p>
-                                        <p className="mt-2 text-slate-500 text-sm font-light max-w-md">Try another filter or clear your search.</p>
+                                        <p className="text-slate-700 text-[17px] font-semibold leading-snug">No matches in the vault.</p>
+                                        <p className="mt-2 max-w-md text-[15px] font-normal leading-relaxed text-slate-600">Try another filter or clear your search.</p>
                                         <button
                                             type="button"
                                             onClick={() => {
@@ -678,25 +717,23 @@ const WorkSection: React.FC = () => {
                                                     ease: [0.16, 1, 0.3, 1],
                                                 }}
                                                 whileHover={{ y: -6 }}
-                                                className="group flex flex-col rounded-[2rem] p-px bg-gradient-to-br from-violet-400/25 via-white to-indigo-400/20 shadow-[0_20px_40px_-20px_rgba(15,23,42,0.2)] hover:shadow-[0_28px_48px_-16px_rgba(124,58,237,0.22)] transition-shadow duration-300 outline-none focus-visible:ring-4 focus-visible:ring-violet-500/30"
+                                                style={{ ['--accent' as string]: ACCENT_PALETTE[i % ACCENT_PALETTE.length] }}
+                                                className="group flex flex-col rounded-[2rem] p-px bg-gradient-to-br from-violet-400/25 via-white to-indigo-400/20 shadow-[0_20px_40px_-20px_rgba(15,23,42,0.2)] hover:shadow-[0_28px_48px_-16px_var(--accent)] transition-shadow duration-300 outline-none focus-visible:ring-4 focus-visible:ring-violet-500/30"
                                                 aria-label={`Open ${project.title} in a new tab`}
                                             >
                                                 <div className="flex flex-col h-full rounded-[1.96rem] bg-white p-5 md:p-6 ring-1 ring-slate-900/[0.04]">
                                                     <ArchiveVaultThumb project={project} />
-                                                    <span className="text-[8px] font-bold uppercase tracking-[0.25em] text-violet-600/90 mb-2 line-clamp-2">
-                                                        {project.tag}
-                                                    </span>
-                                                    <h3 className="text-xl md:text-2xl font-display italic text-slate-950 mb-3 group-hover:text-violet-600 transition-colors flex items-start justify-between gap-3 leading-tight">
+                                                    <h3 className="mb-3 flex items-start justify-between gap-3 text-lg font-sans font-semibold leading-snug tracking-tight text-slate-950 transition-colors group-hover:text-[var(--accent)] md:text-xl">
                                                         <span>{project.title}</span>
-                                                        <ExternalLink className="w-4 h-4 shrink-0 mt-1 text-slate-300 group-hover:text-violet-500 transition-colors" aria-hidden />
+                                                        <ExternalLink className="w-4 h-4 shrink-0 mt-1 text-slate-300 transition-colors group-hover:text-[var(--accent)]" aria-hidden />
                                                     </h3>
-                                                    <p className="text-slate-500 text-sm leading-relaxed font-light line-clamp-3 flex-1">{project.desc}</p>
+                                                    <p className="flex-1 text-[15px] font-normal leading-relaxed text-slate-700 line-clamp-3">{project.desc}</p>
                                                     <div className="mt-5 flex items-center justify-between border-t border-slate-100 pt-4">
-                                                        <span className="font-mono text-[10px] text-slate-400 truncate max-w-[65%]">
+                                                        <span className="max-w-[65%] truncate font-sans text-[13px] text-slate-500">
                                                             {previewChromeUrl(project.link)}
                                                         </span>
-                                                        <span className="flex items-center gap-1 text-[9px] font-black uppercase tracking-[0.2em] text-violet-600 group-hover:gap-2 transition-all">
-                                                            Visit
+                                                        <span className="flex items-center gap-1 font-sans text-[13px] font-semibold text-[var(--accent)] transition-all group-hover:gap-2">
+                                                            Open
                                                             <ArrowUpRight className="w-3.5 h-3.5" aria-hidden />
                                                         </span>
                                                     </div>

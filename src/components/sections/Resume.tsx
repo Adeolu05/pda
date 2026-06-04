@@ -1,127 +1,138 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Download, ExternalLink, Layers, MessageSquare, Code2, Globe, Cpu } from 'lucide-react';
+import { Download, ExternalLink } from 'lucide-react';
 import { RESUME_FILES } from '../../config/constants';
 
+const PATH_ITEMS: { title: string; desc: string; accent: string }[] = [
+    {
+        title: 'Frontend Development',
+        desc: 'Building clean, responsive interfaces with React, Next.js, Tailwind CSS and modern web tools.',
+        accent: '#7C3AED',
+    },
+    {
+        title: 'UI/UX and Product Thinking',
+        desc: 'Designing websites with clarity, visual hierarchy and conversion in mind.',
+        accent: '#4F46E5',
+    },
+    {
+        title: 'Web3 and Community Products',
+        desc: 'Creating content, tools and interfaces around blockchain communities and digital ecosystems.',
+        accent: '#DB2777',
+    },
+    {
+        title: 'AI-assisted Building',
+        desc: 'Using AI tools like Google AI Studio, Cursor and design agents to move faster from idea to execution.',
+        accent: '#0EA5E9',
+    },
+    {
+        title: 'Client-focused Delivery',
+        desc: 'Helping businesses move from offline presence to professional, credible digital platforms.',
+        accent: '#16A34A',
+    },
+];
+
 const Resume: React.FC = () => {
-    const experiences = [
-        {
-            role: 'Frontend Web Development',
-            company: 'Aptech Computer Education',
-            period: 'Oct 2024 — May 2025',
-            desc: 'Intensive specialization in modern web architecture, mastering the full frontend cycle from semantic HTML structure to complex React state management.'
-        },
-        {
-            role: 'Web3 Creative Strategist',
-            company: 'Chain Alephium / Independent',
-            period: '2023 — Current',
-            desc: 'Architecting visual narratives and educational content for blockchain ecosystems, bridging the gap between technical protocols and mainstream users.'
-        },
-        {
-            role: 'Python Automation & Bot Dev',
-            company: 'Independent Developer',
-            period: 'Nov 2022 — Feb 2023',
-            desc: 'Learnt and implemented sophisticated automation scripts and Telegram bots, specializing in real-time API integrations and data processing.'
-        }
-    ];
-
-    const fullStack = [
-        { name: 'HTML5', icon: <Globe className="w-4 h-4" /> },
-        { name: 'CSS3', icon: <Layers className="w-4 h-4" /> },
-        { name: 'JavaScript', icon: <Code2 className="w-4 h-4" /> },
-        { name: 'TypeScript', icon: <Code2 className="w-4 h-4" /> },
-        { name: 'React', icon: <Cpu className="w-4 h-4" /> },
-        { name: 'Python', icon: <MessageSquare className="w-4 h-4" /> },
-        { name: 'Tailwind', icon: <Layers className="w-4 h-4" /> },
-        { name: 'Bootstrap', icon: <Layers className="w-4 h-4" /> },
-        { name: 'Vercel', icon: <Globe className="w-4 h-4" /> },
-    ];
-
     return (
-        <div className="bg-white border border-slate-100 rounded-[3rem] md:rounded-[4rem] p-8 md:p-20 shadow-sm relative overflow-hidden group">
-            {/* Decorative Branding */}
-            <div className="absolute top-6 right-6 text-[18vw] font-display italic text-slate-50 pointer-events-none select-none opacity-50 group-hover:opacity-100 transition-opacity duration-1000">
-                CV.
+        <div
+            id="resume"
+            className="relative scroll-mt-28 overflow-hidden rounded-[2.25rem] border border-slate-100/90 bg-gradient-to-b from-[#FAF9FF] via-white to-white p-8 shadow-[0_1px_0_rgba(15,23,42,0.04)] md:rounded-[3rem] md:p-14 lg:p-[5.25rem]"
+        >
+            <div
+                className="pointer-events-none absolute inset-0 opacity-[0.55]"
+                aria-hidden
+                style={{
+                    backgroundImage:
+                        'radial-gradient(ellipse 55% 45% at 12% 18%, rgba(139,92,246,0.09), transparent 58%), radial-gradient(ellipse 40% 38% at 88% 72%, rgba(99,102,241,0.06), transparent 55%)',
+                }}
+            />
+
+            <div className="pointer-events-none absolute -right-8 top-24 hidden h-px w-[min(42vw,22rem)] rotate-[25deg] bg-gradient-to-l from-transparent via-violet-200/40 to-transparent lg:block" />
+
+            <div className="pointer-events-none absolute right-6 top-8 hidden select-none font-display text-[min(16vw,7rem)] italic leading-none text-slate-100 md:right-10 md:top-12 lg:block">
+                Path.
             </div>
 
-            <div className="relative z-10">
-                <header className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16 md:mb-20">
-                    <div className="flex flex-col gap-4">
-                        <span className="text-[10px] font-black uppercase tracking-[0.4em] text-violet-600/60">Professional Summary</span>
-                        <h2 className="text-6xl md:text-8xl font-display italic text-slate-900 leading-[0.8] tracking-[-0.04em]">
-                            The Path <br /> <span className="text-violet-600">Taken.</span>
+            <div className="relative z-10 mx-auto max-w-5xl">
+                <header className="mb-12 flex flex-col gap-10 border-b border-slate-200/70 pb-12 md:mb-16 md:flex-row md:items-end md:justify-between md:gap-12 md:pb-14">
+                    <div className="max-w-2xl">
+                        <span className="ui-eyebrow">Journey</span>
+                        <h2 className="mt-4 font-display text-[clamp(2.5rem,7vw,4rem)] font-semibold not-italic leading-[1.06] tracking-tight text-slate-950">
+                            The Path <span className="text-violet-700">Taken</span>
                         </h2>
+                        <p className="mt-5 text-[15px] leading-relaxed text-slate-700 md:text-[16px] md:leading-relaxed">
+                            Five chapters that describe how I think, build, and deliver, not another stack list, just the
+                            through-line from craft to client outcomes.
+                        </p>
                     </div>
-                    <div className="flex flex-col sm:flex-row sm:items-center gap-3 w-full md:w-auto">
+                    <div className="flex shrink-0 flex-col gap-3 sm:flex-row sm:items-center md:flex-col md:items-stretch lg:flex-row lg:items-center">
                         <motion.a
                             href={RESUME_FILES.pdf}
                             target="_blank"
                             rel="noopener noreferrer"
-                            whileHover={{ y: -5 }}
-                            className="inline-flex items-center justify-center gap-3 px-8 py-4 bg-slate-950 text-white rounded-full font-black text-[10px] uppercase tracking-[0.3em] hover:bg-violet-600 transition-all shadow-xl"
+                            whileHover={{ y: -2 }}
+                            className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-950 px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.18em] text-white shadow-lg shadow-violet-900/10 transition-colors hover:bg-violet-600"
                         >
-                            <ExternalLink className="w-4 h-4" aria-hidden />
+                            <ExternalLink className="h-4 w-4" aria-hidden />
                             View resume
                         </motion.a>
                         <motion.a
                             href={RESUME_FILES.docx}
                             download="Peluola_David_Resume.docx"
-                            whileHover={{ y: -5 }}
-                            className="inline-flex items-center justify-center gap-3 px-8 py-4 rounded-full font-black text-[10px] uppercase tracking-[0.3em] border-2 border-slate-200 text-slate-900 hover:border-violet-600 hover:text-violet-600 transition-all"
+                            whileHover={{ y: -2 }}
+                            className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200/90 bg-white/80 px-7 py-3.5 text-[11px] font-bold uppercase tracking-[0.18em] text-slate-900 backdrop-blur-sm transition-colors hover:border-violet-300 hover:text-violet-700"
                         >
-                            <Download className="w-4 h-4" aria-hidden />
+                            <Download className="h-4 w-4" aria-hidden />
                             Word (.docx)
                         </motion.a>
                     </div>
                 </header>
 
-                <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 md:gap-20">
-                    <div className="lg:col-span-8 space-y-12 md:space-y-16">
-                        <section className="space-y-12">
-                            {experiences.map((exp, i) => (
-                                <div key={i} className="group/item border-l border-slate-100 pl-8 md:pl-10 py-2 relative">
-                                    <div className="absolute left-[-4px] top-0 w-2 h-2 rounded-full bg-violet-600"></div>
-                                    <div className="flex justify-between items-start mb-4">
-                                        <h3 className="text-3xl md:text-4xl font-display italic text-slate-900 group-hover/item:text-violet-600 transition-colors leading-[0.9] tracking-[-0.03em]">
-                                            {exp.role}
-                                        </h3>
-                                        <span className="text-[9px] font-bold text-slate-400 mt-2">{exp.period}</span>
-                                    </div>
-                                    <p className="text-violet-600 text-[10px] font-bold uppercase tracking-widest mb-4">{exp.company}</p>
-                                    <p className="text-slate-500 text-lg font-light leading-relaxed max-w-2xl">{exp.desc}</p>
-                                </div>
-                            ))}
-                        </section>
-                    </div>
-
-                    <div className="lg:col-span-4 space-y-12">
-                        <div className="p-8 bg-slate-50 rounded-[2.5rem] border border-slate-100">
-                            <h4 className="text-[10px] font-black uppercase tracking-[0.4em] text-slate-400 mb-8 flex items-center gap-3">
-                                <Layers className="w-3.5 h-3.5" /> Core Tech Stack
-                            </h4>
-                            <div className="grid grid-cols-2 gap-3">
-                                {fullStack.map(tech => (
-                                    <motion.div
-                                        key={tech.name}
-                                        whileHover={{ scale: 1.05, backgroundColor: '#fff' }}
-                                        className="flex items-center gap-2.5 px-3 py-3 bg-slate-100/50 border border-slate-200/60 rounded-xl transition-all"
+                <div className="space-y-0">
+                    {PATH_ITEMS.map((item, i) => {
+                        const isLast = i === PATH_ITEMS.length - 1;
+                        return (
+                            <motion.article
+                                key={item.title}
+                                initial={{ opacity: 0, y: 14 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true, margin: '-40px' }}
+                                transition={{ delay: i * 0.05, duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+                                style={{ ['--accent' as string]: item.accent }}
+                                className="group relative flex gap-5 pb-10 last:pb-2 sm:gap-7 md:gap-9 md:pb-12"
+                            >
+                                {/* Rail + node */}
+                                <div className="relative flex w-11 shrink-0 justify-center sm:w-12">
+                                    {!isLast && (
+                                        <span
+                                            className="absolute left-1/2 top-12 -bottom-2 w-px -translate-x-1/2 bg-gradient-to-b from-slate-200 to-slate-200/30 md:-bottom-4"
+                                            aria-hidden
+                                        />
+                                    )}
+                                    <span
+                                        className="relative z-10 inline-flex h-11 w-11 items-center justify-center rounded-full font-sans text-[13px] font-bold tabular-nums text-white shadow-[0_8px_20px_-8px_var(--accent)] ring-4 ring-white transition-transform duration-300 group-hover:scale-110 sm:h-12 sm:w-12 sm:text-sm"
+                                        style={{ backgroundColor: item.accent }}
                                     >
-                                        <div className="text-violet-600">
-                                            {tech.icon}
-                                        </div>
-                                        <span className="text-[9px] font-bold uppercase tracking-wider text-slate-600">
-                                            {tech.name}
-                                        </span>
-                                    </motion.div>
-                                ))}
-                            </div>
-                        </div>
-
-                        <div className="px-2 italic text-slate-400 font-display text-xl leading-relaxed text-balance">
-                            "Great interfaces are invisible. They don't demand attention; they facilitate intention."
-                        </div>
-                    </div>
+                                        {String(i + 1).padStart(2, '0')}
+                                    </span>
+                                </div>
+                                <div className="min-w-0 pt-1.5">
+                                    <h3 className="font-sans text-[1.2rem] font-semibold leading-snug tracking-tight text-slate-950 transition-colors group-hover:text-[var(--accent)] sm:text-xl md:text-[1.35rem] md:leading-snug">
+                                        {item.title}
+                                    </h3>
+                                    <p className="mt-3 max-w-3xl text-[15px] leading-relaxed text-slate-700 md:mt-4 md:text-[16px] md:leading-relaxed">
+                                        {item.desc}
+                                    </p>
+                                </div>
+                            </motion.article>
+                        );
+                    })}
                 </div>
+
+                <blockquote className="relative mt-14 border-l-2 border-violet-200/90 pl-8 md:mt-20 md:pl-10">
+                    <p className="max-w-3xl text-[17px] font-medium leading-relaxed text-slate-600 md:text-xl md:leading-relaxed">
+                        Great interfaces feel obvious in retrospect, they remove friction so the work can speak.
+                    </p>
+                </blockquote>
             </div>
         </div>
     );

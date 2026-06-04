@@ -1,10 +1,12 @@
 export const PROFILE_IMAGE = "/profile.jpg";
 
+/** Matches floating nav on scroll, keep labels short for the pill layout */
 export const NAV_ITEMS = [
     { label: 'Work', href: '#work' },
+    { label: 'Services', href: '#services' },
     { label: 'About', href: '#about' },
+    { label: 'Journey', href: '#resume' },
     { label: 'Contact', href: '#contact' },
-    { label: 'Resume', href: '#resume' },
 ];
 
 export const SOCIAL_LINKS = {
@@ -28,10 +30,10 @@ export const RESUME_FILES = {
     docx: "/Peluola_David_Resume.docx",
 } as const;
 
-/** Shown under Selected Work — hiring / freelance signal */
+/** Shown under Selected Work, hiring / freelance signal */
 export const PORTFOLIO_HIRE_SUBLINE =
-    'I usually reply within 48 hours. I keep a limited slate of concurrent builds so timelines stay realistic—tell me what you need and we’ll scope it.';
+    'Limited concurrent builds, share scope and deadline for an honest fit check.';
 
-/** Shown on the contact form — no server-side storage */
+/** Shown on the contact form, no server-side storage */
 export const CONTACT_PRIVACY_NOTE =
     'This form only opens your email app with your message; nothing you type is saved on this website.';

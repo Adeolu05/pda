@@ -17,7 +17,7 @@
 
 @layer base {
     body {
-        @apply font-sans antialiased text-text-main bg-bg-base overflow-x-hidden;
+        @apply font-sans antialiased text-text-main bg-bg-base overflow-x-hidden text-[15px] md:text-base leading-relaxed;
     }
 
     :where(a, button, input, textarea, select):focus-visible {
@@ -26,7 +26,67 @@
 }
 
 .font-display {
-    font-family: "Instrument Serif", serif;
+    font-family: "Instrument Serif", "Georgia", serif;
+}
+
+/* ---------------------------------------------------------------------------
+   Shared accent system, keeps every section in one visual family.
+   --------------------------------------------------------------------------- */
+@layer components {
+    /* Eyebrow: small uppercase label with a short violet rule */
+    .ui-eyebrow {
+        @apply inline-flex items-center gap-3 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-600;
+    }
+    .ui-eyebrow::before {
+        content: "";
+        @apply h-px w-7 shrink-0 bg-violet-400/80;
+    }
+    .ui-eyebrow.ui-eyebrow-center::after {
+        content: "";
+        @apply h-px w-7 shrink-0 bg-violet-400/80;
+    }
+    .ui-eyebrow-light {
+        @apply text-violet-200/90;
+    }
+    .ui-eyebrow-light::before,
+    .ui-eyebrow-light.ui-eyebrow-center::after {
+        @apply bg-violet-300/60;
+    }
+
+    /* Lilac playful panel used by Services / Process and friends */
+    .ui-panel {
+        @apply relative overflow-hidden rounded-[2rem] bg-[#F4F2FA] md:rounded-[2.75rem];
+    }
+
+    /* Numbered accent pill */
+    .ui-pill {
+        @apply inline-flex h-9 min-w-[2.25rem] items-center justify-center rounded-full px-2.5 font-sans text-[11px] font-bold tabular-nums text-white shadow-sm;
+    }
+
+    /* Growing accent underline (animates on group hover) */
+    .ui-underline {
+        @apply h-px w-12 transition-[width] duration-500;
+    }
+    .group:hover .ui-underline {
+        @apply w-20;
+    }
+}
+
+/* Soft organic blob, call with inline color + position utilities */
+.ui-blob {
+    pointer-events: none;
+    position: absolute;
+    filter: blur(1px);
+    border-radius: 42% 58% 70% 30% / 45% 55% 45% 55%;
+}
+.ui-blob-alt {
+    border-radius: 58% 42% 35% 65% / 52% 48% 62% 38%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .group:hover .ui-underline {
+        width: 3rem;
+    }
 }
 
 /* Sophisticated Grain Effect */
@@ -63,4 +123,76 @@
 
 .text-balance {
     text-wrap: balance;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+@keyframes tech-marquee-ltr {
+    to {
+        transform: translate3d(-50%, 0, 0);
+    }
+}
+
+.tech-marquee-track {
+    width: max-content;
+    animation: tech-marquee-ltr var(--tech-marquee-duration, 88s) linear infinite;
+    will-change: transform;
+    backface-visibility: hidden;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .tech-marquee-track {
+        animation: none;
+    }
+}
+
+@media (hover: hover) and (pointer: fine) {
+    .tech-marquee-hover-wrap:hover .tech-marquee-track {
+        animation-play-state: paused;
+    }
+}
+
+.process-carousel {
+    --process-slide-width: min(88vw, 19rem);
+    -webkit-overflow-scrolling: touch;
+}
+
+.process-carousel-gutter {
+    flex-shrink: 0;
+    width: max(1rem, calc((100% - var(--process-slide-width)) / 2));
+    scroll-snap-align: none;
+}
+
+.process-carousel-slide {
+    scroll-snap-align: center;
+}
+
+@media (min-width: 640px) {
+    .process-carousel {
+        --process-slide-width: 17.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .process-carousel {
+        --process-slide-width: 18.5rem;
+    }
+}
+
+@media (min-width: 1024px) {
+    .process-carousel {
+        --process-slide-width: 19.5rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .process-carousel {
+        scroll-behavior: auto;
+    }
 }

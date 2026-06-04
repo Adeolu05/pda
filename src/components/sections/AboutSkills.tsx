@@ -1,128 +1,133 @@
 import React, { useRef, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform, useReducedMotion, type MotionValue } from 'framer-motion';
 import { Check } from 'lucide-react';
 import { PROFILE_IMAGE } from '../../config/constants';
+
+/** How I work, kept separate from Proof (live credibility). */
+const WORK_STYLE: { label: string; accent: string }[] = [
+    { label: 'Design-led layouts and typography', accent: '#7C3AED' },
+    { label: 'React / Next.js implementations', accent: '#4F46E5' },
+    { label: 'CMS wiring your team can run day to day', accent: '#DB2777' },
+    { label: 'Ship, observe, refine, no mystery backlog', accent: '#0EA5E9' },
+];
 
 const AboutSkills: React.FC = () => {
     const containerRef = useRef<HTMLDivElement>(null);
     const [imageError, setImageError] = useState(false);
+    const reduceMotion = useReducedMotion();
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        offset: ["start end", "end start"]
+        offset: ['start end', 'end start'],
     });
 
-    const imageScale = useTransform(scrollYProgress, [0, 1], [1.4, 1.6]);
-    const imageY = useTransform(scrollYProgress, [0, 1], ["0%", "-15%"]);
-    const blurOrbY = useTransform(scrollYProgress, [0, 1], [0, 80]);
+    const imageScaleMv = useTransform(scrollYProgress, [0, 1], [1.35, 1.55]);
+    const imageYMv = useTransform(scrollYProgress, [0, 1], ['0%', '-12%']);
+    const blurOrbYMv = useTransform(scrollYProgress, [0, 1], [0, 48]);
 
-    const stack = [
-        { category: 'Frontend', items: ['React / TypeScript', 'Next.js / Vercel', 'Tailwind CSS', 'Bootstrap'] },
-        { category: 'Development', items: ['Python Automation', 'Telegram Bot API', 'ES6+ JavaScript', 'HTML5 / CSS3'] },
-        { category: 'Creative', items: ['UI/UX Design', 'Web3 Strategy', 'Video Content', 'Visual Storytelling'] }
-    ];
-
-    const titleText = "About Me";
+    const imageScale: number | MotionValue<number> = reduceMotion ? 1.4 : imageScaleMv;
+    const imageY: string | MotionValue<string> = reduceMotion ? '0%' : imageYMv;
+    const blurOrbY: number | MotionValue<number> = reduceMotion ? 0 : blurOrbYMv;
 
     return (
-        <div className="relative" ref={containerRef}>
-            <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 lg:gap-24 items-center">
-
-                {/* Profile Image Column */}
-                <div className="lg:col-span-5 relative">
+        <div id="about" className="scroll-mt-28" ref={containerRef}>
+            <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-24 lg:gap-x-20">
+                <div className="lg:col-span-5">
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
+                        initial={{ opacity: 0, scale: 0.98 }}
                         whileInView={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+                        viewport={{ once: true }}
                         className="relative"
                     >
-                        <div className="aspect-[4/5] bg-slate-950 rounded-[2.5rem] md:rounded-[3.5rem] overflow-hidden shadow-2xl relative z-10 border border-slate-200/50 p-2 md:p-4 bg-white/40 backdrop-blur-3xl">
-                            <div className="w-full h-full overflow-hidden rounded-[2rem] md:rounded-[2.8rem] relative flex items-center justify-center bg-slate-900">
+                        <div className="relative z-10 overflow-hidden rounded-[2.2rem] border border-white/40 bg-white/60 p-2 shadow-2xl backdrop-blur-2xl md:rounded-[3rem] md:p-4">
+                            <div className="relative aspect-[4/5] overflow-hidden rounded-[1.8rem] bg-slate-950 md:rounded-[2.4rem]">
                                 {!imageError ? (
                                     <motion.img
                                         style={{ scale: imageScale, y: imageY }}
                                         src={PROFILE_IMAGE}
                                         onError={() => setImageError(true)}
-                                        className="w-full h-full object-cover object-[50%_12%] brightness-[0.6] contrast-[1.15] transition-all duration-1000 origin-center"
-                                        alt="David Adeoluwa"
+                                        className="h-full w-full object-cover object-center brightness-[0.55] contrast-[1.2] transform-gpu"
+                                        alt="Peluola David Adeoluwa"
+                                        loading="lazy"
+                                        decoding="async"
                                     />
                                 ) : (
-                                    <div className="w-full h-full bg-slate-900 flex items-center justify-center">
-                                        <span className="text-white font-display italic text-7xl opacity-10">PDA</span>
+                                    <div className="flex h-full items-center justify-center bg-slate-900">
+                                        <span className="font-display text-6xl italic text-white/20">PDA</span>
                                     </div>
                                 )}
-                                <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent pointer-events-none"></div>
-
-                                <div className="absolute bottom-8 left-8 right-8 z-20">
-                                    <p className="text-white font-display text-2xl md:text-3xl italic mb-2 tracking-tight">The Creative Architect.</p>
-                                    <div className="h-0.5 w-12 bg-violet-400"></div>
+                                <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-40" />
+                                <div className="absolute bottom-0 left-0 right-0 z-20 px-5 pb-6 pt-16 md:px-8 md:pb-8 md:pt-20">
+                                    <div className="rounded-xl border border-white/10 bg-black/20 px-4 py-3 backdrop-blur-md md:px-5 md:py-3.5">
+                                        <p className="font-sans text-[14px] font-medium leading-snug text-white/95 md:text-[15px]">
+                                            Peluola David Adeoluwa · Frontend · Remote
+                                        </p>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
                         <motion.div
                             style={{ y: blurOrbY }}
-                            className="absolute -top-10 -right-10 w-64 h-64 bg-violet-600/10 blur-[100px] rounded-full -z-0"
-                        ></motion.div>
+                            className="absolute -right-8 -top-8 -z-10 h-52 w-52 rounded-full bg-violet-500/[0.13] blur-[90px]"
+                            aria-hidden
+                        />
+                        <span
+                            className="ui-blob -z-10 -bottom-10 -left-10 h-44 w-44 bg-fuchsia-400/20 blur-[70px]"
+                            aria-hidden
+                        />
                     </motion.div>
                 </div>
 
-                {/* Text Content Column */}
                 <div className="lg:col-span-7">
-                    <header className="mb-12">
-                        <span className="text-[10px] font-black uppercase tracking-[0.5em] text-violet-600 mb-6 block">Biography</span>
+                    <header className="mb-12 max-w-2xl lg:mb-14">
+                        <span className="ui-eyebrow mb-4">About</span>
                         <motion.h2
-                            initial="hidden"
-                            whileInView="visible"
+                            initial={{ opacity: 0, y: 12 }}
+                            whileInView={{ opacity: 1, y: 0 }}
                             viewport={{ once: true }}
-                            className="text-7xl md:text-[9vw] font-display italic text-slate-900 leading-[0.8] tracking-[-0.04em]"
+                            className="font-display text-[clamp(2.05rem,4.8vw,3.25rem)] font-semibold not-italic leading-[1.06] tracking-tight text-slate-950"
                         >
-                            {titleText.split("").map((char, i) => (
-                                <motion.span
-                                    key={i}
-                                    variants={{ hidden: { opacity: 0 }, visible: { opacity: 1 } }}
-                                    transition={{ delay: i * 0.05 }}
-                                >
-                                    {char}
-                                </motion.span>
-                            ))}
+                            Calm interfaces,{' '}
+                            <span className="text-violet-700">clear intent</span>
                         </motion.h2>
                     </header>
 
-                    <div className="space-y-8 text-slate-500 text-lg md:text-xl leading-relaxed font-light">
+                    <div className="max-w-2xl space-y-6 text-[15px] leading-[1.72] text-slate-700 md:text-[16px] md:leading-[1.75]">
                         <p>
-                            I am a <span className="text-slate-950 font-medium italic">Frontend Architect and Python Developer</span> trained at Aptech Computer Education. My journey started with Pythonic automation, where I mastered the art of building intelligent Telegram bots and streamlined digital systems.
+                            I&apos;m <span className="font-semibold text-slate-900">Peluola David Adeoluwa</span>, frontend
+                            developer for brands, founders and Web3 teams who need sites and product UI that read as
+                            serious in the first scroll.
                         </p>
                         <p>
-                            Today, I specialize in crafting <span className="text-violet-600 font-semibold underline decoration-violet-100 underline-offset-8">high-fidelity web interfaces</span> and Web3 creative strategies. Whether I'm architecting a React platform or engineering a community bot, I focus on performance, precision, and impact.
+                            I stay close to the brief: hierarchy and typography first, then React / Next.js, Tailwind and
+                            CMS pieces your operators can actually use. Launches are paced so stakeholders see progress,
+                            not surprises.
                         </p>
                     </div>
 
-                    <div className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-10 border-t border-slate-100 pt-16">
-                        {stack.map((group, i) => (
+                    <div className="mt-14 grid grid-cols-1 gap-3 sm:grid-cols-2 sm:gap-4">
+                        {WORK_STYLE.map((item, i) => (
                             <motion.div
-                                key={group.category}
-                                initial={{ opacity: 0, y: 20 }}
+                                key={item.label}
+                                initial={{ opacity: 0, y: 10 }}
                                 whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1, duration: 0.8 }}
                                 viewport={{ once: true }}
+                                transition={{ delay: i * 0.05 }}
+                                style={{ ['--accent' as string]: item.accent }}
+                                className="group flex items-start gap-3 rounded-xl border border-slate-200/80 bg-white px-4 py-4 text-[15px] font-medium leading-snug text-slate-800 shadow-sm transition-colors hover:border-[var(--accent)]"
                             >
-                                <h4 className="text-[9px] font-black uppercase tracking-[0.4em] text-slate-400 mb-6">{group.category}</h4>
-                                <ul className="space-y-4">
-                                    {group.items.map(item => (
-                                        <li key={item} className="flex items-center gap-3 text-slate-950 font-semibold text-xs tracking-tight">
-                                            <div className="w-5 h-5 rounded-full bg-violet-50 flex items-center justify-center border border-violet-100/50">
-                                                <Check className="w-3 h-3 text-violet-600" />
-                                            </div>
-                                            {item}
-                                        </li>
-                                    ))}
-                                </ul>
+                                <span
+                                    className="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full text-white"
+                                    style={{ backgroundColor: item.accent }}
+                                >
+                                    <Check className="h-3 w-3" aria-hidden />
+                                </span>
+                                <span>{item.label}</span>
                             </motion.div>
                         ))}
                     </div>
                 </div>
-
             </div>
         </div>
     );

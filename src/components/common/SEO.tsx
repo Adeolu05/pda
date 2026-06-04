@@ -11,8 +11,8 @@ const siteUrl = CONTACT_INFO.websiteUrl.replace(/\/$/, '');
 const defaultImage = `${siteUrl}/profile.jpg`;
 
 export default function SEO({
-    title = "David Adeoluwa | Frontend Architect",
-    description = "Peluola David Adeoluwa is a Frontend Architect and Web3 Creative Strategist specializing in high-fidelity web interfaces, React development, and visual storytelling.",
+    title = "Peluola David Adeoluwa | Frontend Developer & Web3 Builder",
+    description = "Premium frontend developer portfolio of Peluola David Adeoluwa, building websites, landing pages, dashboards and Web3 digital experiences for brands, startups and communities.",
     type = "website"
 }: SEOProps) {
     return (
