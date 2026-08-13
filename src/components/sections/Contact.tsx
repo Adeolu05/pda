@@ -6,8 +6,9 @@ import XIcon from '../common/XIcon';
 
 const PROJECT_TYPES = [
     'Landing Page',
+    'Custom Web Application',
+    'E-Commerce / Full-Stack',
     'Business Website',
-    'Catalogue / E-commerce',
     'Web3 Interface',
     'Other',
 ];

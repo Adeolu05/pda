@@ -6,8 +6,8 @@ import { PROFILE_IMAGE } from '../../config/constants';
 /** How I work, kept separate from Proof (live credibility). */
 const WORK_STYLE: { label: string; accent: string }[] = [
     { label: 'Design-led layouts and typography', accent: '#7C3AED' },
-    { label: 'React / Next.js implementations', accent: '#4F46E5' },
-    { label: 'CMS wiring your team can run day to day', accent: '#DB2777' },
+    { label: 'React / Next.js and full-stack implementations', accent: '#4F46E5' },
+    { label: 'WordPress, WooCommerce and CMS your team can run', accent: '#DB2777' },
     { label: 'Ship, observe, refine, no mystery backlog', accent: '#0EA5E9' },
 ];
 
@@ -61,7 +61,7 @@ const AboutSkills: React.FC = () => {
                                 <div className="absolute bottom-0 left-0 right-0 z-20 px-5 pb-6 pt-16 md:px-8 md:pb-8 md:pt-20">
                                     <div className="rounded-xl border border-white/10 bg-black/20 px-4 py-3 backdrop-blur-md md:px-5 md:py-3.5">
                                         <p className="font-sans text-[14px] font-medium leading-snug text-white/95 md:text-[15px]">
-                                            Peluola David Adeoluwa · Frontend · Remote
+                                            Peluola David Adeoluwa · Web Engineer · Remote
                                         </p>
                                     </div>
                                 </div>
@@ -89,20 +89,20 @@ const AboutSkills: React.FC = () => {
                             className="font-display text-[clamp(2.05rem,4.8vw,3.25rem)] font-semibold not-italic leading-[1.06] tracking-tight text-slate-950"
                         >
                             Calm interfaces,{' '}
-                            <span className="text-violet-700">clear intent</span>
+                            <span className="text-violet-700">clear logic</span>
                         </motion.h2>
                     </header>
 
                     <div className="max-w-2xl space-y-6 text-[15px] leading-[1.72] text-slate-700 md:text-[16px] md:leading-[1.75]">
                         <p>
-                            I&apos;m <span className="font-semibold text-slate-900">Peluola David Adeoluwa</span>, frontend
-                            developer for brands, founders and Web3 teams who need sites and product UI that read as
-                            serious in the first scroll.
+                            I&apos;m <span className="font-semibold text-slate-900">Peluola David Adeoluwa</span>. As a
+                            dependable Web Engineer, I translate complex design concepts into fluid code and robust,
+                            production-ready infrastructure.
                         </p>
                         <p>
-                            I stay close to the brief: hierarchy and typography first, then React / Next.js, Tailwind and
-                            CMS pieces your operators can actually use. Launches are paced so stakeholders see progress,
-                            not surprises.
+                            I eliminate sluggish agency overhead by providing direct, high-craft technical
+                            collaboration, ensuring your digital launch is fast, secure, and visually flawless, from
+                            server architecture down to UI polish.
                         </p>
                     </div>
 

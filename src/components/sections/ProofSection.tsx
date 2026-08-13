@@ -1,13 +1,13 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check } from 'lucide-react';
+import { Check, Zap } from 'lucide-react';
 
 /** Credibility only, keep distinct from About (story / workflow). */
 const PROOF: { line: string; accent: string }[] = [
     { line: 'Production URLs across commerce, launches and Web3, you verify quality in the browser.', accent: '#7C3AED' },
-    { line: 'React / Next.js, Tailwind and typed flows; disciplined deploys on Vercel.', accent: '#4F46E5' },
+    { line: 'React / Next.js, WordPress, Tailwind and typed flows; disciplined deploys on Vercel.', accent: '#4F46E5' },
     { line: 'Comfortable shipping an MVP, then tightening with feedback and analytics.', accent: '#DB2777' },
-    { line: 'Automation and Telegram tooling alongside frontend delivery.', accent: '#0EA5E9' },
+    { line: 'Automation and Telegram tooling alongside full-stack delivery.', accent: '#0EA5E9' },
     { line: 'Hands-on Web3 education content (including Alephium-ecosystem work).', accent: '#16A34A' },
 ];
 
@@ -37,6 +37,26 @@ const ProofSection: React.FC = () => {
                     Live builds, stack discipline and shipping rhythm, nothing here relies on adjectives alone.
                 </p>
             </header>
+
+            <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="relative mb-8 flex items-start gap-4 rounded-2xl border border-violet-200/80 bg-gradient-to-r from-violet-50/90 via-white to-indigo-50/70 px-5 py-4 shadow-[0_12px_36px_-24px_rgba(124,58,237,0.35)] md:mb-10 md:px-6 md:py-5"
+            >
+                <span className="mt-0.5 inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-violet-600 text-white shadow-sm">
+                    <Zap className="h-4 w-4" aria-hidden />
+                </span>
+                <div>
+                    <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-violet-700">
+                        Website Speed & Performance
+                    </p>
+                    <p className="mt-1.5 text-[15px] leading-relaxed text-slate-800 md:text-[16px]">
+                        Auditing and refactoring existing codebases to achieve peak Core Web Vitals, lightning-fast load
+                        times, and flawless performance.
+                    </p>
+                </div>
+            </motion.div>
 
             <ul className="relative grid gap-3.5 sm:grid-cols-2 sm:gap-4">
                 {PROOF.map((item, i) => (

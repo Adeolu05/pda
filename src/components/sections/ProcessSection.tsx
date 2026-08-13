@@ -36,7 +36,7 @@ const STEPS: ProcessStep[] = [
     },
     {
         title: 'Build',
-        body: 'I develop the site with modern frontend tools, responsive layouts, performance and maintainability.',
+        body: 'I develop the product with modern web engineering tools, from interface to backend, with responsive layouts, performance and maintainability.',
         rotate: -2.2,
         visual: 'build',
         surface: 'from-indigo-100/80 via-slate-50 to-violet-100/60',

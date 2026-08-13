@@ -32,8 +32,8 @@ const Footer: React.FC = () => {
                         >
                             {CONTACT_INFO.shortName}
                         </button>
-                        <p className="max-w-xs text-[13px] leading-relaxed text-slate-500">
-                            Premium websites, dashboards and Web3 interfaces, built to convert.
+                        <p className="max-w-sm text-[13px] leading-relaxed text-slate-500">
+                            A boutique web engineering practice crafting high-performance full-stack applications, interactive landing pages, and Web3 experiences for global brands and startups.
                         </p>
                     </div>
 

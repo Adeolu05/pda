@@ -18,38 +18,38 @@ type Service = {
 
 const SERVICES: Service[] = [
     {
-        title: 'Landing Pages',
-        desc: 'Turn attention into enquiries, one tight narrative, mobile-ready, built for paid and organic traffic.',
-        bullets: ['Offer and proof visible above the fold', 'Fast handoff so you can iterate without rework'],
+        title: 'Custom Web Application Development',
+        desc: 'End-to-end development of robust, production-ready web applications tailored to your specific business logic and user needs.',
+        bullets: ['Full-stack architecture from data to interface', 'Production-ready for teams who need to ship, not prototype'],
         rotate: -1.8,
-        visual: 'landing',
-        surface: 'from-violet-200/90 via-violet-50 to-fuchsia-100/70',
-        accent: '#7C3AED',
-        ring: 'from-violet-400/50 via-fuchsia-300/35 to-violet-500/40',
-    },
-    {
-        title: 'Business Websites',
-        desc: 'A credible site home, structured story, services and paths that move visitors toward conversation.',
-        bullets: ['Hierarchy tuned for busy decision-makers', 'Lead capture your team can respond to'],
-        rotate: 1.6,
         visual: 'business',
         surface: 'from-sky-200/70 via-indigo-50 to-violet-100/80',
         accent: '#4F46E5',
         ring: 'from-indigo-400/45 via-sky-300/35 to-violet-400/40',
     },
     {
-        title: 'Catalogue / WhatsApp Commerce',
-        desc: 'Browse-friendly catalogue plus WhatsApp checkout, inventory your ops team controls in the CMS.',
-        bullets: ['SKUs and merchandising without a heavy storefront', 'Checkout where your sales already live'],
-        rotate: -1.4,
+        title: 'E-Commerce & Full-Stack Solutions',
+        desc: 'High-conversion online stores and comprehensive full-stack platforms built for speed, reliability, and seamless user experiences.',
+        bullets: ['WooCommerce and custom commerce architectures', 'Inventory, merchandising and checkout your ops team can run'],
+        rotate: 1.6,
         visual: 'catalogue',
         surface: 'from-emerald-100/80 via-teal-50/90 to-violet-100/60',
         accent: '#059669',
         ring: 'from-emerald-400/40 via-teal-300/30 to-violet-400/35',
     },
     {
-        title: 'Web3 Interfaces',
-        desc: 'Readable Web3 surfaces, onboarding, dashboards and launches that calm complexity for newcomers.',
+        title: 'Landing Page Design & Optimization',
+        desc: 'Bespoke, high-craft landing pages combining editorial UI/UX polish with modern architecture to elevate brand prestige and drive conversions.',
+        bullets: ['Offer and proof visible above the fold', 'Fast handoff so you can iterate without rework'],
+        rotate: -1.4,
+        visual: 'landing',
+        surface: 'from-violet-200/90 via-violet-50 to-fuchsia-100/70',
+        accent: '#7C3AED',
+        ring: 'from-violet-400/50 via-fuchsia-300/35 to-violet-500/40',
+    },
+    {
+        title: 'Web3 & Digital Experiences',
+        desc: 'Bridging cutting-edge decentralized technology with fluid, accessible user interfaces for startups and communities.',
         bullets: ['Layouts for skeptical or first-time audiences', 'Responsive systems across docs and marketing'],
         rotate: 2.2,
         visual: 'web3',
@@ -201,8 +201,8 @@ const ServicesSection: React.FC = () => {
                         transition={{ delay: 0.06 }}
                         className="mt-6 max-w-xl text-[15px] leading-[1.68] text-slate-800 md:text-[17px] md:leading-relaxed"
                     >
-                        Each engagement maps to an outcome, pipeline, revenue signal, or operational relief, not
-                        decoration for its own sake.
+                        Each engagement maps to an outcome, pipeline, revenue signal, or operational relief, from
+                        landing pages to full-stack applications and e-commerce, not decoration for its own sake.
                     </motion.p>
                 </header>
 

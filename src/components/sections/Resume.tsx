@@ -5,8 +5,8 @@ import { RESUME_FILES } from '../../config/constants';
 
 const PATH_ITEMS: { title: string; desc: string; accent: string }[] = [
     {
-        title: 'Frontend Development',
-        desc: 'Building clean, responsive interfaces with React, Next.js, Tailwind CSS and modern web tools.',
+        title: 'Web Engineering',
+        desc: 'Building high-performance full-stack applications with React, Next.js, WordPress, WooCommerce and modern web tools.',
         accent: '#7C3AED',
     },
     {

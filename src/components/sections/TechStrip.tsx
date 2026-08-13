@@ -7,13 +7,17 @@ import {
     SiFigma,
     SiGooglegemini,
     SiNextdotjs,
+    SiNodedotjs,
+    SiPostgresql,
     SiReact,
     SiSanity,
     SiTailwindcss,
     SiTelegram,
     SiTypescript,
     SiVercel,
+    SiWoo,
 } from 'react-icons/si';
+import { FaWordpress } from 'react-icons/fa';
 
 /** Matches section background, masks must align or fades read as grey bands */
 const SECTION_BG = '#F6F4FC';
@@ -32,6 +36,10 @@ const MARQUEE_TOOLS: ToolEntry[] = [
     { label: 'TypeScript', Icon: SiTypescript },
     { label: 'Figma', Icon: SiFigma },
     { label: 'Sanity', Icon: SiSanity },
+    { label: 'WordPress', Icon: FaWordpress },
+    { label: 'WooCommerce', Icon: SiWoo },
+    { label: 'Node.js', Icon: SiNodedotjs },
+    { label: 'PostgreSQL', Icon: SiPostgresql },
     { label: 'Vercel', Icon: SiVercel },
     { label: 'Cursor', Icon: CursorMarqueeIcon },
     { label: 'Google AI Studio', Icon: SiGooglegemini },
@@ -166,8 +174,9 @@ const TechStrip: React.FC = () => {
                             A focused stack for dependable launches.
                         </h2>
                         <p className="mt-6 max-w-[38ch] font-sans text-[15px] leading-[1.68] text-slate-800 md:text-[16px] md:leading-[1.72]">
-                            React / Next.js, Tailwind, typed components, CMS when content moves, Vercel when it ships, the
-                            same toolkit for marketing sites, dashboards and Web3 surfaces.
+                            React / Next.js and TypeScript on the interface, WordPress, WooCommerce, Node.js and
+                            PostgreSQL underneath, CMS when content moves, Vercel when it ships. The same toolkit from
+                            server architecture down to UI polish.
                         </p>
                     </header>
 

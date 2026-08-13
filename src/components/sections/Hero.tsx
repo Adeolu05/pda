@@ -249,7 +249,10 @@ const Hero: React.FC = () => {
                         className="flex flex-col items-center gap-2"
                     >
                         <p className="text-slate-500 text-[8px] md:text-xs uppercase tracking-[0.4em] md:tracking-[0.5em] font-bold">
-                            Frontend Architect • Web3 Creative Strategist
+                            Web Engineer & Architect • Web3 Creative Strategist
+                        </p>
+                        <p className="max-w-[22rem] text-balance text-[11px] font-medium leading-relaxed tracking-normal text-slate-500 md:max-w-lg md:text-sm">
+                            A boutique web engineering practice crafting high-performance full-stack applications, interactive landing pages, and Web3 experiences for global brands and startups.
                         </p>
                     </motion.div>
                 </div>
@@ -271,7 +274,7 @@ const Hero: React.FC = () => {
                 transition={{ delay: 3.2, duration: 1 }}
                 className="absolute bottom-12 right-12 hidden md:block"
             >
-                <div className="text-slate-900 font-display text-sm italic rotate-[90deg] origin-right">Creative Developer / est. 2022</div>
+                <div className="text-slate-900 font-display text-sm italic rotate-[90deg] origin-right">Web Engineer / est. 2022</div>
             </motion.div>
 
         </div>
