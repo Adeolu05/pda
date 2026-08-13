@@ -8,16 +8,20 @@ interface SEOProps {
 }
 
 const siteUrl = CONTACT_INFO.websiteUrl.replace(/\/$/, '');
-const defaultImage = `${siteUrl}/profile.jpg`;
+const defaultImage = `${siteUrl}/og-image.png`;
+const defaultTitle = "Peluola David Adeoluwa | Web Engineer & Architect";
+const defaultDescription =
+    "I build modern, high-performance web applications and custom websites tailored for businesses, startups, and growing brands. Specializing in full-stack engineering, interactive landing pages, and Web3 digital experiences.";
 
 export default function SEO({
-    title = "Peluola David Adeoluwa | Frontend Developer & Web3 Builder",
-    description = "Premium frontend developer portfolio of Peluola David Adeoluwa, building websites, landing pages, dashboards and Web3 digital experiences for brands, startups and communities.",
+    title = defaultTitle,
+    description = defaultDescription,
     type = "website"
 }: SEOProps) {
     return (
         <Helmet>
             <title>{title}</title>
+            <meta name="title" content={title} />
             <meta name="description" content={description} />
             <link rel="canonical" href={`${siteUrl}/`} />
 
