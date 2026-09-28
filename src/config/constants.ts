@@ -27,6 +27,13 @@ export const CONTACT_INFO = {
     websiteUrl: "https://www.dpeluola.com"
 };
 
+/** Google Business Profile, source of the testimonials in ProofSection */
+export const GOOGLE_REVIEWS = {
+    url: "https://share.google/4c2Ccak3IPZaaCQxN",
+    rating: "5.0",
+    count: 8,
+};
+
 /** Public filenames in /public */
 export const RESUME_FILES = {
     pdf: "/Peluola_David_Resume.pdf",

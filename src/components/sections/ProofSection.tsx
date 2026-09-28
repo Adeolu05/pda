@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Quote, Zap } from 'lucide-react';
+import { ArrowUpRight, Check, Quote, Star, Zap } from 'lucide-react';
+import { GOOGLE_REVIEWS } from '../../config/constants';
 
 /** Credibility only, keep distinct from About (story / workflow). */
 const PROOF: { line: string; accent: string }[] = [
@@ -12,12 +13,43 @@ const PROOF: { line: string; accent: string }[] = [
 ];
 
 /**
- * Real client quotes only, the block stays hidden while this list is empty.
- * Ask for permission to use name + role, and keep quotes to one or two sentences.
- * Example shape:
- *   { quote: 'Orders now come straight through WhatsApp...', name: 'Jane Doe', role: 'Founder, Hijo Lux Watches', link: 'https://hijoluxwatches.com' }
+ * Verbatim excerpts from 5-star reviews on the Google Business Profile (GOOGLE_REVIEWS.url).
+ * Keep wording as written; mark cuts with "…". Names shortened to first name + initial.
  */
-const TESTIMONIALS: { quote: string; name: string; role: string; link?: string }[] = [];
+const TESTIMONIALS: { quote: string; name: string; context?: string }[] = [
+    {
+        quote:
+            'Dave developed two websites for clients of mine, both delivered to a high professional standard. The first was an e-commerce platform for a watch retailer… He was consistently professional, communicative, and delivered on time.',
+        name: 'Oyewole O.',
+        context: 'Referred two client builds',
+    },
+    {
+        quote:
+            'Amazing web developer. Very talented… Was able to accomplish every task I gave him and deliver a final product that was highly polished. Everyone who visited my website has nothing but good things to say.',
+        name: 'G Solid Prime',
+        context: 'Google Local Guide',
+    },
+    {
+        quote:
+            'A Very professional, patient website developer. He pays attention to details and grasps ideas shared quickly… I would use his services over and over again.',
+        name: 'Naomi D.',
+    },
+    {
+        quote: 'One of the best out there, very composed with attention to details. I recommend any day.',
+        name: 'Hijo',
+        context: 'Hijo Lux Watches',
+    },
+    {
+        quote: 'He made my portfolio and I must admit, it was a very clean job...love it!',
+        name: 'Olasubomi A.',
+        context: 'Portfolio site',
+    },
+    {
+        quote: 'He is faithful and diligent in web development… I hereby recommend him for who ever needs his service.',
+        name: 'Adeyemi A.',
+        context: 'Church website',
+    },
+];
 
 const ProofSection: React.FC = () => {
     return (
@@ -47,37 +79,57 @@ const ProofSection: React.FC = () => {
             </header>
 
             {TESTIMONIALS.length > 0 && (
-                <div className="relative mb-8 grid gap-4 md:mb-10 md:grid-cols-2 lg:grid-cols-3">
-                    {TESTIMONIALS.map((t, i) => (
-                        <motion.figure
-                            key={t.name}
-                            initial={{ opacity: 0, y: 10 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: i * 0.06 }}
-                            className="flex flex-col rounded-2xl border border-slate-200/70 bg-white p-6 shadow-[0_10px_32px_-22px_rgba(15,23,42,0.16)]"
-                        >
-                            <Quote className="h-5 w-5 text-violet-500" aria-hidden />
-                            <blockquote className="mt-3 flex-1 text-[15px] leading-relaxed text-slate-800 md:text-[16px]">
-                                {t.quote}
-                            </blockquote>
-                            <figcaption className="mt-5 border-t border-slate-100 pt-4">
-                                <p className="text-[14px] font-semibold text-slate-950">{t.name}</p>
-                                {t.link ? (
-                                    <a
-                                        href={t.link}
-                                        target="_blank"
-                                        rel="noopener noreferrer"
-                                        className="text-[13px] text-slate-600 underline decoration-slate-300 underline-offset-2 hover:text-violet-700"
-                                    >
-                                        {t.role}
-                                    </a>
-                                ) : (
-                                    <p className="text-[13px] text-slate-600">{t.role}</p>
-                                )}
-                            </figcaption>
-                        </motion.figure>
-                    ))}
+                <div className="relative mb-8 md:mb-10">
+                    <a
+                        href={GOOGLE_REVIEWS.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group mb-5 inline-flex flex-wrap items-center gap-x-3 gap-y-1 rounded-full border border-slate-200/80 bg-white px-4 py-2 text-[14px] text-slate-700 shadow-sm transition-colors hover:border-violet-300"
+                    >
+                        <span className="flex items-center gap-0.5 text-amber-400" aria-hidden>
+                            {Array.from({ length: 5 }).map((_, i) => (
+                                <Star key={i} className="h-4 w-4 fill-current" />
+                            ))}
+                        </span>
+                        <span>
+                            <span className="font-semibold text-slate-950">{GOOGLE_REVIEWS.rating}</span> from{' '}
+                            {GOOGLE_REVIEWS.count} Google reviews
+                        </span>
+                        <span className="inline-flex items-center gap-1 font-semibold text-violet-700">
+                            See all
+                            <ArrowUpRight className="h-3.5 w-3.5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                        </span>
+                    </a>
+                    <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+                        {TESTIMONIALS.map((t, i) => (
+                            <motion.figure
+                                key={t.name}
+                                initial={{ opacity: 0, y: 10 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: i * 0.06 }}
+                                className="flex flex-col rounded-2xl border border-slate-200/70 bg-white p-6 shadow-[0_10px_32px_-22px_rgba(15,23,42,0.16)]"
+                            >
+                                <div className="flex items-center justify-between">
+                                    <Quote className="h-5 w-5 text-violet-500" aria-hidden />
+                                    <span className="flex gap-0.5 text-amber-400" role="img" aria-label="5 out of 5 stars">
+                                        {Array.from({ length: 5 }).map((_, s) => (
+                                            <Star key={s} className="h-3.5 w-3.5 fill-current" aria-hidden />
+                                        ))}
+                                    </span>
+                                </div>
+                                <blockquote className="mt-3 flex-1 text-[15px] leading-relaxed text-slate-800 md:text-[16px]">
+                                    {t.quote}
+                                </blockquote>
+                                <figcaption className="mt-5 border-t border-slate-100 pt-4">
+                                    <p className="text-[14px] font-semibold text-slate-950">{t.name}</p>
+                                    <p className="text-[13px] text-slate-600">
+                                        {t.context ? `${t.context} · ` : ''}Google review
+                                    </p>
+                                </figcaption>
+                            </motion.figure>
+                        ))}
+                    </div>
                 </div>
             )}
 
