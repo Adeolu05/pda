@@ -16,6 +16,19 @@ interface FeaturedProject {
     stackPills: string[];
     /** Per-project accent used on the number pill, underline, title + CTA hover. */
     accent: string;
+    /** Optional short case study, renders as an expandable panel under the stack pills. */
+    caseStudy?: CaseStudy;
+}
+
+interface CaseStudy {
+    /** What the client was struggling with before the build. */
+    problem: string;
+    /** What you built and the key decisions behind it. */
+    solution: string;
+    /** What changed after launch, concrete beats vague. */
+    outcome: string;
+    /** Optional headline number, e.g. { value: '1.2s', label: 'mobile load time' }. Only use real figures. */
+    metric?: { value: string; label: string };
 }
 
 /** Shared accent palette so archive cards rotate through the same family. */
@@ -26,17 +39,24 @@ const projects: FeaturedProject[] = [
         id: 1,
         title: 'Hijo Lux Watches',
         desc: 'Luxury catalogue with WhatsApp checkout, inventory and merchandising stay in the CMS, no engineer required for day-to-day updates.',
-        img: '/images/work/hijo-hijolux.jpg',
+        img: '/images/work/hijo-hijolux.webp',
         link: 'https://hijoluxwatches.com',
         studioTheme: 'light',
         stackPills: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Sanity CMS', 'WhatsApp', 'Vercel'],
         accent: '#7C3AED',
+        // Fill in with real details to show the case-study panel on this row:
+        // caseStudy: {
+        //     problem: '',
+        //     solution: '',
+        //     outcome: '',
+        //     metric: { value: '', label: '' },
+        // },
     },
     {
         id: 2,
         title: 'PrintNest',
         desc: 'High-intent landing that explains the workflow in one scroll, right leads self-select before they enquire.',
-        img: '/images/work/printnest.jpg',
+        img: '/images/work/printnest.webp',
         link: 'https://printnest.vercel.app',
         stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Landing Page', 'Vercel'],
         accent: '#4F46E5',
@@ -45,7 +65,7 @@ const projects: FeaturedProject[] = [
         id: 3,
         title: 'BCCS Hub',
         desc: 'Structured Web3 learning gateway, plain hierarchy so newcomers stay oriented instead of overwhelmed.',
-        img: '/images/work/bccs-hub.png',
+        img: '/images/work/bccs-hub.webp',
         link: 'https://bccshub.com',
         stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Web3 UI', 'Vercel'],
         accent: '#DB2777',
@@ -97,7 +117,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Onion Price Bot',
         desc: 'A Python-powered Telegram bot delivering real-time meme project analytics, including price, market cap, and volume updates.',
         tag: 'Python / Automation',
-        img: '/images/work/onion-price-bot.jpg',
+        img: '/images/work/onion-price-bot.webp',
         link: 'https://t.me/myoniontokenupdate_bot',
         stackPills: ['Python', 'Telegram Bot', 'Automation', 'API'],
     },
@@ -106,7 +126,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Chain Alephium',
         desc: 'Fun, educational Web3 content series explaining the Alephium ecosystem through high-energy visual storytelling.',
         tag: 'Web3 Content Creation',
-        img: '/images/work/chain-alephium.jpg',
+        img: '/images/work/chain-alephium.webp',
         link: 'https://www.tiktok.com/@chain.alephium',
         stackPills: ['TikTok', 'Web3 Content', 'Video Editing', 'Alephium'],
     },
@@ -115,7 +135,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Inboxx',
         desc: 'A sophisticated platform enabling users to connect with creators through paid messaging, built with modern frontend architecture.',
         tag: 'Web Platform',
-        img: '/images/work/inboxx.png',
+        img: '/images/work/inboxx.webp',
         link: 'https://inboxx-ebon.vercel.app/',
         stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     },
@@ -124,7 +144,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Babelonsol',
         desc: 'Converting AI-generated static imagery into viral TikTok content for the Babel ecosystem on Solana.',
         tag: 'Web3 / Content',
-        img: '/images/work/babelonsol.jpg',
+        img: '/images/work/babelonsol.webp',
         link: 'https://www.tiktok.com/@babelonsol',
         stackPills: ['TikTok', 'Web3', 'Solana', 'Content Creation'],
     },
@@ -133,7 +153,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Grok Freedom',
         desc: 'Official platform and Web3 creative strategy hub for the Grok Freedom ecosystem, bridging technical blockchain concepts with community engagement.',
         tag: 'Web3 / Digital Strategy',
-        img: '/images/work/grok-freedom.png',
+        img: '/images/work/grok-freedom.webp',
         link: 'https://grokfreedom.com',
         stackPills: ['React', 'Web3', 'Tailwind CSS', 'Vercel'],
     },
@@ -142,7 +162,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Herdentity',
         desc: 'A sleek, modern landing page dedicated to identity-rooted confidence for women, featuring sections for mentorship, community building, and leadership skills.',
         tag: 'Frontend Engineering',
-        img: '/images/work/herdentity.png',
+        img: '/images/work/herdentity.webp',
         link: 'https://herdentity.vercel.app',
         stackPills: ['React', 'Tailwind CSS', 'Landing Page', 'Vercel'],
     },
@@ -151,7 +171,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Hijo Platform',
         desc: 'A modern, responsive web interface engineered with optimal frontend architecture for high performance and a streamlined user experience.',
         tag: 'React Application',
-        img: '/images/work/hijo-platform.png',
+        img: '/images/work/hijo-platform.webp',
         link: 'https://hijo.vercel.app',
         stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Vercel'],
     },
@@ -160,7 +180,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Forever Yours',
         desc: "An interactive, emotion-driven Valentine's Day web application designed to create shareable, personalized digital experiences with smooth UI constraints.",
         tag: 'Web Application / UX Design',
-        img: '/images/work/forever-yours.png',
+        img: '/images/work/forever-yours.webp',
         link: 'https://valentine.dpeluola.com',
         stackPills: ['React', 'Interactive UI', 'Tailwind CSS', 'Vercel'],
     },
@@ -169,7 +189,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Chef Olamide',
         desc: 'A premium, high-fidelity culinary portfolio for a UK-based Chef de Partie, showcasing modern gastronomy and professional kitchen experience.',
         tag: 'Web Architecture',
-        img: '/images/work/chef-olamide.png',
+        img: '/images/work/chef-olamide.webp',
         link: 'https://chefolamide.com',
         stackPills: ['Next.js', 'Tailwind CSS', 'Portfolio', 'Vercel'],
     },
@@ -178,7 +198,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'OnionLab',
         desc: 'Premium Alephium market intelligence via Telegram, prices, charts, pools, farming, wallet summaries, holders, and network stats. Node.js bot with a small REST API for snapshots and future dashboard work.',
         tag: 'Telegram / Web3',
-        img: '/images/work/onionlab.png',
+        img: '/images/work/onionlab.webp',
         link: 'https://t.me/onionlab_bot',
         thumbContainOnDark: true,
         stackPills: ['Node.js', 'Telegram Bot', 'REST API', 'Alephium', 'Web3'],
@@ -188,7 +208,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'LMS PDF Downloader',
         desc: 'Student-facing tool that automates grabbing PDF course packs from LMS pages and sorts them by week, Playwright-style automation with a clean Vercel UI.',
         tag: 'TypeScript / Automation',
-        img: '/images/work/lms-pdf-downloader.jpg',
+        img: '/images/work/lms-pdf-downloader.webp',
         link: 'https://lms-pdf-downloader.vercel.app',
         stackPills: ['TypeScript', 'Playwright', 'Automation', 'Vercel'],
     },
@@ -197,7 +217,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Jumpa',
         desc: 'Marketing homepage build, landing structure, responsive layout, and branded sections for product storytelling.',
         tag: 'Web / Landing',
-        img: '/images/work/jumpa-homepage.jpg',
+        img: '/images/work/jumpa-homepage.webp',
         link: 'https://jumpa-homepage.vercel.app',
         stackPills: ['React', 'Tailwind CSS', 'Landing Page', 'Vercel'],
     },
@@ -206,7 +226,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Celebration House',
         desc: 'Church organization site with clear service information, community positioning, and a calm, trustworthy visual tone.',
         tag: 'Web / Community',
-        img: '/images/work/celebration-house.jpg',
+        img: '/images/work/celebration-house.webp',
         link: 'https://celebration-house.vercel.app',
         stackPills: ['React', 'Tailwind CSS', 'Community Site', 'Vercel'],
     },
@@ -215,7 +235,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Dami Olatunji',
         desc: 'Personal brand and portfolio surface, presentational site with emphasis on clarity, hierarchy, and mobile reading.',
         tag: 'Web / Portfolio',
-        img: '/images/work/dami-olatunji.png',
+        img: '/images/work/dami-olatunji.webp',
         link: 'https://damiolatunji.com',
         stackPills: ['Next.js', 'Tailwind CSS', 'Portfolio', 'Vercel'],
     },
@@ -224,7 +244,7 @@ const archiveProjects: ArchiveProject[] = [
         title: "Tomijoke's Cakes",
         desc: 'Conversion-focused storefront for an Abeokuta bakery, fresh-cake catalogue, category guides, and one-tap WhatsApp ordering for birthdays, weddings, and events.',
         tag: 'Web / Small Business',
-        img: '/images/work/tomijoke.jpg',
+        img: '/images/work/tomijoke.webp',
         link: 'https://tomijoke-cakes.vercel.app',
         stackPills: ['Next.js', 'Tailwind CSS', 'WhatsApp', 'Vercel'],
     },
@@ -233,7 +253,7 @@ const archiveProjects: ArchiveProject[] = [
         title: "Lara's Confections",
         desc: 'Warm, elegant landing for an Ogun State confectionery brand, treats showcase, simple order guide, and direct WhatsApp checkout.',
         tag: 'Web / Small Business',
-        img: '/images/work/lara-collection.jpg',
+        img: '/images/work/lara-collection.webp',
         link: 'https://larascollection.vercel.app',
         stackPills: ['Next.js', 'Tailwind CSS', 'WhatsApp', 'Vercel'],
     },
@@ -242,7 +262,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Sweet Zoey Bakehouse',
         desc: 'Soft, editorial bakery site with a menu, order walkthrough, and location section, built to turn browsers into WhatsApp orders.',
         tag: 'Web / Small Business',
-        img: '/images/work/sweet-zoey.jpg',
+        img: '/images/work/sweet-zoey.webp',
         link: 'https://sweet-zoey.vercel.app',
         stackPills: ['Next.js', 'Tailwind CSS', 'WhatsApp', 'Vercel'],
     },
@@ -251,7 +271,7 @@ const archiveProjects: ArchiveProject[] = [
         title: "God's Favor Cakes",
         desc: 'Full bakery marketing site with a filterable gallery, transparent price guide, FAQs, and integrated live chat for fast custom-cake enquiries.',
         tag: 'Web / Small Business',
-        img: '/images/work/gods-favour.jpg',
+        img: '/images/work/gods-favour.webp',
         link: 'https://godsfavour-pi.vercel.app',
         stackPills: ['Next.js', 'Tailwind CSS', 'Live Chat', 'Vercel'],
     },
@@ -260,7 +280,7 @@ const archiveProjects: ArchiveProject[] = [
         title: '24/01 Cakes',
         desc: 'Moody, premium one-page site for a bespoke Abeokuta patisserie, signature collections, brand story, and a consultation booking CTA.',
         tag: 'Web / Small Business',
-        img: '/images/work/2401-cakes.jpg',
+        img: '/images/work/2401-cakes.webp',
         link: 'https://24-01.vercel.app',
         stackPills: ['Next.js', 'Tailwind CSS', 'Landing Page', 'Vercel'],
     },
@@ -269,7 +289,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Shubby',
         desc: 'Personal brand and newsletter hub for a storyteller and relationship curator, dark editorial layout with series, highlights, and subscribe flows.',
         tag: 'Web / Personal Brand',
-        img: '/images/work/shuuby.jpg',
+        img: '/images/work/shuuby.webp',
         link: 'https://shubby-eta.vercel.app',
         stackPills: ['Next.js', 'Tailwind CSS', 'Newsletter', 'Vercel'],
     },
@@ -278,7 +298,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Oluwaseun Akinola',
         desc: 'Speaker and advocacy portfolio for an emerging diplomat, impact pillars, speaking engagements, gallery, and a built-in invitation form.',
         tag: 'Web / Personal Brand',
-        img: '/images/work/oluwaseun-akinola.jpg',
+        img: '/images/work/oluwaseun-akinola.webp',
         link: 'https://oluwaseunakinola.vercel.app',
         stackPills: ['Next.js', 'Tailwind CSS', 'Forms', 'Vercel'],
     },
@@ -287,7 +307,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'TranscriptFlow',
         desc: 'Product site for a YouTube and Vimeo transcript extractor, paste a link and get a clean TXT, PDF, or DOCX file via the web app or Telegram bot.',
         tag: 'SaaS / Automation',
-        img: '/images/work/transcriptflow.jpg',
+        img: '/images/work/transcriptflow.webp',
         link: 'https://www.usetranscriptflow.com',
         stackPills: ['TypeScript', 'Telegram Bot', 'SaaS', 'PDF Export'],
     },
@@ -296,7 +316,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'BitGuess',
         desc: 'Web3 prediction game on Alephium, players stake ALPH on daily BTC move buckets with wallet connect, live pools, and on-chain settlement.',
         tag: 'Web3 / dApp',
-        img: '/images/work/bitguess.jpg',
+        img: '/images/work/bitguess.webp',
         link: 'https://bitguess.vercel.app',
         stackPills: ['React', 'Web3', 'Alephium', 'Wallet Connect', 'Vercel'],
     },
@@ -305,7 +325,7 @@ const archiveProjects: ArchiveProject[] = [
         title: 'Live Stream AI Avatar',
         desc: 'Interactive AI avatar that reads and responds to live-stream comments in real time, with a token-based usage model and a live transcript panel.',
         tag: 'React / AI Tool',
-        img: '/images/work/livestream-ai-avatar.jpg',
+        img: '/images/work/livestream-ai-avatar.webp',
         link: 'https://livestream-ai-avatar.vercel.app',
         stackPills: ['React', 'Google AI', 'Real-time UI', 'Vercel'],
     },
@@ -314,11 +334,44 @@ const archiveProjects: ArchiveProject[] = [
         title: 'RCCG Glorious Premier',
         desc: 'Complete church website for RCCG Ogun Province 12, service schedules, ministries, events, copy-to-clipboard giving details, and a prayer-request form.',
         tag: 'Web / Community',
-        img: '/images/work/ogp12-church.jpg',
+        img: '/images/work/ogp12-church.webp',
         link: 'https://ogp12.vercel.app',
         stackPills: ['Next.js', 'Tailwind CSS', 'Forms', 'Vercel'],
     },
 ];
+
+function CaseStudyPanel({ caseStudy }: { caseStudy: CaseStudy }) {
+    const rows: [string, string][] = [
+        ['The problem', caseStudy.problem],
+        ['What I built', caseStudy.solution],
+        ['The outcome', caseStudy.outcome],
+    ];
+    return (
+        <details className="group/cs mb-8 max-w-lg rounded-2xl border border-slate-200/90 bg-white shadow-sm [&_summary::-webkit-details-marker]:hidden">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-3 px-5 py-4 text-[13px] font-semibold tracking-tight text-slate-900">
+                How it came together
+                <ArrowUpRight
+                    className="h-4 w-4 shrink-0 text-[var(--accent)] transition-transform group-open/cs:rotate-90"
+                    aria-hidden
+                />
+            </summary>
+            <div className="space-y-4 border-t border-slate-100 px-5 pb-5 pt-4">
+                {caseStudy.metric && (
+                    <p className="flex items-baseline gap-2">
+                        <span className="font-display text-3xl font-semibold text-[var(--accent)]">{caseStudy.metric.value}</span>
+                        <span className="text-[13px] text-slate-600">{caseStudy.metric.label}</span>
+                    </p>
+                )}
+                {rows.map(([label, text]) => (
+                    <div key={label}>
+                        <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-slate-500">{label}</p>
+                        <p className="mt-1 text-[15px] leading-relaxed text-slate-800">{text}</p>
+                    </div>
+                ))}
+            </div>
+        </details>
+    );
+}
 
 function ArchiveVaultThumb({
     project,
@@ -590,6 +643,8 @@ const WorkSection: React.FC = () => {
                                     </span>
                                 ))}
                             </div>
+
+                            {project.caseStudy && <CaseStudyPanel caseStudy={project.caseStudy} />}
 
                             <a
                                 href={project.link}

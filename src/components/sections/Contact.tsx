@@ -23,7 +23,8 @@ const Contact: React.FC = () => {
         budget: BUDGET_RANGES[3],
         message: '',
     });
-    const [submitted, setSubmitted] = useState(false);
+    const [company, setCompany] = useState(''); // honeypot
+    const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'fallback'>('idle');
 
     const socialLinks = [
         { Icon: Github, href: SOCIAL_LINKS.github, label: 'GitHub' },
@@ -32,15 +33,42 @@ const Contact: React.FC = () => {
         { Icon: Instagram, href: SOCIAL_LINKS.instagram, label: 'Instagram' },
     ];
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    const openMailFallback = () => {
         const subject = encodeURIComponent(`Project inquiry, ${formData.projectType}, ${formData.name}`);
         const body = encodeURIComponent(
-            `Hi,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nProject type: ${formData.projectType}\nBudget: ${formData.budget}\n\nMessage:\n${formData.message}\n\nSent from ${CONTACT_INFO.websiteUrl}`,
+            `Hi,
+
+Name: ${formData.name}
+Email: ${formData.email}
+
+Project type: ${formData.projectType}
+Budget: ${formData.budget}
+
+Message:
+${formData.message}
+
+Sent from ${CONTACT_INFO.websiteUrl}`,
         );
         window.location.href = `mailto:${CONTACT_INFO.email}?subject=${subject}&body=${body}`;
-        setSubmitted(true);
-        window.setTimeout(() => setSubmitted(false), 6000);
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus('sending');
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...formData, company }),
+            });
+            if (!res.ok) throw new Error(`Contact API responded ${res.status}`);
+            setStatus('sent');
+            setFormData((prev) => ({ ...prev, message: '' }));
+        } catch {
+            // API unavailable (local dev, missing env, outage): hand off to the visitor's email app
+            openMailFallback();
+            setStatus('fallback');
+        }
     };
 
     return (
@@ -97,7 +125,18 @@ const Contact: React.FC = () => {
                     className="scroll-mt-28 rounded-[1.75rem] border border-white/12 bg-white/[0.05] p-6 shadow-[0_24px_64px_-24px_rgba(0,0,0,0.45)] backdrop-blur-md md:p-10"
                 >
                     <p className="mb-8 text-[15px] font-medium leading-snug text-slate-300">All fields help me reply with something useful, nothing is stored on this site.</p>
-                    <form className="space-y-7" onSubmit={handleSubmit}>
+                    <form className="relative space-y-7" onSubmit={handleSubmit}>
+                        <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden>
+                            <label htmlFor="contact-company">Company website</label>
+                            <input
+                                id="contact-company"
+                                type="text"
+                                tabIndex={-1}
+                                autoComplete="off"
+                                value={company}
+                                onChange={(e) => setCompany(e.target.value)}
+                            />
+                        </div>
                         <div className="space-y-1.5">
                             <label htmlFor="contact-name" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">
                                 Name
@@ -180,7 +219,7 @@ const Contact: React.FC = () => {
                         </div>
                         <p className="text-[15px] leading-relaxed text-slate-400">{CONTACT_PRIVACY_NOTE}</p>
                         <AnimatePresence>
-                            {submitted && (
+                            {(status === 'sent' || status === 'fallback') && (
                                 <motion.div
                                     initial={{ opacity: 0, y: -6, height: 0 }}
                                     animate={{ opacity: 1, y: 0, height: 'auto' }}
@@ -191,23 +230,30 @@ const Contact: React.FC = () => {
                                     aria-live="polite"
                                 >
                                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" aria-hidden />
-                                    <p className="text-[14px] leading-snug">
-                                        Your email app should be opening with everything pre-filled, just hit send. If it
-                                        didn&apos;t, reach me at{' '}
-                                        <a className="font-semibold underline decoration-emerald-400/50 underline-offset-2" href={`mailto:${CONTACT_INFO.email}`}>
-                                            {CONTACT_INFO.email}
-                                        </a>.
-                                    </p>
+                                    {status === 'sent' ? (
+                                        <p className="text-[14px] leading-snug">
+                                            Brief received. I&apos;ll reply to {formData.email} within two business days.
+                                        </p>
+                                    ) : (
+                                        <p className="text-[14px] leading-snug">
+                                            Your email app should be opening with everything pre-filled, just hit send. If it
+                                            didn&apos;t, reach me at{' '}
+                                            <a className="font-semibold underline decoration-emerald-400/50 underline-offset-2" href={`mailto:${CONTACT_INFO.email}`}>
+                                                {CONTACT_INFO.email}
+                                            </a>.
+                                        </p>
+                                    )}
                                 </motion.div>
                             )}
                         </AnimatePresence>
                         <motion.button
                             type="submit"
+                            disabled={status === 'sending'}
                             whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.99 }}
-                            className="flex min-h-[3.65rem] w-full items-center justify-center gap-2 rounded-xl bg-white px-6 text-[13px] font-bold uppercase tracking-[0.16em] text-slate-950 shadow-[0_16px_42px_-14px_rgba(124,58,237,0.35),0_8px_24px_-12px_rgba(0,0,0,0.35)] ring-1 ring-white/25 transition-colors hover:bg-violet-100 hover:shadow-[0_18px_48px_-14px_rgba(124,58,237,0.42)] md:text-[14px] md:tracking-[0.14em]"
+                            className="flex min-h-[3.65rem] w-full items-center justify-center gap-2 rounded-xl bg-white px-6 text-[13px] font-bold uppercase tracking-[0.16em] text-slate-950 shadow-[0_16px_42px_-14px_rgba(124,58,237,0.35),0_8px_24px_-12px_rgba(0,0,0,0.35)] ring-1 ring-white/25 transition-colors hover:bg-violet-100 hover:shadow-[0_18px_48px_-14px_rgba(124,58,237,0.42)] disabled:cursor-wait disabled:opacity-70 md:text-[14px] md:tracking-[0.14em]"
                         >
-                            Send Project Brief
+                            {status === 'sending' ? 'Sending…' : 'Send Project Brief'}
                             <ArrowRight className="h-4 w-4 md:h-[1.125rem] md:w-[1.125rem]" aria-hidden />
                         </motion.button>
                     </form>

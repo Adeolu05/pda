@@ -1,4 +1,4 @@
-export const PROFILE_IMAGE = "/profile.jpg";
+export const PROFILE_IMAGE = "/profile.webp";
 
 /** Matches floating nav on scroll, keep labels short for the pill layout */
 export const NAV_ITEMS = [
@@ -36,4 +36,4 @@ export const PORTFOLIO_HIRE_SUBLINE =
 
 /** Shown on the contact form, no server-side storage */
 export const CONTACT_PRIVACY_NOTE =
-    'This form only opens your email app with your message; nothing you type is saved on this website.';
+    'Your brief is emailed straight to my inbox; nothing you type is saved in a database on this website.';

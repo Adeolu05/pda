@@ -8,7 +8,7 @@ interface SEOProps {
 }
 
 const siteUrl = CONTACT_INFO.websiteUrl.replace(/\/$/, '');
-const defaultImage = `${siteUrl}/og-image.png`;
+const defaultImage = `${siteUrl}/og-image.jpg`;
 const defaultTitle = "Peluola David Adeoluwa | Web Engineer & Architect";
 const defaultDescription =
     "I build modern, high-performance web applications and custom websites tailored for businesses, startups, and growing brands. Specializing in full-stack engineering, interactive landing pages, and Web3 digital experiences.";

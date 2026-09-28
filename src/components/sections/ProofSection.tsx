@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Check, Zap } from 'lucide-react';
+import { Check, Quote, Zap } from 'lucide-react';
 
 /** Credibility only, keep distinct from About (story / workflow). */
 const PROOF: { line: string; accent: string }[] = [
@@ -10,6 +10,14 @@ const PROOF: { line: string; accent: string }[] = [
     { line: 'Automation and Telegram tooling alongside full-stack delivery.', accent: '#0EA5E9' },
     { line: 'Hands-on Web3 education content (including Alephium-ecosystem work).', accent: '#16A34A' },
 ];
+
+/**
+ * Real client quotes only, the block stays hidden while this list is empty.
+ * Ask for permission to use name + role, and keep quotes to one or two sentences.
+ * Example shape:
+ *   { quote: 'Orders now come straight through WhatsApp...', name: 'Jane Doe', role: 'Founder, Hijo Lux Watches', link: 'https://hijoluxwatches.com' }
+ */
+const TESTIMONIALS: { quote: string; name: string; role: string; link?: string }[] = [];
 
 const ProofSection: React.FC = () => {
     return (
@@ -37,6 +45,41 @@ const ProofSection: React.FC = () => {
                     Live builds, stack discipline and shipping rhythm, nothing here relies on adjectives alone.
                 </p>
             </header>
+
+            {TESTIMONIALS.length > 0 && (
+                <div className="relative mb-8 grid gap-4 md:mb-10 md:grid-cols-2 lg:grid-cols-3">
+                    {TESTIMONIALS.map((t, i) => (
+                        <motion.figure
+                            key={t.name}
+                            initial={{ opacity: 0, y: 10 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.06 }}
+                            className="flex flex-col rounded-2xl border border-slate-200/70 bg-white p-6 shadow-[0_10px_32px_-22px_rgba(15,23,42,0.16)]"
+                        >
+                            <Quote className="h-5 w-5 text-violet-500" aria-hidden />
+                            <blockquote className="mt-3 flex-1 text-[15px] leading-relaxed text-slate-800 md:text-[16px]">
+                                {t.quote}
+                            </blockquote>
+                            <figcaption className="mt-5 border-t border-slate-100 pt-4">
+                                <p className="text-[14px] font-semibold text-slate-950">{t.name}</p>
+                                {t.link ? (
+                                    <a
+                                        href={t.link}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="text-[13px] text-slate-600 underline decoration-slate-300 underline-offset-2 hover:text-violet-700"
+                                    >
+                                        {t.role}
+                                    </a>
+                                ) : (
+                                    <p className="text-[13px] text-slate-600">{t.role}</p>
+                                )}
+                            </figcaption>
+                        </motion.figure>
+                    ))}
+                </div>
+            )}
 
             <motion.div
                 initial={{ opacity: 0, y: 10 }}
