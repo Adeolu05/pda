@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Briefcase, User, FileText, Mail, ArrowUpRight } from 'lucide-react';
-import { PROFILE_IMAGE } from '../../config/constants';
+import { PROFILE_IMAGE, PROFILE_SIZES, PROFILE_SRCSET } from '../../config/constants';
 
 const Hero: React.FC = () => {
     const { scrollY } = useScroll();
@@ -163,9 +163,10 @@ const Hero: React.FC = () => {
                         </motion.a>
                     ))}
 
+                    {/* No opacity fade: the portrait is the LCP element, and Chrome won't record LCP for content that starts invisible */}
                     <motion.div
-                        initial={{ y: 50, opacity: 0, scale: 0.9, rotateY: 20 }}
-                        animate={{ y: 0, opacity: 1, scale: 1, rotateY: 0 }}
+                        initial={{ y: 50, scale: 0.9, rotateY: 20 }}
+                        animate={{ y: 0, scale: 1, rotateY: 0 }}
                         transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
                         className="relative group p-2 md:p-4 bg-white/60 backdrop-blur-2xl border border-white/40 shadow-2xl rounded-[2.2rem] md:rounded-[3rem] transform-gpu"
                     >
@@ -176,6 +177,8 @@ const Hero: React.FC = () => {
                                     animate={{ scale: 1.35 }}
                                     transition={{ duration: 2, ease: "easeOut" }}
                                     src={PROFILE_IMAGE}
+                                    srcSet={PROFILE_SRCSET}
+                                    sizes={PROFILE_SIZES}
                                     onError={() => setImageError(true)}
                                     alt="Peluola David Adeoluwa"
                                     width={760}
@@ -251,7 +254,7 @@ const Hero: React.FC = () => {
                         className="flex flex-col items-center gap-2"
                     >
                         <p className="text-slate-500 text-[8px] md:text-xs uppercase tracking-[0.4em] md:tracking-[0.5em] font-bold">
-                            Web Engineer & Architect • Web3 Creative Strategist
+                            Web Engineer &amp; Architect
                         </p>
                         <p className="max-w-[22rem] text-balance text-[11px] font-medium leading-relaxed tracking-normal text-slate-500 md:max-w-lg md:text-sm">
                             A boutique web engineering practice crafting high-performance full-stack applications, interactive landing pages, and Web3 experiences for global brands and startups.

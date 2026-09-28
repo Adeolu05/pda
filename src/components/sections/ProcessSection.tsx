@@ -148,6 +148,7 @@ const ProcessSection: React.FC = () => {
         canPrev,
         canNext,
         isOverflowing,
+        snapEnabled,
         scrollByDirection,
         onCarouselKeyDown,
         onPointerDown,
@@ -232,7 +233,7 @@ const ProcessSection: React.FC = () => {
                         onPointerMove={onPointerMove}
                         onPointerUp={onPointerUp}
                         onPointerCancel={onPointerUp}
-                        className={`process-carousel flex gap-5 overflow-x-auto overscroll-x-contain scroll-smooth pb-6 pt-2 snap-x snap-mandatory no-scrollbar sm:gap-6 md:gap-7 ${
+                        className={`process-carousel flex gap-5 overflow-x-auto overscroll-x-contain scroll-smooth pb-6 pt-2 no-scrollbar sm:gap-6 md:gap-7 ${snapEnabled ? 'snap-x snap-mandatory' : ''} ${
                             isOverflowing ? 'cursor-grab touch-pan-x active:cursor-grabbing' : 'cursor-default justify-center'
                         }`}
                         role="region"

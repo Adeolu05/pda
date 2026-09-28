@@ -95,8 +95,9 @@ const ProofSection: React.FC = () => {
                         Website Speed & Performance
                     </p>
                     <p className="mt-1.5 text-[15px] leading-relaxed text-slate-800 md:text-[16px]">
-                        Auditing and refactoring existing codebases to achieve peak Core Web Vitals, lightning-fast load
-                        times, and flawless performance.
+                        Measured, not promised. PrintNest scores 96/100 for mobile performance on Lighthouse, and an
+                        optimisation pass on this portfolio cut each visit from 1.4 MB to about 0.4 MB with zero layout
+                        shift.
                     </p>
                 </div>
             </motion.div>

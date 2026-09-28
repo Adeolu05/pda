@@ -44,13 +44,14 @@ const projects: FeaturedProject[] = [
         studioTheme: 'light',
         stackPills: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Sanity CMS', 'WhatsApp', 'Vercel'],
         accent: '#7C3AED',
-        // Fill in with real details to show the case-study panel on this row:
-        // caseStudy: {
-        //     problem: '',
-        //     solution: '',
-        //     outcome: '',
-        //     metric: { value: '', label: '' },
-        // },
+        caseStudy: {
+            problem:
+                'Hijo Lux sells authenticated luxury watches, many priced in six figures, to buyers across Nigeria and the UAE. Buyers needed reasons to trust the dealer before sending a message, and the team needed to change stock and prices often without waiting on a developer.',
+            solution:
+                'A Next.js storefront with an editorial layout, stock and pricing managed in Sanity CMS, and WhatsApp as the checkout so every enquiry becomes a direct conversation. Trust signals sit on the homepage: the brand registration certificate, authentication, clear pricing and delivery terms.',
+            outcome:
+                'Live at hijoluxwatches.com. The team updates inventory, prices and featured pieces in the CMS themselves, and buyers go from a product to a WhatsApp chat in one tap.',
+        },
     },
     {
         id: 2,
@@ -60,6 +61,15 @@ const projects: FeaturedProject[] = [
         link: 'https://printnest.vercel.app',
         stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Landing Page', 'Vercel'],
         accent: '#4F46E5',
+        caseStudy: {
+            problem:
+                'PrintNest turns an artist’s images into a shareable print store. The landing page had to explain a new product to non-technical artists quickly enough that they would try it instead of bouncing.',
+            solution:
+                'A single-scroll React page that shows the product working: a live storefront mockup, a three-step how-it-works, a before/after of the AI copy tool and a no-signup demo store. Built mobile-first because artists arrive from Instagram, TikTok and WhatsApp.',
+            outcome:
+                'The workflow is clear in one scroll, so artists can judge the fit before signing up. It also scores 100 for best practices and SEO on Lighthouse.',
+            metric: { value: '96', label: 'Lighthouse mobile performance (Sept 2026)' },
+        },
     },
     {
         id: 3,
@@ -69,6 +79,14 @@ const projects: FeaturedProject[] = [
         link: 'https://bccshub.com',
         stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Web3 UI', 'Vercel'],
         accent: '#DB2777',
+        caseStudy: {
+            problem:
+                'Blue Collar Crypto Society introduces tradespeople and working-class creators to Web3. Most of that audience is new to crypto and wary of hype, so the site had to feel clear and trustworthy rather than overwhelming.',
+            solution:
+                'A React and TypeScript site organised around plain-language sections (what BCCS is, education over hype, community first) and four clear paths: the 3,333-piece collection, utility and rewards, music on DigiBeatz, and partners.',
+            outcome:
+                'Live at bccshub.com as the community’s front door, with a simple hierarchy newcomers can follow instead of a wall of crypto jargon.',
+        },
     },
 ];
 

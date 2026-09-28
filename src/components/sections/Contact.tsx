@@ -13,14 +13,19 @@ const PROJECT_TYPES = [
     'Other',
 ];
 
-const BUDGET_RANGES = ['₦100k - ₦200k', '₦200k - ₦500k', '₦500k+', 'Not sure yet'];
+/** Local clients see naira, international clients see USD; both land in the same email. */
+const BUDGET_GROUPS = [
+    { label: 'Nigeria (₦)', options: ['₦100k - ₦200k', '₦200k - ₦500k', '₦500k+'] },
+    { label: 'International ($)', options: ['Under $1,000', '$1,000 - $3,000', '$3,000 - $7,500', '$7,500+'] },
+];
+const BUDGET_UNSURE = 'Not sure yet';
 
 const Contact: React.FC = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         projectType: PROJECT_TYPES[0],
-        budget: BUDGET_RANGES[3],
+        budget: BUDGET_UNSURE,
         message: '',
     });
     const [company, setCompany] = useState(''); // honeypot
@@ -195,10 +200,17 @@ Sent from ${CONTACT_INFO.websiteUrl}`,
                                     onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                                     className="min-h-[3rem] w-full cursor-pointer rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow] focus:border-violet-400/80 focus:ring-4 focus:ring-violet-500/25"
                                 >
-                                    {BUDGET_RANGES.map((b) => (
-                                        <option key={b} value={b} className="bg-slate-900 text-white">
-                                            {b}
-                                        </option>
+                                    <option value={BUDGET_UNSURE} className="bg-slate-900 text-white">
+                                        {BUDGET_UNSURE}
+                                    </option>
+                                    {BUDGET_GROUPS.map((group) => (
+                                        <optgroup key={group.label} label={group.label} className="bg-slate-900 text-slate-400">
+                                            {group.options.map((b) => (
+                                                <option key={b} value={b} className="bg-slate-900 text-white">
+                                                    {b}
+                                                </option>
+                                            ))}
+                                        </optgroup>
                                     ))}
                                 </select>
                             </div>

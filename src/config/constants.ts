@@ -1,4 +1,7 @@
 export const PROFILE_IMAGE = "/profile.webp";
+/** Hero portrait renders at ~297-513 CSS px (frame width x 1.35 zoom); keep in sync with the preload in index.html */
+export const PROFILE_SRCSET = "/profile-480.webp 480w, /profile-800.webp 800w, /profile.webp 1400w";
+export const PROFILE_SIZES = "(min-width: 1024px) 513px, (min-width: 768px) 486px, (min-width: 640px) 378px, 297px";
 
 /** Matches floating nav on scroll, keep labels short for the pill layout */
 export const NAV_ITEMS = [
@@ -21,7 +24,7 @@ export const CONTACT_INFO = {
     label: "Peluola David Adeoluwa",
     shortName: "P.D.A",
     domain: "dpeluola.com",
-    websiteUrl: "https://dpeluola.com"
+    websiteUrl: "https://www.dpeluola.com"
 };
 
 /** Public filenames in /public */
