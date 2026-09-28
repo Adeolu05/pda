@@ -32,7 +32,7 @@ export const RESUME_FILES = {
 
 /** Shown under Selected Work, hiring / freelance signal */
 export const PORTFOLIO_HIRE_SUBLINE =
-    'Limited concurrent builds, share scope and deadline for an honest fit check.';
+    'I take on a few builds at a time. Share scope and deadline for an honest fit check.';
 
 /** Shown on the contact form, no server-side storage */
 export const CONTACT_PRIVACY_NOTE =

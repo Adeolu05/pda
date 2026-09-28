@@ -89,7 +89,7 @@ Sent from ${CONTACT_INFO.websiteUrl}`,
                         <span className="text-violet-300">what&apos;s next.</span>
                     </h2>
                     <p className="mt-6 text-[15px] leading-[1.72] text-slate-200 md:text-[16px] md:leading-relaxed">
-                        Send a tight brief, links, goals and timeline, and you&apos;ll hear back with honest fit, estimated
+                        Send a tight brief (links, goals and timeline) and you&apos;ll hear back with an honest fit check, estimated
                         turnaround and what &quot;done&quot; includes before we touch code.
                     </p>
 
@@ -124,7 +124,7 @@ Sent from ${CONTACT_INFO.websiteUrl}`,
                     id="contact-form"
                     className="scroll-mt-28 rounded-[1.75rem] border border-white/12 bg-white/[0.05] p-6 shadow-[0_24px_64px_-24px_rgba(0,0,0,0.45)] backdrop-blur-md md:p-10"
                 >
-                    <p className="mb-8 text-[15px] font-medium leading-snug text-slate-300">All fields help me reply with something useful, nothing is stored on this site.</p>
+                    <p className="mb-8 text-[15px] font-medium leading-snug text-slate-300">Every field helps me reply with something useful.</p>
                     <form className="relative space-y-7" onSubmit={handleSubmit}>
                         <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden>
                             <label htmlFor="contact-company">Company website</label>
@@ -214,7 +214,7 @@ Sent from ${CONTACT_INFO.websiteUrl}`,
                                 value={formData.message}
                                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                 className="w-full resize-none rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow,background-color] placeholder:text-slate-500 focus:border-violet-400/80 focus:bg-white/[0.09] focus:ring-4 focus:ring-violet-500/25"
-                                placeholder="Goals, deadline, links, competitors, short is fine."
+                                placeholder="Goals, deadline, links, competitors. Short is fine."
                             />
                         </div>
                         <p className="text-[15px] leading-relaxed text-slate-400">{CONTACT_PRIVACY_NOTE}</p>
@@ -236,7 +236,7 @@ Sent from ${CONTACT_INFO.websiteUrl}`,
                                         </p>
                                     ) : (
                                         <p className="text-[14px] leading-snug">
-                                            Your email app should be opening with everything pre-filled, just hit send. If it
+                                            Your email app should be opening with everything pre-filled. Just hit send. If it
                                             didn&apos;t, reach me at{' '}
                                             <a className="font-semibold underline decoration-emerald-400/50 underline-offset-2" href={`mailto:${CONTACT_INFO.email}`}>
                                                 {CONTACT_INFO.email}

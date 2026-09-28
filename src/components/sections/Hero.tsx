@@ -27,7 +27,7 @@ const Hero: React.FC = () => {
             color: '#FFFFFF',
             textColor: '#0F172A',
             target: '#work',
-            position: 'top-[15%] -left-20 sm:-left-24 md:-left-44',
+            position: 'top-[15%] -left-12 sm:-left-24 md:-left-44',
             rotation: -4,
             glow: 'shadow-[0_0_30px_rgba(139,92,246,0.15)]'
         },
@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
             color: '#8B5CF6',
             textColor: '#FFFFFF',
             target: '#about',
-            position: 'top-[15%] -right-20 sm:-right-24 md:-right-44',
+            position: 'top-[15%] -right-12 sm:-right-24 md:-right-44',
             rotation: 6,
             glow: 'shadow-[0_0_40px_rgba(139,92,246,0.4)]'
         },
@@ -47,7 +47,7 @@ const Hero: React.FC = () => {
             color: '#1E1B4B',
             textColor: '#E0E7FF',
             target: '#resume',
-            position: 'bottom-[15%] -left-20 sm:-left-24 md:-left-44',
+            position: 'bottom-[15%] -left-12 sm:-left-24 md:-left-44',
             rotation: 3,
             glow: 'shadow-[0_0_30px_rgba(79,70,229,0.2)]'
         },
@@ -57,7 +57,7 @@ const Hero: React.FC = () => {
             color: '#0F172A',
             textColor: '#FFFFFF',
             target: '#contact',
-            position: 'bottom-[15%] -right-20 sm:-right-24 md:-right-44',
+            position: 'bottom-[15%] -right-12 sm:-right-24 md:-right-44',
             rotation: -6,
             glow: 'shadow-[0_0_20px_rgba(0,0,0,0.1)]'
         }
@@ -75,7 +75,7 @@ const Hero: React.FC = () => {
     };
 
     return (
-        <div className="relative w-full h-[100svh] overflow-hidden flex items-center justify-center bg-[#FAF9FF]">
+        <div className="relative w-full min-h-[100svh] overflow-hidden flex items-center justify-center bg-[#FAF9FF] py-20 md:py-24">
             {/* Light Mesh Background Gradients */}
             <div className="absolute inset-0 z-0">
                 <motion.div
@@ -172,8 +172,8 @@ const Hero: React.FC = () => {
                         <div className="w-[220px] sm:w-[280px] md:w-[360px] lg:w-[380px] aspect-[4/5] bg-slate-950 rounded-[1.8rem] md:rounded-[2.4rem] relative overflow-hidden flex items-center justify-center">
                             {!imageError ? (
                                 <motion.img
-                                    initial={{ scale: 1.8 }}
-                                    animate={{ scale: 1.5 }}
+                                    initial={{ scale: 1.6 }}
+                                    animate={{ scale: 1.35 }}
                                     transition={{ duration: 2, ease: "easeOut" }}
                                     src={PROFILE_IMAGE}
                                     onError={() => setImageError(true)}
@@ -183,7 +183,7 @@ const Hero: React.FC = () => {
                                     loading="eager"
                                     decoding="async"
                                     fetchPriority="high"
-                                    className="w-full h-full object-cover object-center brightness-[0.55] contrast-[1.2] transition-all duration-1000 group-hover:brightness-[0.65] group-hover:scale-[1.55] transform-gpu"
+                                    className="w-full h-full object-cover object-center brightness-[0.92] contrast-[1.05] saturate-[1.05] transition-all duration-1000 group-hover:brightness-100 group-hover:scale-[1.4] transform-gpu"
                                 />
                             ) : (
                                 <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center p-12 text-center gap-4">
@@ -191,7 +191,7 @@ const Hero: React.FC = () => {
                                     <p className="text-white/20 text-[8px] uppercase tracking-widest font-bold">Image load failed</p>
                                 </div>
                             )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-40"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-40"></div>
                         </div>
 
                         {/* Available badge */}
@@ -254,6 +254,23 @@ const Hero: React.FC = () => {
                         <p className="max-w-[22rem] text-balance text-[11px] font-medium leading-relaxed tracking-normal text-slate-500 md:max-w-lg md:text-sm">
                             A boutique web engineering practice crafting high-performance full-stack applications, interactive landing pages, and Web3 experiences for global brands and startups.
                         </p>
+                        <div className="pointer-events-auto mt-4 flex flex-wrap items-center justify-center gap-3">
+                            <a
+                                href="#contact"
+                                onClick={(e) => scrollToSection(e, '#contact')}
+                                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-slate-950 px-5 sm:px-6 text-[12px] font-bold uppercase tracking-[0.12em] text-white shadow-[0_14px_34px_-14px_rgba(124,58,237,0.55)] transition-colors hover:bg-violet-700"
+                            >
+                                Start a project
+                                <ArrowUpRight className="h-4 w-4" aria-hidden />
+                            </a>
+                            <a
+                                href="#work"
+                                onClick={(e) => scrollToSection(e, '#work')}
+                                className="inline-flex min-h-11 items-center rounded-full border border-slate-300 bg-white/70 px-5 sm:px-6 text-[12px] font-bold uppercase tracking-[0.12em] text-slate-900 backdrop-blur transition-colors hover:border-slate-900"
+                            >
+                                See my work
+                            </a>
+                        </div>
                     </motion.div>
                 </div>
             </div>
@@ -263,7 +280,7 @@ const Hero: React.FC = () => {
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 0.15, x: 0 }}
                 transition={{ delay: 3, duration: 1 }}
-                className="absolute top-12 left-12 hidden md:block"
+                className="absolute bottom-12 left-12 hidden md:block"
             >
                 <div className="text-slate-900 font-display text-sm italic rotate-[-90deg] origin-left">Based in Africa / Global Delivery</div>
             </motion.div>

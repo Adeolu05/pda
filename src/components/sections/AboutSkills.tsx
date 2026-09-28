@@ -8,7 +8,7 @@ const WORK_STYLE: { label: string; accent: string }[] = [
     { label: 'Design-led layouts and typography', accent: '#7C3AED' },
     { label: 'React / Next.js and full-stack implementations', accent: '#4F46E5' },
     { label: 'WordPress, WooCommerce and CMS your team can run', accent: '#DB2777' },
-    { label: 'Ship, observe, refine, no mystery backlog', accent: '#0EA5E9' },
+    { label: 'Ship, measure and refine in short cycles', accent: '#0EA5E9' },
 ];
 
 const AboutSkills: React.FC = () => {

@@ -4,7 +4,7 @@ import { Check, Quote, Zap } from 'lucide-react';
 
 /** Credibility only, keep distinct from About (story / workflow). */
 const PROOF: { line: string; accent: string }[] = [
-    { line: 'Production URLs across commerce, launches and Web3, you verify quality in the browser.', accent: '#7C3AED' },
+    { line: 'Production URLs across commerce, launches and Web3, so you can verify quality in the browser.', accent: '#7C3AED' },
     { line: 'React / Next.js, WordPress, Tailwind and typed flows; disciplined deploys on Vercel.', accent: '#4F46E5' },
     { line: 'Comfortable shipping an MVP, then tightening with feedback and analytics.', accent: '#DB2777' },
     { line: 'Automation and Telegram tooling alongside full-stack delivery.', accent: '#0EA5E9' },
@@ -42,7 +42,7 @@ const ProofSection: React.FC = () => {
                     Proof you can <span className="text-violet-700">verify</span>
                 </motion.h2>
                 <p className="mt-4 text-[15px] leading-relaxed text-slate-700 md:text-[16px]">
-                    Live builds, stack discipline and shipping rhythm, nothing here relies on adjectives alone.
+                    Live builds, stack discipline and shipping rhythm. Nothing here relies on adjectives alone.
                 </p>
             </header>
 

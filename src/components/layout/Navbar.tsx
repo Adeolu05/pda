@@ -17,24 +17,30 @@ const Navbar: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        const els = NAV_ITEMS.map((item) => document.querySelector(item.href)).filter(
-            (el): el is Element => el !== null,
-        );
-        if (els.length === 0) return;
+        // Highlight the nav section under the viewport midline; clear it inside unlisted
+        // sections (Process, Proof) so a stale item doesn't stay lit.
+        let frame = 0;
+        const update = () => {
+            frame = 0;
+            const mid = window.innerHeight * 0.45;
+            const hit = NAV_ITEMS.find((item) => {
+                const rect = document.querySelector(item.href)?.getBoundingClientRect();
+                return rect && rect.top <= mid && rect.bottom >= mid;
+            });
+            setActiveHref(hit?.href ?? '');
+        };
+        const onScroll = () => {
+            if (!frame) frame = requestAnimationFrame(update);
+        };
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && entry.target.id) {
-                        setActiveHref(`#${entry.target.id}`);
-                    }
-                });
-            },
-            { rootMargin: '-45% 0px -50% 0px', threshold: 0 },
-        );
-
-        els.forEach((el) => observer.observe(el));
-        return () => observer.disconnect();
+        update();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+            window.removeEventListener('resize', onScroll);
+            cancelAnimationFrame(frame);
+        };
     }, []);
 
     return (

@@ -201,8 +201,8 @@ const ServicesSection: React.FC = () => {
                         transition={{ delay: 0.06 }}
                         className="mt-6 max-w-xl text-[15px] leading-[1.68] text-slate-800 md:text-[17px] md:leading-relaxed"
                     >
-                        Each engagement maps to an outcome, pipeline, revenue signal, or operational relief, from
-                        landing pages to full-stack applications and e-commerce, not decoration for its own sake.
+                        Every engagement maps to an outcome: more leads, more revenue or less operational drag. Landing
+                        pages, full-stack applications and e-commerce, built for results rather than decoration.
                     </motion.p>
                 </header>
 
@@ -298,7 +298,7 @@ const ServicesSection: React.FC = () => {
                             Send scope and deadline
                             <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
                         </a>
-                        <span className="text-slate-600">, replies within two business days when slots are open.</span>
+                        <span className="text-slate-600">. I reply within two business days when slots are open.</span>
                     </p>
                 </motion.div>
             </section>

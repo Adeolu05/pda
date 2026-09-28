@@ -38,7 +38,7 @@ const projects: FeaturedProject[] = [
     {
         id: 1,
         title: 'Hijo Lux Watches',
-        desc: 'Luxury catalogue with WhatsApp checkout, inventory and merchandising stay in the CMS, no engineer required for day-to-day updates.',
+        desc: 'Luxury catalogue with WhatsApp checkout. Inventory and merchandising live in the CMS, so no engineer is needed for day-to-day updates.',
         img: '/images/work/hijo-hijolux.webp',
         link: 'https://hijoluxwatches.com',
         studioTheme: 'light',
@@ -55,7 +55,7 @@ const projects: FeaturedProject[] = [
     {
         id: 2,
         title: 'PrintNest',
-        desc: 'High-intent landing that explains the workflow in one scroll, right leads self-select before they enquire.',
+        desc: 'High-intent landing page that explains the workflow in one scroll, so the right leads self-select before they enquire.',
         img: '/images/work/printnest.webp',
         link: 'https://printnest.vercel.app',
         stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Landing Page', 'Vercel'],
@@ -64,7 +64,7 @@ const projects: FeaturedProject[] = [
     {
         id: 3,
         title: 'BCCS Hub',
-        desc: 'Structured Web3 learning gateway, plain hierarchy so newcomers stay oriented instead of overwhelmed.',
+        desc: 'Structured Web3 learning gateway with a plain hierarchy, so newcomers stay oriented instead of overwhelmed.',
         img: '/images/work/bccs-hub.webp',
         link: 'https://bccshub.com',
         stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Web3 UI', 'Vercel'],
@@ -589,7 +589,7 @@ const WorkSection: React.FC = () => {
                         Selected builds you can <span className="text-violet-700">explore live</span>
                     </h2>
                     <p className="max-w-2xl text-[15px] leading-[1.72] text-slate-800 md:text-[17px] md:leading-relaxed">
-                        Commerce, launches and Web3 surfaces, each row below is shipped code with a public URL.{' '}
+                        Commerce, launches and Web3 surfaces. Each row below is shipped code with a public URL.{' '}
                         <span className="text-slate-900">{PORTFOLIO_HIRE_SUBLINE}</span>
                     </p>
                 </motion.div>

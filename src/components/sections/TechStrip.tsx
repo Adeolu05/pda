@@ -22,7 +22,7 @@ import { FaWordpress } from 'react-icons/fa';
 /** Matches section background, masks must align or fades read as grey bands */
 const SECTION_BG = '#F6F4FC';
 
-type ToolIconProps = { className?: string; 'aria-hidden'?: boolean | string };
+type ToolIconProps = { className?: string; 'aria-hidden'?: boolean | 'true' | 'false' };
 type ToolEntry = { label: string; Icon: IconType | React.FC<ToolIconProps> };
 
 const CursorMarqueeIcon: React.FC<ToolIconProps> = ({ className, ...rest }) => (
