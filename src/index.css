@@ -13,6 +13,17 @@
     * {
         cursor: none !important;
     }
+
+    /* Keep the text caret cursor where people type or select text */
+    input:not([type='checkbox']):not([type='radio']),
+    textarea,
+    select {
+        cursor: text !important;
+    }
+
+    select {
+        cursor: pointer !important;
+    }
 }
 
 @layer base {

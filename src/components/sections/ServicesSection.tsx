@@ -225,6 +225,7 @@ const ServicesSection: React.FC = () => {
                             <div className="flex h-full flex-col overflow-hidden rounded-[1.85rem] bg-white md:rounded-[1.88rem]">
                                 <div
                                     className={`relative h-[8.75rem] shrink-0 overflow-hidden bg-gradient-to-br sm:h-[9.5rem] ${s.surface}`}
+                                    aria-hidden
                                 >
                                     <div
                                         className="pointer-events-none absolute inset-0 opacity-50"

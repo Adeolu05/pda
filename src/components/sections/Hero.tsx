@@ -144,9 +144,9 @@ const Hero: React.FC = () => {
                             }}
                             whileTap={{ scale: 0.95 }}
                             transition={{
-                                opacity: { delay: 2.5 + idx * 0.1 },
-                                x: { delay: 2.5 + idx * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] },
-                                rotate: { delay: 3 }
+                                opacity: { delay: 1 + idx * 0.08 },
+                                x: { delay: 1 + idx * 0.08, duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+                                rotate: { delay: 1.4 }
                             }}
                             className={`
                                 absolute z-50 flex items-center gap-2 md:gap-3 px-4 md:px-7 py-2 md:py-3.5 rounded-full border border-slate-200 font-bold md:font-black shadow-xl cursor-pointer text-[8px] md:text-[10px] uppercase tracking-widest transition-all group/label transform-gpu whitespace-nowrap
@@ -204,8 +204,8 @@ const Hero: React.FC = () => {
                                 rotate: [15, 13, 15]
                             }}
                             transition={{
-                                opacity: { delay: 2 },
-                                x: { delay: 2 },
+                                opacity: { delay: 0.9 },
+                                x: { delay: 0.9 },
                                 y: { repeat: Infinity, duration: 4, ease: "easeInOut" },
                                 rotate: { repeat: Infinity, duration: 4, ease: "easeInOut" }
                             }}
@@ -220,17 +220,19 @@ const Hero: React.FC = () => {
                 {/* Name Title */}
                 <div className="mt-8 text-center overflow-hidden pointer-events-none">
                     <motion.h1
+                        aria-label="Peluola David Adeoluwa"
                         initial={{ y: 100, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1.2, delay: 1, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
                         className="text-slate-950 text-4xl md:text-7xl font-display font-semibold not-italic mb-2 tracking-tight leading-[1.06]"
                     >
                         {Array.from("Peluola David Adeoluwa").map((char, i) => (
                             <motion.span
                                 key={i}
+                                aria-hidden
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: 1.2 + i * 0.03 }}
+                                transition={{ duration: 0.4, delay: 0.35 + i * 0.02 }}
                             >
                                 {char}
                             </motion.span>
@@ -239,13 +241,13 @@ const Hero: React.FC = () => {
                     <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: "100%" }}
-                        transition={{ duration: 1.5, delay: 2, ease: "easeInOut" }}
+                        transition={{ duration: 1, delay: 0.8, ease: "easeInOut" }}
                         className="h-[0.5px] md:h-px bg-gradient-to-r from-transparent via-violet-600/30 to-transparent mb-2"
                     />
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 2.5 }}
+                        transition={{ duration: 0.7, delay: 0.9 }}
                         className="flex flex-col items-center gap-2"
                     >
                         <p className="text-slate-500 text-[8px] md:text-xs uppercase tracking-[0.4em] md:tracking-[0.5em] font-bold">
@@ -279,7 +281,7 @@ const Hero: React.FC = () => {
             <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 0.15, x: 0 }}
-                transition={{ delay: 3, duration: 1 }}
+                transition={{ delay: 1.4, duration: 1 }}
                 className="absolute bottom-12 left-12 hidden md:block"
             >
                 <div className="text-slate-900 font-display text-sm italic rotate-[-90deg] origin-left">Based in Africa / Global Delivery</div>
@@ -288,7 +290,7 @@ const Hero: React.FC = () => {
             <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 0.15, x: 0 }}
-                transition={{ delay: 3.2, duration: 1 }}
+                transition={{ delay: 1.5, duration: 1 }}
                 className="absolute bottom-12 right-12 hidden md:block"
             >
                 <div className="text-slate-900 font-display text-sm italic rotate-[90deg] origin-right">Web Engineer / est. 2022</div>

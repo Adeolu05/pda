@@ -559,6 +559,7 @@ const WorkSection: React.FC = () => {
 
     useEffect(() => {
         if (!isArchiveOpen) return;
+        const opener = document.activeElement as HTMLElement | null;
         const prevOverflow = document.body.style.overflow;
         document.body.style.overflow = 'hidden';
         const onKeyDown = (e: KeyboardEvent) => {
@@ -572,6 +573,8 @@ const WorkSection: React.FC = () => {
             document.body.style.overflow = prevOverflow;
             window.removeEventListener('keydown', onKeyDown);
             window.clearTimeout(focusT);
+            // Return keyboard focus to the "vault" button that opened the dialog
+            opener?.focus({ preventScroll: true });
         };
     }, [isArchiveOpen]);
 
