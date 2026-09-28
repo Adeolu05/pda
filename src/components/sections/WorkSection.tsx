@@ -169,7 +169,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 11,
         title: 'Hijo Platform',
-        desc: 'A modern, responsive web interface engineered with optimal frontend architecture for high performance and a streamlined user experience.',
+        desc: 'Earlier storefront for Hijo Luxwatches, an authentic luxury watch dealer: collection highlights, trade-in and resale services, worldwide shipping and a watch-spec showcase.',
         tag: 'React Application',
         img: '/images/work/hijo-platform.webp',
         link: 'https://hijo.vercel.app',
@@ -196,7 +196,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 14,
         title: 'OnionLab',
-        desc: 'Premium Alephium market intelligence via Telegram, prices, charts, pools, farming, wallet summaries, holders, and network stats. Node.js bot with a small REST API for snapshots and future dashboard work.',
+        desc: 'Premium Alephium market intelligence via Telegram: prices, charts, pools, farming, wallet summaries, holders, and network stats. Node.js bot with a small REST API for snapshots and future dashboard work.',
         tag: 'Telegram / Web3',
         img: '/images/work/onionlab.webp',
         link: 'https://t.me/onionlab_bot',
@@ -206,7 +206,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 15,
         title: 'LMS PDF Downloader',
-        desc: 'Student-facing tool that automates grabbing PDF course packs from LMS pages and sorts them by week, Playwright-style automation with a clean Vercel UI.',
+        desc: 'Student-facing tool that automates grabbing PDF course packs from LMS pages and sorts them by week. Playwright-style automation with a clean Vercel UI.',
         tag: 'TypeScript / Automation',
         img: '/images/work/lms-pdf-downloader.webp',
         link: 'https://lms-pdf-downloader.vercel.app',
@@ -215,7 +215,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 16,
         title: 'Jumpa',
-        desc: 'Marketing homepage build, landing structure, responsive layout, and branded sections for product storytelling.',
+        desc: 'Marketing homepage build: landing structure, responsive layout and branded sections for product storytelling.',
         tag: 'Web / Landing',
         img: '/images/work/jumpa-homepage.webp',
         link: 'https://jumpa-homepage.vercel.app',
@@ -233,7 +233,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 18,
         title: 'Dami Olatunji',
-        desc: 'Personal brand and portfolio surface, presentational site with emphasis on clarity, hierarchy, and mobile reading.',
+        desc: 'Personal brand and portfolio site with emphasis on clarity, hierarchy, and mobile reading.',
         tag: 'Web / Portfolio',
         img: '/images/work/dami-olatunji.webp',
         link: 'https://damiolatunji.com',
@@ -278,7 +278,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 23,
         title: '24/01 Cakes',
-        desc: 'Moody, premium one-page site for a bespoke Abeokuta patisserie, signature collections, brand story, and a consultation booking CTA.',
+        desc: 'Moody, premium one-page site for a bespoke Abeokuta patisserie: signature collections, brand story and a consultation booking CTA.',
         tag: 'Web / Small Business',
         img: '/images/work/2401-cakes.webp',
         link: 'https://24-01.vercel.app',
@@ -287,7 +287,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 24,
         title: 'Shubby',
-        desc: 'Personal brand and newsletter hub for a storyteller and relationship curator, dark editorial layout with series, highlights, and subscribe flows.',
+        desc: 'Personal brand and newsletter hub for a storyteller and relationship curator. Dark editorial layout with series, highlights, and subscribe flows.',
         tag: 'Web / Personal Brand',
         img: '/images/work/shuuby.webp',
         link: 'https://shubby-eta.vercel.app',
@@ -296,7 +296,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 25,
         title: 'Oluwaseun Akinola',
-        desc: 'Speaker and advocacy portfolio for an emerging diplomat, impact pillars, speaking engagements, gallery, and a built-in invitation form.',
+        desc: 'Speaker and advocacy portfolio for an emerging diplomat: impact pillars, speaking engagements, gallery and a built-in invitation form.',
         tag: 'Web / Personal Brand',
         img: '/images/work/oluwaseun-akinola.webp',
         link: 'https://oluwaseunakinola.vercel.app',
@@ -305,7 +305,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 26,
         title: 'TranscriptFlow',
-        desc: 'Product site for a YouTube and Vimeo transcript extractor, paste a link and get a clean TXT, PDF, or DOCX file via the web app or Telegram bot.',
+        desc: 'Product site for a YouTube and Vimeo transcript extractor. Paste a link and get a clean TXT, PDF, or DOCX file via the web app or Telegram bot.',
         tag: 'SaaS / Automation',
         img: '/images/work/transcriptflow.webp',
         link: 'https://www.usetranscriptflow.com',
@@ -314,7 +314,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 27,
         title: 'BitGuess',
-        desc: 'Web3 prediction game on Alephium, players stake ALPH on daily BTC move buckets with wallet connect, live pools, and on-chain settlement.',
+        desc: 'Web3 prediction game on Alephium. Players stake ALPH on daily BTC move buckets with wallet connect, live pools, and on-chain settlement.',
         tag: 'Web3 / dApp',
         img: '/images/work/bitguess.webp',
         link: 'https://bitguess.vercel.app',
@@ -332,7 +332,7 @@ const archiveProjects: ArchiveProject[] = [
     {
         id: 29,
         title: 'RCCG Glorious Premier',
-        desc: 'Complete church website for RCCG Ogun Province 12, service schedules, ministries, events, copy-to-clipboard giving details, and a prayer-request form.',
+        desc: 'Complete church website for RCCG Ogun Province 12: service schedules, ministries, events, copy-to-clipboard giving details, and a prayer-request form.',
         tag: 'Web / Community',
         img: '/images/work/ogp12-church.webp',
         link: 'https://ogp12.vercel.app',
