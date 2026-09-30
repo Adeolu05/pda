@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowUpRight } from 'lucide-react';
 import { NAV_ITEMS } from '../../config/constants';
 import { scrollToSection } from '../../utils/scrollToSection';
 
 const Navbar: React.FC = () => {
     const [showNav, setShowNav] = useState(false);
     const [activeHref, setActiveHref] = useState<string>('');
+    const [nearContact, setNearContact] = useState(false);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -17,27 +19,57 @@ const Navbar: React.FC = () => {
     }, []);
 
     useEffect(() => {
-        const els = NAV_ITEMS.map((item) => document.querySelector(item.href)).filter(
-            (el): el is Element => el !== null,
-        );
-        if (els.length === 0) return;
+        // Highlight the nav section under the viewport midline; clear it inside unlisted
+        // sections (Process, Proof) so a stale item doesn't stay lit.
+        let frame = 0;
+        const update = () => {
+            frame = 0;
+            const mid = window.innerHeight * 0.45;
+            const hit = NAV_ITEMS.find((item) => {
+                const rect = document.querySelector(item.href)?.getBoundingClientRect();
+                return rect && rect.top <= mid && rect.bottom >= mid;
+            });
+            setActiveHref(hit?.href ?? '');
+            // Sticky mobile CTA is redundant once the contact form (or anything after it) is on screen
+            const contactTop = document.querySelector('#contact')?.getBoundingClientRect().top ?? Infinity;
+            setNearContact(contactTop < window.innerHeight * 0.85);
+        };
+        const onScroll = () => {
+            if (!frame) frame = requestAnimationFrame(update);
+        };
 
-        const observer = new IntersectionObserver(
-            (entries) => {
-                entries.forEach((entry) => {
-                    if (entry.isIntersecting && entry.target.id) {
-                        setActiveHref(`#${entry.target.id}`);
-                    }
-                });
-            },
-            { rootMargin: '-45% 0px -50% 0px', threshold: 0 },
-        );
-
-        els.forEach((el) => observer.observe(el));
-        return () => observer.disconnect();
+        update();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        window.addEventListener('resize', onScroll);
+        return () => {
+            window.removeEventListener('scroll', onScroll);
+            window.removeEventListener('resize', onScroll);
+            cancelAnimationFrame(frame);
+        };
     }, []);
 
+    // Phones get a shorter pill; the rest stay reachable by scrolling and via the sticky CTA
+    const PHONE_HIDDEN = new Set(['#services', '#resume']);
+    const showStickyCta = showNav && !nearContact;
+
     return (
+        <>
+        <AnimatePresence>
+            {showStickyCta && (
+                <motion.a
+                    key="sticky-cta"
+                    href="#contact"
+                    onClick={(e) => scrollToSection(e, '#contact')}
+                    initial={{ y: 80, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: 80, opacity: 0 }}
+                    className="fixed inset-x-4 bottom-[max(1rem,env(safe-area-inset-bottom))] z-50 flex min-h-12 items-center justify-center gap-2 rounded-full bg-slate-950 text-[12px] font-bold uppercase tracking-[0.14em] text-white shadow-[0_18px_40px_-12px_rgba(124,58,237,0.55)] ring-1 ring-white/25 sm:hidden"
+                >
+                    Start a project
+                    <ArrowUpRight className="h-4 w-4" aria-hidden />
+                </motion.a>
+            )}
+        </AnimatePresence>
         <AnimatePresence>
             {showNav && (
                 <motion.nav
@@ -54,7 +86,9 @@ const Navbar: React.FC = () => {
                                 href={item.href}
                                 onClick={(e) => scrollToSection(e, item.href)}
                                 aria-current={active ? 'true' : undefined}
-                                className={`relative shrink-0 rounded-full px-3 py-2 transition-colors duration-300 sm:px-5 md:px-6 ${
+                                className={`relative shrink-0 rounded-full px-4 py-2 transition-colors duration-300 sm:px-5 md:px-6 ${
+                                    PHONE_HIDDEN.has(item.href) ? 'hidden sm:inline-block' : ''
+                                } ${
                                     active
                                         ? 'text-white'
                                         : 'text-slate-700 hover:bg-slate-900 hover:text-white'
@@ -74,6 +108,7 @@ const Navbar: React.FC = () => {
                 </motion.nav>
             )}
         </AnimatePresence>
+        </>
     );
 };
 

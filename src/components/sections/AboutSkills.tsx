@@ -8,7 +8,7 @@ const WORK_STYLE: { label: string; accent: string }[] = [
     { label: 'Design-led layouts and typography', accent: '#7C3AED' },
     { label: 'React / Next.js and full-stack implementations', accent: '#4F46E5' },
     { label: 'WordPress, WooCommerce and CMS your team can run', accent: '#DB2777' },
-    { label: 'Ship, observe, refine, no mystery backlog', accent: '#0EA5E9' },
+    { label: 'Ship, measure and refine in short cycles', accent: '#0EA5E9' },
 ];
 
 const AboutSkills: React.FC = () => {
@@ -32,7 +32,8 @@ const AboutSkills: React.FC = () => {
     return (
         <div id="about" className="scroll-mt-28" ref={containerRef}>
             <div className="grid grid-cols-1 items-center gap-14 lg:grid-cols-12 lg:gap-24 lg:gap-x-20">
-                <div className="lg:col-span-5">
+                {/* Hidden on phones: same portrait as the hero, and it adds a full screen of scrolling */}
+                <div className="hidden md:block lg:col-span-5">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.98 }}
                         whileInView={{ opacity: 1, scale: 1 }}
@@ -47,7 +48,7 @@ const AboutSkills: React.FC = () => {
                                         style={{ scale: imageScale, y: imageY }}
                                         src={PROFILE_IMAGE}
                                         onError={() => setImageError(true)}
-                                        className="h-full w-full object-cover object-center brightness-[0.55] contrast-[1.2] transform-gpu"
+                                        className="h-full w-full object-cover object-center brightness-[0.92] contrast-[1.05] transform-gpu"
                                         alt="Peluola David Adeoluwa"
                                         loading="lazy"
                                         decoding="async"

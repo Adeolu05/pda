@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { Briefcase, User, FileText, Mail, ArrowUpRight } from 'lucide-react';
-import { PROFILE_IMAGE } from '../../config/constants';
+import { PROFILE_IMAGE, PROFILE_SIZES, PROFILE_SRCSET } from '../../config/constants';
 
 const Hero: React.FC = () => {
     const { scrollY } = useScroll();
@@ -27,7 +27,7 @@ const Hero: React.FC = () => {
             color: '#FFFFFF',
             textColor: '#0F172A',
             target: '#work',
-            position: 'top-[15%] -left-20 sm:-left-24 md:-left-44',
+            position: 'top-[15%] -left-12 sm:-left-24 md:-left-44',
             rotation: -4,
             glow: 'shadow-[0_0_30px_rgba(139,92,246,0.15)]'
         },
@@ -37,7 +37,7 @@ const Hero: React.FC = () => {
             color: '#8B5CF6',
             textColor: '#FFFFFF',
             target: '#about',
-            position: 'top-[15%] -right-20 sm:-right-24 md:-right-44',
+            position: 'top-[15%] -right-12 sm:-right-24 md:-right-44',
             rotation: 6,
             glow: 'shadow-[0_0_40px_rgba(139,92,246,0.4)]'
         },
@@ -47,7 +47,7 @@ const Hero: React.FC = () => {
             color: '#1E1B4B',
             textColor: '#E0E7FF',
             target: '#resume',
-            position: 'bottom-[15%] -left-20 sm:-left-24 md:-left-44',
+            position: 'bottom-[15%] -left-12 sm:-left-24 md:-left-44',
             rotation: 3,
             glow: 'shadow-[0_0_30px_rgba(79,70,229,0.2)]'
         },
@@ -57,7 +57,7 @@ const Hero: React.FC = () => {
             color: '#0F172A',
             textColor: '#FFFFFF',
             target: '#contact',
-            position: 'bottom-[15%] -right-20 sm:-right-24 md:-right-44',
+            position: 'bottom-[15%] -right-12 sm:-right-24 md:-right-44',
             rotation: -6,
             glow: 'shadow-[0_0_20px_rgba(0,0,0,0.1)]'
         }
@@ -75,7 +75,7 @@ const Hero: React.FC = () => {
     };
 
     return (
-        <div className="relative w-full h-[100svh] overflow-hidden flex items-center justify-center bg-[#FAF9FF]">
+        <div className="relative w-full min-h-[100svh] overflow-hidden flex items-center justify-center bg-[#FAF9FF] py-20 md:py-24">
             {/* Light Mesh Background Gradients */}
             <div className="absolute inset-0 z-0">
                 <motion.div
@@ -144,9 +144,9 @@ const Hero: React.FC = () => {
                             }}
                             whileTap={{ scale: 0.95 }}
                             transition={{
-                                opacity: { delay: 2.5 + idx * 0.1 },
-                                x: { delay: 2.5 + idx * 0.1, duration: 1, ease: [0.16, 1, 0.3, 1] },
-                                rotate: { delay: 3 }
+                                opacity: { delay: 1 + idx * 0.08 },
+                                x: { delay: 1 + idx * 0.08, duration: 0.8, ease: [0.16, 1, 0.3, 1] },
+                                rotate: { delay: 1.4 }
                             }}
                             className={`
                                 absolute z-50 flex items-center gap-2 md:gap-3 px-4 md:px-7 py-2 md:py-3.5 rounded-full border border-slate-200 font-bold md:font-black shadow-xl cursor-pointer text-[8px] md:text-[10px] uppercase tracking-widest transition-all group/label transform-gpu whitespace-nowrap
@@ -163,19 +163,22 @@ const Hero: React.FC = () => {
                         </motion.a>
                     ))}
 
+                    {/* No opacity fade: the portrait is the LCP element, and Chrome won't record LCP for content that starts invisible */}
                     <motion.div
-                        initial={{ y: 50, opacity: 0, scale: 0.9, rotateY: 20 }}
-                        animate={{ y: 0, opacity: 1, scale: 1, rotateY: 0 }}
+                        initial={{ y: 50, scale: 0.9, rotateY: 20 }}
+                        animate={{ y: 0, scale: 1, rotateY: 0 }}
                         transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
                         className="relative group p-2 md:p-4 bg-white/60 backdrop-blur-2xl border border-white/40 shadow-2xl rounded-[2.2rem] md:rounded-[3rem] transform-gpu"
                     >
                         <div className="w-[220px] sm:w-[280px] md:w-[360px] lg:w-[380px] aspect-[4/5] bg-slate-950 rounded-[1.8rem] md:rounded-[2.4rem] relative overflow-hidden flex items-center justify-center">
                             {!imageError ? (
                                 <motion.img
-                                    initial={{ scale: 1.8 }}
-                                    animate={{ scale: 1.5 }}
+                                    initial={{ scale: 1.6 }}
+                                    animate={{ scale: 1.35 }}
                                     transition={{ duration: 2, ease: "easeOut" }}
                                     src={PROFILE_IMAGE}
+                                    srcSet={PROFILE_SRCSET}
+                                    sizes={PROFILE_SIZES}
                                     onError={() => setImageError(true)}
                                     alt="Peluola David Adeoluwa"
                                     width={760}
@@ -183,7 +186,7 @@ const Hero: React.FC = () => {
                                     loading="eager"
                                     decoding="async"
                                     fetchPriority="high"
-                                    className="w-full h-full object-cover object-center brightness-[0.55] contrast-[1.2] transition-all duration-1000 group-hover:brightness-[0.65] group-hover:scale-[1.55] transform-gpu"
+                                    className="w-full h-full object-cover object-center brightness-[0.92] contrast-[1.05] saturate-[1.05] transition-all duration-1000 group-hover:brightness-100 group-hover:scale-[1.4] transform-gpu"
                                 />
                             ) : (
                                 <div className="w-full h-full bg-slate-900 flex flex-col items-center justify-center p-12 text-center gap-4">
@@ -191,7 +194,7 @@ const Hero: React.FC = () => {
                                     <p className="text-white/20 text-[8px] uppercase tracking-widest font-bold">Image load failed</p>
                                 </div>
                             )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/60 via-transparent to-transparent opacity-40"></div>
+                            <div className="absolute inset-0 bg-gradient-to-t from-slate-950/40 via-transparent to-transparent opacity-40"></div>
                         </div>
 
                         {/* Available badge */}
@@ -204,8 +207,8 @@ const Hero: React.FC = () => {
                                 rotate: [15, 13, 15]
                             }}
                             transition={{
-                                opacity: { delay: 2 },
-                                x: { delay: 2 },
+                                opacity: { delay: 0.9 },
+                                x: { delay: 0.9 },
                                 y: { repeat: Infinity, duration: 4, ease: "easeInOut" },
                                 rotate: { repeat: Infinity, duration: 4, ease: "easeInOut" }
                             }}
@@ -220,17 +223,19 @@ const Hero: React.FC = () => {
                 {/* Name Title */}
                 <div className="mt-8 text-center overflow-hidden pointer-events-none">
                     <motion.h1
+                        aria-label="Peluola David Adeoluwa"
                         initial={{ y: 100, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1.2, delay: 1, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 0.9, delay: 0.3, ease: [0.16, 1, 0.3, 1] }}
                         className="text-slate-950 text-4xl md:text-7xl font-display font-semibold not-italic mb-2 tracking-tight leading-[1.06]"
                     >
                         {Array.from("Peluola David Adeoluwa").map((char, i) => (
                             <motion.span
                                 key={i}
+                                aria-hidden
                                 initial={{ opacity: 0, y: 20 }}
                                 animate={{ opacity: 1, y: 0 }}
-                                transition={{ duration: 0.5, delay: 1.2 + i * 0.03 }}
+                                transition={{ duration: 0.4, delay: 0.35 + i * 0.02 }}
                             >
                                 {char}
                             </motion.span>
@@ -239,21 +244,38 @@ const Hero: React.FC = () => {
                     <motion.div
                         initial={{ width: 0 }}
                         animate={{ width: "100%" }}
-                        transition={{ duration: 1.5, delay: 2, ease: "easeInOut" }}
+                        transition={{ duration: 1, delay: 0.8, ease: "easeInOut" }}
                         className="h-[0.5px] md:h-px bg-gradient-to-r from-transparent via-violet-600/30 to-transparent mb-2"
                     />
                     <motion.div
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 1, delay: 2.5 }}
+                        transition={{ duration: 0.7, delay: 0.9 }}
                         className="flex flex-col items-center gap-2"
                     >
                         <p className="text-slate-500 text-[8px] md:text-xs uppercase tracking-[0.4em] md:tracking-[0.5em] font-bold">
-                            Web Engineer & Architect • Web3 Creative Strategist
+                            Web Engineer &amp; Architect
                         </p>
                         <p className="max-w-[22rem] text-balance text-[11px] font-medium leading-relaxed tracking-normal text-slate-500 md:max-w-lg md:text-sm">
                             A boutique web engineering practice crafting high-performance full-stack applications, interactive landing pages, and Web3 experiences for global brands and startups.
                         </p>
+                        <div className="pointer-events-auto mt-4 flex flex-wrap items-center justify-center gap-3">
+                            <a
+                                href="#contact"
+                                onClick={(e) => scrollToSection(e, '#contact')}
+                                className="inline-flex min-h-11 items-center gap-2 rounded-full bg-slate-950 px-5 sm:px-6 text-[12px] font-bold uppercase tracking-[0.12em] text-white shadow-[0_14px_34px_-14px_rgba(124,58,237,0.55)] transition-colors hover:bg-violet-700"
+                            >
+                                Start a project
+                                <ArrowUpRight className="h-4 w-4" aria-hidden />
+                            </a>
+                            <a
+                                href="#work"
+                                onClick={(e) => scrollToSection(e, '#work')}
+                                className="inline-flex min-h-11 items-center rounded-full border border-slate-300 bg-white/70 px-5 sm:px-6 text-[12px] font-bold uppercase tracking-[0.12em] text-slate-900 backdrop-blur transition-colors hover:border-slate-900"
+                            >
+                                See my work
+                            </a>
+                        </div>
                     </motion.div>
                 </div>
             </div>
@@ -262,8 +284,8 @@ const Hero: React.FC = () => {
             <motion.div
                 initial={{ opacity: 0, x: -30 }}
                 animate={{ opacity: 0.15, x: 0 }}
-                transition={{ delay: 3, duration: 1 }}
-                className="absolute top-12 left-12 hidden md:block"
+                transition={{ delay: 1.4, duration: 1 }}
+                className="absolute bottom-12 left-12 hidden md:block"
             >
                 <div className="text-slate-900 font-display text-sm italic rotate-[-90deg] origin-left">Based in Africa / Global Delivery</div>
             </motion.div>
@@ -271,7 +293,7 @@ const Hero: React.FC = () => {
             <motion.div
                 initial={{ opacity: 0, x: 30 }}
                 animate={{ opacity: 0.15, x: 0 }}
-                transition={{ delay: 3.2, duration: 1 }}
+                transition={{ delay: 1.5, duration: 1 }}
                 className="absolute bottom-12 right-12 hidden md:block"
             >
                 <div className="text-slate-900 font-display text-sm italic rotate-[90deg] origin-right">Web Engineer / est. 2022</div>

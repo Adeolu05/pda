@@ -2,6 +2,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { HelmetProvider } from 'react-helmet-async';
+import { MotionConfig } from 'framer-motion';
 import './index.css';
 import App from './App';
 
@@ -14,7 +15,10 @@ const root = ReactDOM.createRoot(rootElement);
 root.render(
   <React.StrictMode>
     <HelmetProvider>
-      <App />
+      {/* Honour the OS "reduce motion" setting for every framer-motion animation */}
+      <MotionConfig reducedMotion="user">
+        <App />
+      </MotionConfig>
     </HelmetProvider>
   </React.StrictMode>
 );

@@ -60,7 +60,7 @@ const Resume: React.FC = () => {
                             The Path <span className="text-violet-700">Taken</span>
                         </h2>
                         <p className="mt-5 text-[15px] leading-relaxed text-slate-700 md:text-[16px] md:leading-relaxed">
-                            Five chapters that describe how I think, build, and deliver, not another stack list, just the
+                            Five chapters that describe how I think, build and deliver. Not another stack list, just the
                             through-line from craft to client outcomes.
                         </p>
                     </div>
@@ -130,7 +130,7 @@ const Resume: React.FC = () => {
 
                 <blockquote className="relative mt-14 border-l-2 border-violet-200/90 pl-8 md:mt-20 md:pl-10">
                     <p className="max-w-3xl text-[17px] font-medium leading-relaxed text-slate-600 md:text-xl md:leading-relaxed">
-                        Great interfaces feel obvious in retrospect, they remove friction so the work can speak.
+                        Great interfaces feel obvious in retrospect. They remove friction so the work can speak.
                     </p>
                 </blockquote>
             </div>

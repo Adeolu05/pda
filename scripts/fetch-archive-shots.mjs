@@ -32,15 +32,15 @@ function download(url, dest) {
 }
 
 const jobs = [
-  ['https://lms-pdf-downloader.vercel.app', 'public/images/work/lms-pdf-downloader.jpg'],
-  ['https://jumpa-homepage.vercel.app', 'public/images/work/jumpa-homepage.jpg'],
-  ['https://celebration-house.vercel.app', 'public/images/work/celebration-house.jpg'],
-  // Dami: hero asset is manual public/images/work/dami-olatunji.png (damiolatunji.com)
+  ['https://lms-pdf-downloader.vercel.app', 'public/images/work/lms-pdf-downloader.webp'],
+  ['https://jumpa-homepage.vercel.app', 'public/images/work/jumpa-homepage.webp'],
+  ['https://celebration-house.vercel.app', 'public/images/work/celebration-house.webp'],
+  // Dami: hero asset is manual public/images/work/dami-olatunji.webp (damiolatunji.com)
 ];
 
 for (const [page, rel] of jobs) {
   const dest = path.join(root, rel);
-  const raw = dest.replace(/\.jpg$/, '-raw.png');
+  const raw = dest.replace(/\.webp$/, '-raw.png');
   const api = `https://api.microlink.io/?url=${encodeURIComponent(page)}&screenshot=true`;
   const body = await get(api);
   const j = JSON.parse(body);
@@ -51,7 +51,7 @@ for (const [page, rel] of jobs) {
   }
   await download(u, raw);
   execSync(
-    `python -c "from PIL import Image; im=Image.open(r'${dest.replace(/\\/g, '/').replace(/\.jpg$/, '-raw.png')}').convert('RGB'); im.thumbnail((1800,1800)); im.save(r'${dest.replace(/\\/g, '/')}', quality=88, optimize=True)"`,
+    `python -c "from PIL import Image; im=Image.open(r'${dest.replace(/\\/g, '/').replace(/\.webp$/, '-raw.png')}').convert('RGB'); im.thumbnail((1400,1400)); im.save(r'${dest.replace(/\\/g, '/')}', quality=80, method=6)"`,
     { stdio: 'inherit' }
   );
   fs.unlinkSync(raw);

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, ArrowRight, Instagram, Linkedin, Github, CheckCircle2 } from 'lucide-react';
+import { Mail, ArrowRight, ArrowUpRight, CalendarDays, Instagram, Linkedin, Github, CheckCircle2 } from 'lucide-react';
 import { SOCIAL_LINKS, CONTACT_INFO, CONTACT_PRIVACY_NOTE } from '../../config/constants';
 import XIcon from '../common/XIcon';
 
@@ -13,17 +13,23 @@ const PROJECT_TYPES = [
     'Other',
 ];
 
-const BUDGET_RANGES = ['₦100k - ₦200k', '₦200k - ₦500k', '₦500k+', 'Not sure yet'];
+/** Local clients see naira, international clients see USD; both land in the same email. */
+const BUDGET_GROUPS = [
+    { label: 'Nigeria (₦)', options: ['₦100k - ₦200k', '₦200k - ₦500k', '₦500k+'] },
+    { label: 'International ($)', options: ['Under $1,000', '$1,000 - $3,000', '$3,000 - $7,500', '$7,500+'] },
+];
+const BUDGET_UNSURE = 'Not sure yet';
 
 const Contact: React.FC = () => {
     const [formData, setFormData] = useState({
         name: '',
         email: '',
         projectType: PROJECT_TYPES[0],
-        budget: BUDGET_RANGES[3],
+        budget: BUDGET_UNSURE,
         message: '',
     });
-    const [submitted, setSubmitted] = useState(false);
+    const [company, setCompany] = useState(''); // honeypot
+    const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'fallback'>('idle');
 
     const socialLinks = [
         { Icon: Github, href: SOCIAL_LINKS.github, label: 'GitHub' },
@@ -32,15 +38,42 @@ const Contact: React.FC = () => {
         { Icon: Instagram, href: SOCIAL_LINKS.instagram, label: 'Instagram' },
     ];
 
-    const handleSubmit = (e: React.FormEvent) => {
-        e.preventDefault();
+    const openMailFallback = () => {
         const subject = encodeURIComponent(`Project inquiry, ${formData.projectType}, ${formData.name}`);
         const body = encodeURIComponent(
-            `Hi,\n\nName: ${formData.name}\nEmail: ${formData.email}\n\nProject type: ${formData.projectType}\nBudget: ${formData.budget}\n\nMessage:\n${formData.message}\n\nSent from ${CONTACT_INFO.websiteUrl}`,
+            `Hi,
+
+Name: ${formData.name}
+Email: ${formData.email}
+
+Project type: ${formData.projectType}
+Budget: ${formData.budget}
+
+Message:
+${formData.message}
+
+Sent from ${CONTACT_INFO.websiteUrl}`,
         );
         window.location.href = `mailto:${CONTACT_INFO.email}?subject=${subject}&body=${body}`;
-        setSubmitted(true);
-        window.setTimeout(() => setSubmitted(false), 6000);
+    };
+
+    const handleSubmit = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setStatus('sending');
+        try {
+            const res = await fetch('/api/contact', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...formData, company }),
+            });
+            if (!res.ok) throw new Error(`Contact API responded ${res.status}`);
+            setStatus('sent');
+            setFormData((prev) => ({ ...prev, message: '' }));
+        } catch {
+            // API unavailable (local dev, missing env, outage): hand off to the visitor's email app
+            openMailFallback();
+            setStatus('fallback');
+        }
     };
 
     return (
@@ -61,7 +94,7 @@ const Contact: React.FC = () => {
                         <span className="text-violet-300">what&apos;s next.</span>
                     </h2>
                     <p className="mt-6 text-[15px] leading-[1.72] text-slate-200 md:text-[16px] md:leading-relaxed">
-                        Send a tight brief, links, goals and timeline, and you&apos;ll hear back with honest fit, estimated
+                        Send a tight brief (links, goals and timeline) and you&apos;ll hear back with an honest fit check, estimated
                         turnaround and what &quot;done&quot; includes before we touch code.
                     </p>
 
@@ -75,7 +108,27 @@ const Contact: React.FC = () => {
                         <span className="min-w-0 break-all font-sans text-lg font-semibold tracking-tight text-white sm:text-xl">{CONTACT_INFO.email}</span>
                     </a>
 
-                    <div className="mt-12 flex flex-wrap gap-6">
+                    <a
+                        href={CONTACT_INFO.bookingUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group mt-8 flex items-center gap-4 rounded-2xl border border-white/12 bg-white/[0.05] p-4 pr-5 text-white transition-colors hover:border-violet-300/50 hover:bg-white/[0.08] sm:max-w-md"
+                    >
+                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-violet-500/20 text-violet-200">
+                            <CalendarDays className="h-5 w-5" aria-hidden />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                            <span className="block text-[15px] font-semibold">Prefer to talk? Book a discovery call</span>
+                            <span className="mt-0.5 block text-[13px] text-slate-400">Pick a time on Cal.com, no prep needed</span>
+                        </span>
+                        <ArrowUpRight className="h-4 w-4 shrink-0 text-violet-200 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                    </a>
+
+                    <p className="mt-6 text-[14px] leading-relaxed text-slate-400">
+                        Replies within two business days. Working with clients worldwide.
+                    </p>
+
+                    <div className="mt-10 flex flex-wrap gap-6">
                         {socialLinks.map(({ Icon, href, label }) => (
                             <motion.a
                                 key={label}
@@ -96,8 +149,19 @@ const Contact: React.FC = () => {
                     id="contact-form"
                     className="scroll-mt-28 rounded-[1.75rem] border border-white/12 bg-white/[0.05] p-6 shadow-[0_24px_64px_-24px_rgba(0,0,0,0.45)] backdrop-blur-md md:p-10"
                 >
-                    <p className="mb-8 text-[15px] font-medium leading-snug text-slate-300">All fields help me reply with something useful, nothing is stored on this site.</p>
-                    <form className="space-y-7" onSubmit={handleSubmit}>
+                    <p className="mb-8 text-[15px] font-medium leading-snug text-slate-300">Every field helps me reply with something useful.</p>
+                    <form className="relative space-y-7" onSubmit={handleSubmit}>
+                        <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden>
+                            <label htmlFor="contact-company">Company website</label>
+                            <input
+                                id="contact-company"
+                                type="text"
+                                tabIndex={-1}
+                                autoComplete="off"
+                                value={company}
+                                onChange={(e) => setCompany(e.target.value)}
+                            />
+                        </div>
                         <div className="space-y-1.5">
                             <label htmlFor="contact-name" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">
                                 Name
@@ -156,10 +220,17 @@ const Contact: React.FC = () => {
                                     onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
                                     className="min-h-[3rem] w-full cursor-pointer rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow] focus:border-violet-400/80 focus:ring-4 focus:ring-violet-500/25"
                                 >
-                                    {BUDGET_RANGES.map((b) => (
-                                        <option key={b} value={b} className="bg-slate-900 text-white">
-                                            {b}
-                                        </option>
+                                    <option value={BUDGET_UNSURE} className="bg-slate-900 text-white">
+                                        {BUDGET_UNSURE}
+                                    </option>
+                                    {BUDGET_GROUPS.map((group) => (
+                                        <optgroup key={group.label} label={group.label} className="bg-slate-900 text-slate-400">
+                                            {group.options.map((b) => (
+                                                <option key={b} value={b} className="bg-slate-900 text-white">
+                                                    {b}
+                                                </option>
+                                            ))}
+                                        </optgroup>
                                     ))}
                                 </select>
                             </div>
@@ -175,12 +246,12 @@ const Contact: React.FC = () => {
                                 value={formData.message}
                                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                                 className="w-full resize-none rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow,background-color] placeholder:text-slate-500 focus:border-violet-400/80 focus:bg-white/[0.09] focus:ring-4 focus:ring-violet-500/25"
-                                placeholder="Goals, deadline, links, competitors, short is fine."
+                                placeholder="Goals, deadline, links, competitors. Short is fine."
                             />
                         </div>
                         <p className="text-[15px] leading-relaxed text-slate-400">{CONTACT_PRIVACY_NOTE}</p>
                         <AnimatePresence>
-                            {submitted && (
+                            {(status === 'sent' || status === 'fallback') && (
                                 <motion.div
                                     initial={{ opacity: 0, y: -6, height: 0 }}
                                     animate={{ opacity: 1, y: 0, height: 'auto' }}
@@ -191,23 +262,30 @@ const Contact: React.FC = () => {
                                     aria-live="polite"
                                 >
                                     <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" aria-hidden />
-                                    <p className="text-[14px] leading-snug">
-                                        Your email app should be opening with everything pre-filled, just hit send. If it
-                                        didn&apos;t, reach me at{' '}
-                                        <a className="font-semibold underline decoration-emerald-400/50 underline-offset-2" href={`mailto:${CONTACT_INFO.email}`}>
-                                            {CONTACT_INFO.email}
-                                        </a>.
-                                    </p>
+                                    {status === 'sent' ? (
+                                        <p className="text-[14px] leading-snug">
+                                            Brief received. I&apos;ll reply to {formData.email} within two business days.
+                                        </p>
+                                    ) : (
+                                        <p className="text-[14px] leading-snug">
+                                            Your email app should be opening with everything pre-filled. Just hit send. If it
+                                            didn&apos;t, reach me at{' '}
+                                            <a className="font-semibold underline decoration-emerald-400/50 underline-offset-2" href={`mailto:${CONTACT_INFO.email}`}>
+                                                {CONTACT_INFO.email}
+                                            </a>.
+                                        </p>
+                                    )}
                                 </motion.div>
                             )}
                         </AnimatePresence>
                         <motion.button
                             type="submit"
+                            disabled={status === 'sending'}
                             whileHover={{ scale: 1.01 }}
                             whileTap={{ scale: 0.99 }}
-                            className="flex min-h-[3.65rem] w-full items-center justify-center gap-2 rounded-xl bg-white px-6 text-[13px] font-bold uppercase tracking-[0.16em] text-slate-950 shadow-[0_16px_42px_-14px_rgba(124,58,237,0.35),0_8px_24px_-12px_rgba(0,0,0,0.35)] ring-1 ring-white/25 transition-colors hover:bg-violet-100 hover:shadow-[0_18px_48px_-14px_rgba(124,58,237,0.42)] md:text-[14px] md:tracking-[0.14em]"
+                            className="flex min-h-[3.65rem] w-full items-center justify-center gap-2 rounded-xl bg-white px-6 text-[13px] font-bold uppercase tracking-[0.16em] text-slate-950 shadow-[0_16px_42px_-14px_rgba(124,58,237,0.35),0_8px_24px_-12px_rgba(0,0,0,0.35)] ring-1 ring-white/25 transition-colors hover:bg-violet-100 hover:shadow-[0_18px_48px_-14px_rgba(124,58,237,0.42)] disabled:cursor-wait disabled:opacity-70 md:text-[14px] md:tracking-[0.14em]"
                         >
-                            Send Project Brief
+                            {status === 'sending' ? 'Sending…' : 'Send Project Brief'}
                             <ArrowRight className="h-4 w-4 md:h-[1.125rem] md:w-[1.125rem]" aria-hidden />
                         </motion.button>
                     </form>

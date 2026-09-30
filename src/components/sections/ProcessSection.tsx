@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useProcessCarousel } from '../../hooks/useProcessCarousel';
 
@@ -143,11 +144,14 @@ function StepPreview({ visual, accent }: { visual: StepVisual; accent: string })
 
 const ProcessSection: React.FC = () => {
     const reduceMotion = useReducedMotion();
+    // Playful tilt only from tablet up; rotated body text is harder to read on phones
+    const tilt = useMediaQuery('(min-width: 768px)') && !reduceMotion;
     const {
         scrollRef,
         canPrev,
         canNext,
         isOverflowing,
+        snapEnabled,
         scrollByDirection,
         onCarouselKeyDown,
         onPointerDown,
@@ -207,7 +211,7 @@ const ProcessSection: React.FC = () => {
                                 onClick={() => scrollByDirection(-1)}
                                 disabled={!canPrev}
                                 aria-label="Previous step"
-                                className={`${NAV_BTN} absolute left-1 top-[42%] z-20 hidden -translate-y-1/2 md:left-3 md:flex lg:left-5`}
+                                className={`${NAV_BTN} absolute left-1 top-[42%] z-20 hidden -translate-y-1/2 md:left-3 md:flex lg:left-5 xl:hidden`}
                             >
                                 <ChevronLeft className="h-5 w-5" aria-hidden />
                             </button>
@@ -216,7 +220,7 @@ const ProcessSection: React.FC = () => {
                                 onClick={() => scrollByDirection(1)}
                                 disabled={!canNext}
                                 aria-label="Next step"
-                                className={`${NAV_BTN} absolute right-1 top-[42%] z-20 hidden -translate-y-1/2 md:right-3 md:flex lg:right-5`}
+                                className={`${NAV_BTN} absolute right-1 top-[42%] z-20 hidden -translate-y-1/2 md:right-3 md:flex lg:right-5 xl:hidden`}
                             >
                                 <ChevronRight className="h-5 w-5" aria-hidden />
                             </button>
@@ -232,14 +236,14 @@ const ProcessSection: React.FC = () => {
                         onPointerMove={onPointerMove}
                         onPointerUp={onPointerUp}
                         onPointerCancel={onPointerUp}
-                        className={`process-carousel flex gap-5 overflow-x-auto overscroll-x-contain scroll-smooth pb-6 pt-2 snap-x snap-mandatory no-scrollbar sm:gap-6 md:gap-7 ${
+                        className={`process-carousel flex gap-5 overflow-x-auto overscroll-x-contain scroll-smooth pb-6 pt-2 no-scrollbar sm:gap-6 md:gap-7 xl:grid xl:grid-cols-4 xl:gap-6 xl:overflow-visible xl:px-2 ${snapEnabled ? 'snap-x snap-mandatory' : ''} ${
                             isOverflowing ? 'cursor-grab touch-pan-x active:cursor-grabbing' : 'cursor-default justify-center'
                         }`}
                         role="region"
                         aria-roledescription="carousel"
                         aria-label="Project process steps"
                     >
-                        <div className="process-carousel-gutter shrink-0" aria-hidden />
+                        <div className="process-carousel-gutter shrink-0 xl:hidden" aria-hidden />
                         {STEPS.map((step, i) => (
                             <motion.article
                                 key={step.title}
@@ -250,12 +254,12 @@ const ProcessSection: React.FC = () => {
                                 viewport={{ once: true, margin: '-20px' }}
                                 transition={{ delay: i * 0.07, duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                                 whileHover={
-                                    reduceMotion
+                                    !tilt
                                         ? undefined
                                         : { rotate: 0, y: -10, transition: { type: 'spring', stiffness: 320, damping: 22 } }
                                 }
-                                style={{ rotate: reduceMotion ? 0 : step.rotate }}
-                                className="process-carousel-slide w-[min(88vw,19rem)] shrink-0 snap-center sm:w-[17.5rem] md:w-[18.5rem] lg:w-[19.5rem]"
+                                style={{ rotate: tilt ? step.rotate : 0 }}
+                                className="process-carousel-slide w-[min(88vw,19rem)] shrink-0 snap-center sm:w-[17.5rem] md:w-[18.5rem] lg:w-[19.5rem] xl:w-auto"
                                 aria-roledescription="slide"
                                 aria-label={`${i + 1} of ${STEPS.length}: ${step.title}`}
                             >
@@ -281,23 +285,23 @@ const ProcessSection: React.FC = () => {
                                         <h3 className="mt-3 font-sans text-xl font-semibold leading-snug tracking-tight text-slate-950">
                                             {step.title}
                                         </h3>
-                                        <p className="mt-3 flex-1 text-[16px] leading-relaxed text-slate-800 md:text-[17px] md:leading-[1.65]">
+                                        <p className="mt-3 flex-1 text-[16px] leading-relaxed text-slate-800 md:text-[17px] md:leading-[1.65] xl:text-[15.5px]">
                                             {step.body}
                                         </p>
                                     </div>
                                 </div>
                             </motion.article>
                         ))}
-                        <div className="process-carousel-gutter shrink-0" aria-hidden />
+                        <div className="process-carousel-gutter shrink-0 xl:hidden" aria-hidden />
                     </div>
 
                     {/* Fade edges, desktop hint at overflow */}
                     <div
-                        className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-16 bg-gradient-to-r from-[#F4F2FA] to-transparent md:block lg:w-24"
+                        className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-16 bg-gradient-to-r from-[#F4F2FA] to-transparent md:block lg:w-24 xl:hidden"
                         aria-hidden
                     />
                     <div
-                        className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-16 bg-gradient-to-l from-[#F4F2FA] to-transparent md:block lg:w-24"
+                        className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-16 bg-gradient-to-l from-[#F4F2FA] to-transparent md:block lg:w-24 xl:hidden"
                         aria-hidden
                     />
                 </div>

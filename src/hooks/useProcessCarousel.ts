@@ -33,6 +33,9 @@ export function useProcessCarousel(slideCount: number, reduceMotion: boolean | n
     const [canPrev, setCanPrev] = useState(false);
     const [canNext, setCanNext] = useState(true);
     const [isOverflowing, setIsOverflowing] = useState(true);
+    // Scroll-snap is enabled on first interaction: snapping on load nudges the track, and Chrome
+    // treats that scroll as the end of LCP measurement (the page then reports no LCP at all).
+    const [snapEnabled, setSnapEnabled] = useState(false);
     const dragState = useRef({ active: false, startX: 0, startScroll: 0, pointerId: -1 });
 
     const scrollBehavior: ScrollBehavior = reduceMotion ? 'auto' : 'smooth';
@@ -79,6 +82,7 @@ export function useProcessCarousel(slideCount: number, reduceMotion: boolean | n
             const el = scrollRef.current;
             if (!el) return;
             const clamped = Math.max(0, Math.min(slideCount - 1, index));
+            setSnapEnabled(true);
             scrollChildToCenter(el, clamped, scrollBehavior);
             setActiveIndex(clamped);
 
@@ -111,6 +115,9 @@ export function useProcessCarousel(slideCount: number, reduceMotion: boolean | n
         };
 
         el.addEventListener('scroll', onScroll, { passive: true });
+        const enableSnap = () => setSnapEnabled(true);
+        const interactionEvents = ['pointerdown', 'touchstart', 'wheel', 'keydown', 'focus'] as const;
+        interactionEvents.forEach((ev) => el.addEventListener(ev, enableSnap, { once: true, passive: true }));
         const resizeObserver = new ResizeObserver(() => {
             updateScrollMetrics();
             syncActiveFromScroll();
@@ -120,6 +127,7 @@ export function useProcessCarousel(slideCount: number, reduceMotion: boolean | n
 
         return () => {
             el.removeEventListener('scroll', onScroll);
+            interactionEvents.forEach((ev) => el.removeEventListener(ev, enableSnap));
             resizeObserver.disconnect();
         };
     }, [updateScrollMetrics, syncActiveFromScroll, slideCount]);
@@ -179,6 +187,7 @@ export function useProcessCarousel(slideCount: number, reduceMotion: boolean | n
         canPrev,
         canNext,
         isOverflowing,
+        snapEnabled,
         scrollToIndex,
         scrollByDirection,
         onCarouselKeyDown,

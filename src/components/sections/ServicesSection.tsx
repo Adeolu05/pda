@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
+import { useMediaQuery } from '../../hooks/useMediaQuery';
 import { ArrowUpRight } from 'lucide-react';
 import { scrollToSection } from '../../utils/scrollToSection';
 
@@ -160,6 +161,8 @@ function ServiceVisual({ visual, accent }: { visual: ServiceVisual; accent: stri
 
 const ServicesSection: React.FC = () => {
     const reduceMotion = useReducedMotion();
+    // Playful tilt only from tablet up; rotated body text is harder to read on phones
+    const tilt = useMediaQuery('(min-width: 768px)') && !reduceMotion;
 
     return (
         <div id="services" className="scroll-mt-28">
@@ -201,8 +204,8 @@ const ServicesSection: React.FC = () => {
                         transition={{ delay: 0.06 }}
                         className="mt-6 max-w-xl text-[15px] leading-[1.68] text-slate-800 md:text-[17px] md:leading-relaxed"
                     >
-                        Each engagement maps to an outcome, pipeline, revenue signal, or operational relief, from
-                        landing pages to full-stack applications and e-commerce, not decoration for its own sake.
+                        Every engagement maps to an outcome: more leads, more revenue or less operational drag. Landing
+                        pages, full-stack applications and e-commerce, built for results rather than decoration.
                     </motion.p>
                 </header>
 
@@ -215,16 +218,17 @@ const ServicesSection: React.FC = () => {
                             viewport={{ once: true, margin: '-40px' }}
                             transition={{ delay: i * 0.07, duration: 0.55, ease: [0.16, 1, 0.3, 1] }}
                             whileHover={
-                                reduceMotion
+                                !tilt
                                     ? undefined
                                     : { rotate: 0, y: -8, transition: { type: 'spring', stiffness: 320, damping: 24 } }
                             }
-                            style={{ rotate: reduceMotion ? 0 : s.rotate }}
+                            style={{ rotate: tilt ? s.rotate : 0 }}
                             className={`group relative flex h-full flex-col rounded-[1.9rem] bg-gradient-to-br p-px shadow-[0_20px_50px_-24px_rgba(15,23,42,0.16)] ${s.ring}`}
                         >
                             <div className="flex h-full flex-col overflow-hidden rounded-[1.85rem] bg-white md:rounded-[1.88rem]">
                                 <div
-                                    className={`relative h-[8.75rem] shrink-0 overflow-hidden bg-gradient-to-br sm:h-[9.5rem] ${s.surface}`}
+                                    className={`relative hidden h-[8.75rem] shrink-0 overflow-hidden bg-gradient-to-br sm:block sm:h-[9.5rem] ${s.surface}`}
+                                    aria-hidden
                                 >
                                     <div
                                         className="pointer-events-none absolute inset-0 opacity-50"
@@ -298,7 +302,7 @@ const ServicesSection: React.FC = () => {
                             Send scope and deadline
                             <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
                         </a>
-                        <span className="text-slate-600">, replies within two business days when slots are open.</span>
+                        <span className="text-slate-600">. I reply within two business days when slots are open.</span>
                     </p>
                 </motion.div>
             </section>
