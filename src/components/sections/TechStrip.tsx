@@ -59,11 +59,11 @@ function LogoCapsule({ label, Icon }: ToolEntry) {
     return (
         <div
             className="
-                group/item inline-flex shrink-0 items-center gap-3.5 rounded-full border border-slate-200/85 bg-white/[0.72]
-                px-[1.35rem] py-[0.95rem] shadow-[0_2px_8px_rgba(15,23,42,0.05),0_12px_32px_-24px_rgba(124,58,237,0.12)] backdrop-blur-[11px]
+                group/item inline-flex shrink-0 items-center gap-3 rounded-full border border-slate-200/85 bg-white
+                px-5 py-3.5 shadow-[0_2px_8px_rgba(15,23,42,0.05),0_12px_32px_-24px_rgba(124,58,237,0.12)]
                 transition-[border-color,box-shadow,background-color] duration-300 ease-out
                 hover:border-violet-300/50 hover:bg-white/[0.92] hover:shadow-[0_14px_40px_-22px_rgba(124,58,237,0.18)]
-                md:gap-4 md:px-7 md:py-[1.05rem]
+                md:gap-3.5 md:px-6 md:py-4
             "
         >
             <Icon
@@ -115,7 +115,7 @@ function TechMarquee({ tools }: { tools: ToolEntry[] }) {
         return (
             <motion.div
                 ref={trackRef}
-                className="tech-marquee-track flex items-center gap-7 md:gap-9 lg:gap-11"
+                className="tech-marquee-track flex items-center gap-4 md:gap-5"
                 animate={{ x: [0, -loopWidth] }}
                 transition={{
                     x: {
@@ -137,7 +137,7 @@ function TechMarquee({ tools }: { tools: ToolEntry[] }) {
     return (
         <div
             ref={trackRef}
-            className="tech-marquee-track flex items-center gap-7 md:gap-9 lg:gap-11"
+            className="tech-marquee-track flex items-center gap-4 md:gap-5"
             style={{ animation: 'none', WebkitAnimation: 'none' }}
         >
             {stripTools.map((tool, index) => (
@@ -190,12 +190,12 @@ const TechStrip: React.FC = () => {
                                 className="tech-marquee-hover-wrap relative overflow-hidden rounded-[inherit] border border-slate-200/55 bg-white/[0.88] py-8 shadow-[0_20px_52px_-34px_rgba(124,58,237,0.14),0_12px_36px_-28px_rgba(15,23,42,0.1),inset_0_1px_0_0_rgba(255,255,255,0.75)] md:bg-white/[0.58] md:py-10 md:backdrop-blur-[14px] lg:py-[2.65rem]"
                             >
                                 <div
-                                    className="pointer-events-none absolute inset-y-0 left-0 z-[2] w-[5rem] sm:w-24 md:w-36 lg:w-[10.5rem] xl:w-[12rem]"
+                                    className="pointer-events-none absolute inset-y-0 left-0 z-[2] w-10 sm:w-14 md:w-16 lg:w-20"
                                     style={fadeLeftStyle}
                                     aria-hidden
                                 />
                                 <div
-                                    className="pointer-events-none absolute inset-y-0 right-0 z-[2] w-[5rem] sm:w-24 md:w-36 lg:w-[10.5rem] xl:w-[12rem]"
+                                    className="pointer-events-none absolute inset-y-0 right-0 z-[2] w-10 sm:w-14 md:w-16 lg:w-20"
                                     style={fadeRightStyle}
                                     aria-hidden
                                 />

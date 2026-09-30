@@ -18,6 +18,8 @@ interface FeaturedProject {
     accent: string;
     /** Optional short case study, renders as an expandable panel under the stack pills. */
     caseStudy?: CaseStudy;
+    /** Muted scroll-through loop of the live site (public/videos/work), shown instead of `img` when motion is allowed. */
+    video?: { src: string; poster: string };
 }
 
 interface CaseStudy {
@@ -40,6 +42,7 @@ const projects: FeaturedProject[] = [
         title: 'Hijo Lux Watches',
         desc: 'Luxury catalogue with WhatsApp checkout. Inventory and merchandising live in the CMS, so no engineer is needed for day-to-day updates.',
         img: '/images/work/hijo-hijolux.webp',
+        video: { src: '/videos/work/hijolux.mp4', poster: '/videos/work/hijolux-poster.webp' },
         link: 'https://hijoluxwatches.com',
         studioTheme: 'light',
         stackPills: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Sanity CMS', 'WhatsApp', 'Vercel'],
@@ -58,6 +61,7 @@ const projects: FeaturedProject[] = [
         title: 'PrintNest',
         desc: 'High-intent landing page that explains the workflow in one scroll, so the right leads self-select before they enquire.',
         img: '/images/work/printnest.webp',
+        video: { src: '/videos/work/printnest.mp4', poster: '/videos/work/printnest-poster.webp' },
         link: 'https://printnest.vercel.app',
         stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Landing Page', 'Vercel'],
         accent: '#4F46E5',
@@ -76,6 +80,7 @@ const projects: FeaturedProject[] = [
         title: 'BCCS Hub',
         desc: 'Structured Web3 learning gateway with a plain hierarchy, so newcomers stay oriented instead of overwhelmed.',
         img: '/images/work/bccs-hub.webp',
+        video: { src: '/videos/work/bccshub.mp4', poster: '/videos/work/bccshub-poster.webp' },
         link: 'https://bccshub.com',
         stackPills: ['React', 'TypeScript', 'Tailwind CSS', 'Web3 UI', 'Vercel'],
         accent: '#DB2777',
@@ -442,6 +447,55 @@ function previewChromeUrl(link: string) {
     }
 }
 
+/**
+ * Autoplaying muted loop that only downloads when near the viewport and pauses off-screen.
+ * Falls back to the still poster for reduced-motion users and Save-Data connections.
+ */
+function LoopVideo({ src, poster, className }: { src: string; poster: string; className: string }) {
+    const ref = useRef<HTMLVideoElement>(null);
+    const [load, setLoad] = useState(false);
+    const allowMotion = useMemo(() => {
+        if (typeof window === 'undefined') return false;
+        const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData;
+        return !reduce && !saveData;
+    }, []);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el || !allowMotion) return;
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setLoad(true);
+                    el.play().catch(() => {});
+                } else {
+                    el.pause();
+                }
+            },
+            { rootMargin: '200px 0px' },
+        );
+        io.observe(el);
+        return () => io.disconnect();
+    }, [allowMotion, load]);
+
+    return (
+        <video
+            ref={ref}
+            className={className}
+            poster={poster}
+            src={load ? src : undefined}
+            width={1200}
+            height={750}
+            muted
+            loop
+            playsInline
+            preload="none"
+            aria-hidden
+        />
+    );
+}
+
 function ProjectPreview({ project, idx }: { project: FeaturedProject; idx: number }) {
     const host = previewChromeUrl(project.link);
     const theme = project.studioTheme ?? 'dark';
@@ -535,13 +589,21 @@ function ProjectPreview({ project, idx }: { project: FeaturedProject; idx: numbe
                     transition={{ type: 'spring', stiffness: 360, damping: 30 }}
                 >
                     <div className={`relative rounded-2xl md:rounded-[1.35rem] overflow-hidden max-w-full ${shotRing}`}>
-                        <img
-                            src={project.img}
-                            alt=""
-                            className="block w-full max-w-full h-auto max-h-[min(62vh,640px)] object-contain object-center mx-auto"
-                            loading={idx === 0 ? 'eager' : 'lazy'}
-                            decoding="async"
-                        />
+                        {project.video ? (
+                            <LoopVideo
+                                src={project.video.src}
+                                poster={project.video.poster}
+                                className="block w-full max-w-full h-auto max-h-[min(62vh,640px)] object-contain object-center mx-auto"
+                            />
+                        ) : (
+                            <img
+                                src={project.img}
+                                alt=""
+                                className="block w-full max-w-full h-auto max-h-[min(62vh,640px)] object-contain object-center mx-auto"
+                                loading={idx === 0 ? 'eager' : 'lazy'}
+                                decoding="async"
+                            />
+                        )}
                     </div>
                 </motion.div>
                 <div className={`absolute inset-x-0 bottom-0 h-20 md:h-24 bg-gradient-to-t ${bottomFade} pointer-events-none z-[2]`} />

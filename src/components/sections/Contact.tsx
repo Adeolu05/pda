@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, ArrowRight, Instagram, Linkedin, Github, CheckCircle2 } from 'lucide-react';
+import { Mail, ArrowRight, ArrowUpRight, CalendarDays, Instagram, Linkedin, Github, CheckCircle2 } from 'lucide-react';
 import { SOCIAL_LINKS, CONTACT_INFO, CONTACT_PRIVACY_NOTE } from '../../config/constants';
 import XIcon from '../common/XIcon';
 
@@ -108,7 +108,27 @@ Sent from ${CONTACT_INFO.websiteUrl}`,
                         <span className="min-w-0 break-all font-sans text-lg font-semibold tracking-tight text-white sm:text-xl">{CONTACT_INFO.email}</span>
                     </a>
 
-                    <div className="mt-12 flex flex-wrap gap-6">
+                    <a
+                        href={CONTACT_INFO.bookingUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="group mt-8 flex items-center gap-4 rounded-2xl border border-white/12 bg-white/[0.05] p-4 pr-5 text-white transition-colors hover:border-violet-300/50 hover:bg-white/[0.08] sm:max-w-md"
+                    >
+                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-violet-500/20 text-violet-200">
+                            <CalendarDays className="h-5 w-5" aria-hidden />
+                        </span>
+                        <span className="min-w-0 flex-1">
+                            <span className="block text-[15px] font-semibold">Prefer to talk? Book a discovery call</span>
+                            <span className="mt-0.5 block text-[13px] text-slate-400">Pick a time on Cal.com, no prep needed</span>
+                        </span>
+                        <ArrowUpRight className="h-4 w-4 shrink-0 text-violet-200 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                    </a>
+
+                    <p className="mt-6 text-[14px] leading-relaxed text-slate-400">
+                        Replies within two business days. Working with clients worldwide.
+                    </p>
+
+                    <div className="mt-10 flex flex-wrap gap-6">
                         {socialLinks.map(({ Icon, href, label }) => (
                             <motion.a
                                 key={label}

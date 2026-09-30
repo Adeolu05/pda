@@ -24,7 +24,9 @@ export const CONTACT_INFO = {
     label: "Peluola David Adeoluwa",
     shortName: "P.D.A",
     domain: "dpeluola.com",
-    websiteUrl: "https://www.dpeluola.com"
+    websiteUrl: "https://www.dpeluola.com",
+    /** Cal.com discovery call, offered next to the contact form */
+    bookingUrl: "https://cal.com/dpeluola/discovery",
 };
 
 /** Google Business Profile, source of the testimonials in ProofSection */

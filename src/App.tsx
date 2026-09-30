@@ -30,13 +30,14 @@ const App: React.FC = () => {
                     <WorkSection />
                 </section>
 
+                {/* Proof sits right after the work so reviews are seen before visitors drift off */}
+                <ProofSection />
+
                 <ServicesSection />
 
                 <AboutSkills />
 
                 <ProcessSection />
-
-                <ProofSection />
 
                 <Resume />
 
