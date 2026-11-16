@@ -27,7 +27,8 @@ export default {
                 card: '12px',
             },
             maxWidth: {
-                site: '1100px',
+                site: '1200px',
+                'site-xl': '1360px',
             },
             transitionTimingFunction: {
                 out: 'cubic-bezier(.16,1,.3,1)',

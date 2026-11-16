@@ -139,7 +139,7 @@ const Work: React.FC = () => {
                     </div>
                     <ul className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {builds.map((b) => (
-                            <li key={b.title}>
+                            <li key={b.title} className="min-w-0">
                                 <ExternalLink
                                     href={b.link}
                                     className="card card-hover group flex h-full items-center gap-4 p-3"
@@ -151,9 +151,9 @@ const Work: React.FC = () => {
                                         height={72}
                                         loading="lazy"
                                         decoding="async"
-                                        className="h-[72px] w-[112px] shrink-0 rounded-md border border-line object-cover object-top"
+                                        className="h-[56px] w-[88px] shrink-0 rounded-md min-[380px]:h-[72px] min-[380px]:w-[112px] border border-line object-cover object-top"
                                     />
-                                    <span className="min-w-0">
+                                    <span className="min-w-0 flex-1">
                                         <span className="flex items-center gap-1 text-[15px] font-medium text-ink">
                                             <span className="truncate">{b.title}</span>
                                             <ArrowUpRight className="h-3.5 w-3.5 shrink-0 text-faint transition-colors group-hover:text-accent" aria-hidden />

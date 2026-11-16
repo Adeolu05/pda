@@ -33,6 +33,8 @@ const ToolRow: React.FC<{ tool: Tool; flip: boolean }> = ({ tool, flip }) => (
                     <WindowBar label={new URL(tool.live).host} />
                     <img
                         src={tool.shot.src}
+                        srcSet={`${tool.shot.src.replace('.webp', '-960.webp')} 960w, ${tool.shot.src} 1600w`}
+                        sizes="(min-width: 1536px) 760px, (min-width: 768px) 56vw, 100vw"
                         alt={tool.shot.alt}
                         width={1600}
                         height={1000}

@@ -30,7 +30,7 @@ export const SectionHeader: React.FC<{
     <div className="grid gap-6 md:grid-cols-12 md:gap-10">
         <div className="md:col-span-6">
             <span className="eyebrow">{eyebrow}</span>
-            <h2 id={id} className="mt-4 text-[clamp(1.75rem,3.2vw,2.25rem)] font-medium leading-[1.12] tracking-[-0.025em] text-ink">
+            <h2 id={id} className="mt-4 text-[clamp(1.75rem,3.2vw,2.5rem)] font-medium leading-[1.12] tracking-[-0.025em] text-ink">
                 {title}
             </h2>
         </div>
