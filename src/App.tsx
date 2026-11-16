@@ -1,6 +1,5 @@
 import React from 'react';
 import MainLayout from './components/layout/MainLayout';
-import SEO from './components/common/SEO';
 import Hero from './components/sections/Hero';
 import Tools from './components/sections/Tools';
 import Work from './components/sections/Work';
@@ -15,7 +14,6 @@ import Contact from './components/sections/Contact';
  */
 const App: React.FC = () => (
     <MainLayout>
-        <SEO />
         <Hero />
         <Work />
         <Tools />

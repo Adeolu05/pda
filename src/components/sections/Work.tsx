@@ -77,6 +77,15 @@ const FeaturedCard: React.FC<{ project: FeaturedProject; delay: number }> = ({ p
                     ))}
                 </div>
 
+                {project.quote && (
+                    <figure className="mt-5 rounded-lg border border-line bg-raised/60 px-4 py-3">
+                        <blockquote className="text-[14px] leading-relaxed text-ink">&ldquo;{project.quote.text}&rdquo;</blockquote>
+                        <figcaption className="mt-2 font-mono text-[11.5px] text-faint">
+                            {project.quote.name}, {project.quote.source}
+                        </figcaption>
+                    </figure>
+                )}
+
                 {project.caseStudy && (
                     <details className="group mt-5 rounded-lg border border-line">
                         <summary className="flex cursor-pointer list-none items-center justify-between px-4 py-3 text-[14px] text-ink [&::-webkit-details-marker]:hidden">

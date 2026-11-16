@@ -1,8 +1,8 @@
 import React from 'react';
-import { FileText } from 'lucide-react';
+import { ArrowUpRight, FileText } from 'lucide-react';
 import { PROFILE_IMAGE, RESUME_FILES } from '../../config/constants';
-import { STACK } from '../../config/content';
-import { Reveal } from '../common/ui';
+import { STACK, WRITING } from '../../config/content';
+import { ExternalLink, Reveal } from '../common/ui';
 
 const About: React.FC = () => (
     <section id="about" aria-labelledby="about-title" className="border-t border-line py-24 md:py-32">
@@ -50,6 +50,28 @@ const About: React.FC = () => (
                             </li>
                         ))}
                     </ul>
+                </div>
+
+                <div className="mt-8">
+                    <p className="font-mono text-[11.5px] uppercase tracking-[0.14em] text-faint">Writing</p>
+                    <ul className="mt-3 space-y-2">
+                        {WRITING.posts.map((p) => (
+                            <li key={p.url}>
+                                <ExternalLink href={p.url} className="card card-hover flex items-start justify-between gap-4 p-4">
+                                    <span>
+                                        <span className="block text-[15px] font-medium leading-snug text-ink">{p.title}</span>
+                                        <span className="mt-1 block font-mono text-[12px] text-faint">
+                                            DEV · {p.date} · {p.minutes} min read
+                                        </span>
+                                    </span>
+                                    <ArrowUpRight className="mt-0.5 h-4 w-4 shrink-0 text-faint" aria-hidden />
+                                </ExternalLink>
+                            </li>
+                        ))}
+                    </ul>
+                    <ExternalLink href={WRITING.profile} className="mt-3 inline-flex items-center gap-1 text-[14px] text-muted hover:text-ink">
+                        All posts on DEV <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
+                    </ExternalLink>
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-3">

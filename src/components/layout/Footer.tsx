@@ -59,6 +59,11 @@ const Footer: React.FC = () => (
                         </ExternalLink>
                     </li>
                     <li>
+                        <ExternalLink href={SOCIAL_LINKS.telegram} className="text-[14px] text-muted hover:text-ink">
+                            Telegram @dpeluola
+                        </ExternalLink>
+                    </li>
+                    <li>
                         <ExternalLink href={SOCIAL_LINKS.github} className="text-[14px] text-muted hover:text-ink">
                             GitHub
                         </ExternalLink>
@@ -68,12 +73,17 @@ const Footer: React.FC = () => (
                             LinkedIn
                         </ExternalLink>
                     </li>
+                    <li>
+                        <ExternalLink href={SOCIAL_LINKS.dev} className="text-[14px] text-muted hover:text-ink">
+                            DEV
+                        </ExternalLink>
+                    </li>
                 </ul>
             </div>
         </div>
         <div className="border-t border-line">
             <p className="container-site py-6 font-mono text-[12px] text-faint">
-                © {new Date().getFullYear()} {CONTACT_INFO.label}
+                <span suppressHydrationWarning>© {new Date().getFullYear()}</span> {CONTACT_INFO.label}
             </p>
         </div>
     </footer>

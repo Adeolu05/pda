@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { ArrowRight, CalendarDays, CheckCircle2, Github, Instagram, Linkedin, Mail } from 'lucide-react';
 import { CONTACT_INFO, CONTACT_PRIVACY_NOTE, SOCIAL_LINKS } from '../../config/constants';
 import XIcon from '../common/XIcon';
+import TelegramIcon from '../common/TelegramIcon';
 import { ExternalLink, Reveal } from '../common/ui';
 
 const PROJECT_TYPES = ['Landing page', 'Web app', 'E-commerce store', 'Business website', 'Crypto / Web3 tooling', 'Other'];
@@ -84,6 +85,15 @@ const Contact: React.FC = () => {
                                 <span className="block break-all text-[15px] font-medium text-ink">{CONTACT_INFO.email}</span>
                             </span>
                         </a>
+                        <ExternalLink href={SOCIAL_LINKS.telegram} className="card card-hover flex items-center gap-4 p-4">
+                            <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-raised text-accent">
+                                <TelegramIcon className="h-5 w-5" />
+                            </span>
+                            <span>
+                                <span className="block text-[13px] text-faint">Telegram</span>
+                                <span className="block text-[15px] font-medium text-ink">@dpeluola</span>
+                            </span>
+                        </ExternalLink>
                         <ExternalLink href={CONTACT_INFO.bookingUrl} className="card card-hover flex items-center gap-4 p-4">
                             <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-raised text-accent">
                                 <CalendarDays className="h-5 w-5" aria-hidden />

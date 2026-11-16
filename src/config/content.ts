@@ -108,6 +108,8 @@ export interface FeaturedProject {
     video?: { src: string; poster: string };
     stack: string[];
     caseStudy?: CaseStudy;
+    /** Verbatim client review shown on the card */
+    quote?: { text: string; name: string; source: string };
 }
 
 export const FEATURED: FeaturedProject[] = [
@@ -136,6 +138,11 @@ export const FEATURED: FeaturedProject[] = [
         img: '/images/work/hijo-hijolux.webp',
         video: { src: '/videos/work/hijolux.mp4', poster: '/videos/work/hijolux-poster.webp' },
         stack: ['Next.js', 'TypeScript', 'Sanity CMS', 'WhatsApp'],
+        quote: {
+            text: 'One of the best out there, very composed with attention to details. I recommend any day.',
+            name: 'Hijo Lux Watches',
+            source: 'Google review',
+        },
         caseStudy: {
             problem:
                 'Hijo Lux sells authenticated luxury watches, many priced in six figures, to buyers across Nigeria and the UAE. Buyers needed reasons to trust the dealer before sending a message, and the team needed to change stock and prices often without waiting on a developer.',
@@ -251,7 +258,7 @@ export const SERVICES = [
     },
     {
         title: 'Crypto tooling',
-        body: 'Wallet UX, Telegram bots, dashboards and on-chain checks for Zcash, NEAR and Solana teams.',
+        body: 'Wallet UX, Telegram bots, dashboards and on-chain checks for Zcash, NEAR and Parano1d teams.',
         stack: 'TypeScript · Rust · Node',
     },
 ];
@@ -264,3 +271,16 @@ export const PROCESS = [
 ];
 
 export const STACK = ['React', 'Next.js', 'TypeScript', 'Node.js', 'Postgres', 'Python', 'Rust (NEAR)', 'Tailwind', 'Sanity', 'WooCommerce', 'Vercel', 'Railway'];
+
+/** Verified on dev.to/api/articles?username=dpeluola */
+export const WRITING = {
+    profile: 'https://dev.to/dpeluola',
+    posts: [
+        {
+            title: 'Can you withdraw shielded ZEC? I tested 4 big services. None can.',
+            url: 'https://dev.to/dpeluola/can-you-withdraw-shielded-zec-i-tested-4-big-services-none-can-2jek',
+            date: '16 Nov 2026',
+            minutes: 2,
+        },
+    ],
+};

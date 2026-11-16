@@ -14,11 +14,13 @@ export const SOCIAL_LINKS = {
     github: "https://github.com/Adeolu05",
     twitter: "https://x.com/0xdavee_",
     instagram: "https://www.instagram.com/_dpeluola",
+    telegram: "https://t.me/dpeluola",
+    dev: "https://dev.to/dpeluola",
 };
 
 export const CONTACT_INFO = {
     email: "hello@dpeluola.com",
-    label: "Peluola David Adeoluwa",
+    label: "David Peluola",
     shortName: "P.D.A",
     domain: "dpeluola.com",
     websiteUrl: "https://www.dpeluola.com",

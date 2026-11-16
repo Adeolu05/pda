@@ -2,12 +2,6 @@
     "github": {
         "silent": true
     },
-    "rewrites": [
-        {
-            "source": "/((?!api/).*)",
-            "destination": "/"
-        }
-    ],
     "headers": [
         {
             "source": "/(.*)",
