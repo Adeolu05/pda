@@ -1,28 +1,38 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    content: [
-        "./index.html",
-        "./src/**/*.{js,ts,jsx,tsx}",
-    ],
+    content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
     theme: {
         extend: {
             colors: {
-                brand: {
-                    purple: "#7C3AED",
-                    indigo: "#4F46E5",
-                },
-                bg: {
-                    base: "#FAF9FF",
-                },
-                text: {
-                    main: "#0F172A",
-                },
+                bg: 'var(--bg)',
+                surface: 'var(--surface)',
+                raised: 'var(--raised)',
+                ink: 'var(--ink)',
+                muted: 'var(--muted)',
+                faint: 'var(--faint)',
+                line: 'var(--line)',
+                'line-2': 'var(--line-2)',
+                'line-input': 'var(--line-input)',
+                accent: 'var(--accent)',
+                focus: 'var(--focus)',
+                success: 'var(--success)',
+                warn: 'var(--warn)',
+                danger: 'var(--danger)',
             },
             fontFamily: {
-                sans: ['Inter', 'sans-serif'],
-                display: ['"Instrument Serif"', 'serif'],
+                sans: ['Inter', 'system-ui', 'sans-serif'],
+                mono: ['"JetBrains Mono"', 'ui-monospace', 'SFMono-Regular', 'monospace'],
+            },
+            borderRadius: {
+                card: '12px',
+            },
+            maxWidth: {
+                site: '1100px',
+            },
+            transitionTimingFunction: {
+                out: 'cubic-bezier(.16,1,.3,1)',
             },
         },
     },
     plugins: [],
-}
+};

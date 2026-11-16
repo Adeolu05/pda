@@ -1,17 +1,10 @@
 import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Mail, ArrowRight, ArrowUpRight, CalendarDays, Instagram, Linkedin, Github, CheckCircle2 } from 'lucide-react';
-import { SOCIAL_LINKS, CONTACT_INFO, CONTACT_PRIVACY_NOTE } from '../../config/constants';
+import { ArrowRight, CalendarDays, CheckCircle2, Github, Instagram, Linkedin, Mail } from 'lucide-react';
+import { CONTACT_INFO, CONTACT_PRIVACY_NOTE, SOCIAL_LINKS } from '../../config/constants';
 import XIcon from '../common/XIcon';
+import { ExternalLink, Reveal } from '../common/ui';
 
-const PROJECT_TYPES = [
-    'Landing Page',
-    'Custom Web Application',
-    'E-Commerce / Full-Stack',
-    'Business Website',
-    'Web3 Interface',
-    'Other',
-];
+const PROJECT_TYPES = ['Landing page', 'Web app', 'E-commerce store', 'Business website', 'Crypto / Web3 tooling', 'Other'];
 
 /** Local clients see naira, international clients see USD; both land in the same email. */
 const BUDGET_GROUPS = [
@@ -20,278 +13,186 @@ const BUDGET_GROUPS = [
 ];
 const BUDGET_UNSURE = 'Not sure yet';
 
+const Label: React.FC<{ htmlFor: string; children: React.ReactNode }> = ({ htmlFor, children }) => (
+    <label htmlFor={htmlFor} className="mb-1.5 block text-[13px] text-muted">
+        {children}
+    </label>
+);
+
 const Contact: React.FC = () => {
-    const [formData, setFormData] = useState({
-        name: '',
-        email: '',
-        projectType: PROJECT_TYPES[0],
-        budget: BUDGET_UNSURE,
-        message: '',
-    });
-    const [company, setCompany] = useState(''); // honeypot
+    const [form, setForm] = useState({ name: '', email: '', projectType: PROJECT_TYPES[0], budget: BUDGET_UNSURE, message: '' });
+    const [company, setCompany] = useState(''); // honeypot, hidden from people
     const [status, setStatus] = useState<'idle' | 'sending' | 'sent' | 'fallback'>('idle');
 
-    const socialLinks = [
-        { Icon: Github, href: SOCIAL_LINKS.github, label: 'GitHub' },
-        { Icon: Linkedin, href: SOCIAL_LINKS.linkedIn, label: 'LinkedIn' },
-        { Icon: XIcon, href: SOCIAL_LINKS.twitter, label: 'X' },
-        { Icon: Instagram, href: SOCIAL_LINKS.instagram, label: 'Instagram' },
-    ];
+    const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) =>
+        setForm((f) => ({ ...f, [k]: e.target.value }));
 
     const openMailFallback = () => {
-        const subject = encodeURIComponent(`Project inquiry, ${formData.projectType}, ${formData.name}`);
+        const subject = encodeURIComponent(`Project inquiry: ${form.projectType}, ${form.name}`);
         const body = encodeURIComponent(
-            `Hi,
-
-Name: ${formData.name}
-Email: ${formData.email}
-
-Project type: ${formData.projectType}
-Budget: ${formData.budget}
-
-Message:
-${formData.message}
-
-Sent from ${CONTACT_INFO.websiteUrl}`,
+            `Hi David,\n\nName: ${form.name}\nEmail: ${form.email}\nProject type: ${form.projectType}\nBudget: ${form.budget}\n\n${form.message}\n\nSent from ${CONTACT_INFO.websiteUrl}`,
         );
         window.location.href = `mailto:${CONTACT_INFO.email}?subject=${subject}&body=${body}`;
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
+    const onSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setStatus('sending');
         try {
             const res = await fetch('/api/contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ ...formData, company }),
+                body: JSON.stringify({ ...form, company }),
             });
-            if (!res.ok) throw new Error(`Contact API responded ${res.status}`);
+            if (!res.ok) throw new Error(String(res.status));
             setStatus('sent');
-            setFormData((prev) => ({ ...prev, message: '' }));
+            setForm((f) => ({ ...f, message: '' }));
         } catch {
-            // API unavailable (local dev, missing env, outage): hand off to the visitor's email app
+            // API unavailable (local dev, missing key, outage): hand off to the visitor's email app
             openMailFallback();
             setStatus('fallback');
         }
     };
 
+    const socials = [
+        { Icon: XIcon, href: SOCIAL_LINKS.twitter, label: 'X' },
+        { Icon: Github, href: SOCIAL_LINKS.github, label: 'GitHub' },
+        { Icon: Linkedin, href: SOCIAL_LINKS.linkedIn, label: 'LinkedIn' },
+        { Icon: Instagram, href: SOCIAL_LINKS.instagram, label: 'Instagram' },
+    ];
+
     return (
-        <div
-            id="contact"
-            className="relative scroll-mt-28 overflow-hidden rounded-[2.25rem] bg-slate-950 p-7 sm:p-8 md:rounded-[3rem] md:p-14 lg:p-20"
-        >
-            <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_80%_0%,rgba(124,58,237,0.18),transparent)]" />
-            <span className="ui-blob -top-16 -left-10 h-72 w-72 bg-violet-600/20 blur-[110px]" aria-hidden />
-            <span className="ui-blob ui-blob-alt -bottom-20 right-10 h-72 w-72 bg-fuchsia-600/15 blur-[120px]" aria-hidden />
-            <span className="ui-blob bottom-24 -left-16 h-56 w-56 bg-indigo-600/15 blur-[110px]" aria-hidden />
-
-            <div className="relative z-10 grid grid-cols-1 gap-16 lg:grid-cols-2 lg:gap-x-16 lg:gap-y-10">
-                <div className="lg:max-w-xl">
-                    <span className="ui-eyebrow ui-eyebrow-light">Start a project</span>
-                    <h2 className="mt-4 break-words font-display text-[clamp(2.05rem,5.5vw,3.55rem)] font-semibold not-italic leading-[1.08] tracking-tight text-white">
-                        Ready when you are. Let&apos;s ship{' '}
-                        <span className="text-violet-300">what&apos;s next.</span>
+        <section id="contact" aria-labelledby="contact-title" className="border-t border-line py-24 md:py-32">
+            <div className="container-site grid gap-12 lg:grid-cols-12 lg:gap-14">
+                <Reveal className="lg:col-span-5">
+                    <span className="eyebrow">Contact</span>
+                    <h2 id="contact-title" className="mt-4 text-[clamp(1.75rem,3.2vw,2.25rem)] font-medium leading-[1.12] tracking-[-0.025em] text-ink">
+                        Got a project? Let&apos;s talk.
                     </h2>
-                    <p className="mt-6 text-[15px] leading-[1.72] text-slate-200 md:text-[16px] md:leading-relaxed">
-                        Send a tight brief (links, goals and timeline) and you&apos;ll hear back with an honest fit check, estimated
-                        turnaround and what &quot;done&quot; includes before we touch code.
+                    <p className="mt-5 text-[16px] leading-relaxed text-muted">
+                        Send your goals, links and timeline. You&apos;ll get an honest fit check, a price and what &ldquo;done&rdquo; includes
+                        before any code. I reply within two business days.
                     </p>
 
-                    <a
-                        href={`mailto:${CONTACT_INFO.email}`}
-                        className="mt-10 group flex flex-wrap items-center gap-4 text-white transition-colors hover:text-violet-200"
-                    >
-                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5">
-                            <Mail className="h-5 w-5" aria-hidden />
-                        </span>
-                        <span className="min-w-0 break-all font-sans text-lg font-semibold tracking-tight text-white sm:text-xl">{CONTACT_INFO.email}</span>
-                    </a>
-
-                    <a
-                        href={CONTACT_INFO.bookingUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="group mt-8 flex items-center gap-4 rounded-2xl border border-white/12 bg-white/[0.05] p-4 pr-5 text-white transition-colors hover:border-violet-300/50 hover:bg-white/[0.08] sm:max-w-md"
-                    >
-                        <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-violet-500/20 text-violet-200">
-                            <CalendarDays className="h-5 w-5" aria-hidden />
-                        </span>
-                        <span className="min-w-0 flex-1">
-                            <span className="block text-[15px] font-semibold">Prefer to talk? Book a discovery call</span>
-                            <span className="mt-0.5 block text-[13px] text-slate-400">Pick a time on Cal.com, no prep needed</span>
-                        </span>
-                        <ArrowUpRight className="h-4 w-4 shrink-0 text-violet-200 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
-                    </a>
-
-                    <p className="mt-6 text-[14px] leading-relaxed text-slate-400">
-                        Replies within two business days. Working with clients worldwide.
-                    </p>
-
-                    <div className="mt-10 flex flex-wrap gap-6">
-                        {socialLinks.map(({ Icon, href, label }) => (
-                            <motion.a
-                                key={label}
-                                whileHover={{ y: -3 }}
-                                href={href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label={label}
-                                className="text-slate-500 transition-colors hover:text-white"
-                            >
-                                <Icon className="h-5 w-5" aria-hidden />
-                            </motion.a>
-                        ))}
+                    <div className="mt-8 space-y-3">
+                        <a href={`mailto:${CONTACT_INFO.email}`} className="card card-hover flex items-center gap-4 p-4">
+                            <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-raised text-accent">
+                                <Mail className="h-5 w-5" aria-hidden />
+                            </span>
+                            <span>
+                                <span className="block text-[13px] text-faint">Email</span>
+                                <span className="block break-all text-[15px] font-medium text-ink">{CONTACT_INFO.email}</span>
+                            </span>
+                        </a>
+                        <ExternalLink href={CONTACT_INFO.bookingUrl} className="card card-hover flex items-center gap-4 p-4">
+                            <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-raised text-accent">
+                                <CalendarDays className="h-5 w-5" aria-hidden />
+                            </span>
+                            <span>
+                                <span className="block text-[13px] text-faint">Prefer to talk?</span>
+                                <span className="block text-[15px] font-medium text-ink">Book a free 15-minute call</span>
+                            </span>
+                        </ExternalLink>
                     </div>
-                </div>
 
-                <div
-                    id="contact-form"
-                    className="scroll-mt-28 rounded-[1.75rem] border border-white/12 bg-white/[0.05] p-6 shadow-[0_24px_64px_-24px_rgba(0,0,0,0.45)] backdrop-blur-md md:p-10"
-                >
-                    <p className="mb-8 text-[15px] font-medium leading-snug text-slate-300">Every field helps me reply with something useful.</p>
-                    <form className="relative space-y-7" onSubmit={handleSubmit}>
-                        <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden>
-                            <label htmlFor="contact-company">Company website</label>
-                            <input
-                                id="contact-company"
-                                type="text"
-                                tabIndex={-1}
-                                autoComplete="off"
-                                value={company}
-                                onChange={(e) => setCompany(e.target.value)}
-                            />
-                        </div>
-                        <div className="space-y-1.5">
-                            <label htmlFor="contact-name" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">
-                                Name
-                            </label>
-                            <input
-                                id="contact-name"
-                                required
-                                type="text"
-                                autoComplete="name"
-                                value={formData.name}
-                                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                className="min-h-[3rem] w-full rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow,background-color] placeholder:text-slate-500 focus:border-violet-400/80 focus:bg-white/[0.09] focus:ring-4 focus:ring-violet-500/25"
-                                placeholder="Your name or company"
-                            />
-                        </div>
-                        <div className="space-y-1.5">
-                            <label htmlFor="contact-email" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">
-                                Email
-                            </label>
-                            <input
-                                id="contact-email"
-                                required
-                                type="email"
-                                autoComplete="email"
-                                value={formData.email}
-                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                                className="min-h-[3rem] w-full rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow,background-color] placeholder:text-slate-500 focus:border-violet-400/80 focus:bg-white/[0.09] focus:ring-4 focus:ring-violet-500/25"
-                                placeholder="you@example.com"
-                            />
-                        </div>
-                        <div className="grid gap-7 sm:grid-cols-2 sm:gap-6">
-                            <div className="space-y-2">
-                                <label htmlFor="contact-type" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">
-                                    Project type
-                                </label>
-                                <select
-                                    id="contact-type"
-                                    value={formData.projectType}
-                                    onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                                    className="min-h-[3rem] w-full cursor-pointer rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow] focus:border-violet-400/80 focus:ring-4 focus:ring-violet-500/25"
+                    <ul className="mt-8 flex gap-2" aria-label="Social profiles">
+                        {socials.map(({ Icon, href, label }) => (
+                            <li key={label}>
+                                <ExternalLink
+                                    href={href}
+                                    aria-label={label}
+                                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-line-2 text-muted transition-colors hover:bg-raised hover:text-ink"
                                 >
+                                    <Icon className="h-4 w-4" />
+                                </ExternalLink>
+                            </li>
+                        ))}
+                    </ul>
+                </Reveal>
+
+                <Reveal delay={0.06} className="lg:col-span-7">
+                    <form onSubmit={onSubmit} className="card p-6 sm:p-8">
+                        <div className="grid gap-5 sm:grid-cols-2">
+                            <div>
+                                <Label htmlFor="c-name">Name</Label>
+                                <input id="c-name" required maxLength={120} autoComplete="name" className="field" value={form.name} onChange={set('name')} />
+                            </div>
+                            <div>
+                                <Label htmlFor="c-email">Email</Label>
+                                <input
+                                    id="c-email"
+                                    type="email"
+                                    required
+                                    maxLength={200}
+                                    autoComplete="email"
+                                    className="field"
+                                    value={form.email}
+                                    onChange={set('email')}
+                                />
+                            </div>
+                            <div>
+                                <Label htmlFor="c-type">Project type</Label>
+                                <select id="c-type" className="field" value={form.projectType} onChange={set('projectType')}>
                                     {PROJECT_TYPES.map((t) => (
-                                        <option key={t} value={t} className="bg-slate-900 text-white">
-                                            {t}
-                                        </option>
+                                        <option key={t}>{t}</option>
                                     ))}
                                 </select>
                             </div>
-                            <div className="space-y-2">
-                                <label htmlFor="contact-budget" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">
-                                    Budget range
-                                </label>
-                                <select
-                                    id="contact-budget"
-                                    value={formData.budget}
-                                    onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                                    className="min-h-[3rem] w-full cursor-pointer rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow] focus:border-violet-400/80 focus:ring-4 focus:ring-violet-500/25"
-                                >
-                                    <option value={BUDGET_UNSURE} className="bg-slate-900 text-white">
-                                        {BUDGET_UNSURE}
-                                    </option>
-                                    {BUDGET_GROUPS.map((group) => (
-                                        <optgroup key={group.label} label={group.label} className="bg-slate-900 text-slate-400">
-                                            {group.options.map((b) => (
-                                                <option key={b} value={b} className="bg-slate-900 text-white">
-                                                    {b}
-                                                </option>
+                            <div>
+                                <Label htmlFor="c-budget">Budget</Label>
+                                <select id="c-budget" className="field" value={form.budget} onChange={set('budget')}>
+                                    <option>{BUDGET_UNSURE}</option>
+                                    {BUDGET_GROUPS.map((g) => (
+                                        <optgroup key={g.label} label={g.label}>
+                                            {g.options.map((o) => (
+                                                <option key={o}>{o}</option>
                                             ))}
                                         </optgroup>
                                     ))}
                                 </select>
                             </div>
+                            <div className="sm:col-span-2">
+                                <Label htmlFor="c-message">What should I know?</Label>
+                                <textarea
+                                    id="c-message"
+                                    required
+                                    maxLength={5000}
+                                    rows={5}
+                                    className="field h-auto py-2.5"
+                                    placeholder="Goals, links, deadline"
+                                    value={form.message}
+                                    onChange={set('message')}
+                                />
+                            </div>
+                            {/* Honeypot: visually hidden and skipped by keyboard and screen readers */}
+                            <div className="absolute -left-[9999px]" aria-hidden="true">
+                                <label htmlFor="c-company">Company</label>
+                                <input id="c-company" tabIndex={-1} autoComplete="off" value={company} onChange={(e) => setCompany(e.target.value)} />
+                            </div>
                         </div>
-                        <div className="space-y-2">
-                            <label htmlFor="contact-message" className="text-[11px] font-semibold uppercase tracking-[0.16em] text-slate-300">
-                                What should I know?
-                            </label>
-                            <textarea
-                                id="contact-message"
-                                required
-                                rows={4}
-                                value={formData.message}
-                                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                                className="w-full resize-none rounded-xl border border-white/12 bg-white/[0.06] px-4 py-3 text-base text-white outline-none transition-[border-color,box-shadow,background-color] placeholder:text-slate-500 focus:border-violet-400/80 focus:bg-white/[0.09] focus:ring-4 focus:ring-violet-500/25"
-                                placeholder="Goals, deadline, links, competitors. Short is fine."
-                            />
+
+                        <div className="mt-6 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+                            <p className="text-[12.5px] leading-relaxed text-faint sm:max-w-xs">{CONTACT_PRIVACY_NOTE}</p>
+                            <button type="submit" className="btn-primary" disabled={status === 'sending'} aria-busy={status === 'sending'}>
+                                {status === 'sending' ? 'Sending…' : 'Send project brief'}
+                                <ArrowRight className="h-4 w-4" aria-hidden />
+                            </button>
                         </div>
-                        <p className="text-[15px] leading-relaxed text-slate-400">{CONTACT_PRIVACY_NOTE}</p>
-                        <AnimatePresence>
-                            {(status === 'sent' || status === 'fallback') && (
-                                <motion.div
-                                    initial={{ opacity: 0, y: -6, height: 0 }}
-                                    animate={{ opacity: 1, y: 0, height: 'auto' }}
-                                    exit={{ opacity: 0, y: -6, height: 0 }}
-                                    transition={{ duration: 0.3 }}
-                                    className="flex items-start gap-3 overflow-hidden rounded-xl border border-emerald-400/30 bg-emerald-400/10 px-4 py-3 text-emerald-200"
-                                    role="status"
-                                    aria-live="polite"
-                                >
-                                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0" aria-hidden />
-                                    {status === 'sent' ? (
-                                        <p className="text-[14px] leading-snug">
-                                            Brief received. I&apos;ll reply to {formData.email} within two business days.
-                                        </p>
-                                    ) : (
-                                        <p className="text-[14px] leading-snug">
-                                            Your email app should be opening with everything pre-filled. Just hit send. If it
-                                            didn&apos;t, reach me at{' '}
-                                            <a className="font-semibold underline decoration-emerald-400/50 underline-offset-2" href={`mailto:${CONTACT_INFO.email}`}>
-                                                {CONTACT_INFO.email}
-                                            </a>.
-                                        </p>
-                                    )}
-                                </motion.div>
+
+                        <p role="status" aria-live="polite" className="mt-4 text-[14px]">
+                            {status === 'sent' && (
+                                <span className="inline-flex items-center gap-2 text-success">
+                                    <CheckCircle2 className="h-4 w-4" aria-hidden /> Sent. I&apos;ll reply within two business days.
+                                </span>
                             )}
-                        </AnimatePresence>
-                        <motion.button
-                            type="submit"
-                            disabled={status === 'sending'}
-                            whileHover={{ scale: 1.01 }}
-                            whileTap={{ scale: 0.99 }}
-                            className="flex min-h-[3.65rem] w-full items-center justify-center gap-2 rounded-xl bg-white px-6 text-[13px] font-bold uppercase tracking-[0.16em] text-slate-950 shadow-[0_16px_42px_-14px_rgba(124,58,237,0.35),0_8px_24px_-12px_rgba(0,0,0,0.35)] ring-1 ring-white/25 transition-colors hover:bg-violet-100 hover:shadow-[0_18px_48px_-14px_rgba(124,58,237,0.42)] disabled:cursor-wait disabled:opacity-70 md:text-[14px] md:tracking-[0.14em]"
-                        >
-                            {status === 'sending' ? 'Sending…' : 'Send Project Brief'}
-                            <ArrowRight className="h-4 w-4 md:h-[1.125rem] md:w-[1.125rem]" aria-hidden />
-                        </motion.button>
+                            {status === 'fallback' && (
+                                <span className="text-muted">Your email app should open with the brief filled in. If not, email {CONTACT_INFO.email}.</span>
+                            )}
+                        </p>
                     </form>
-                </div>
+                </Reveal>
             </div>
-        </div>
+        </section>
     );
 };
 

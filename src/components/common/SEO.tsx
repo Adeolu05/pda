@@ -9,9 +9,9 @@ interface SEOProps {
 
 const siteUrl = CONTACT_INFO.websiteUrl.replace(/\/$/, '');
 const defaultImage = `${siteUrl}/og-image.jpg`;
-const defaultTitle = "Peluola David Adeoluwa | Web Engineer & Architect";
+const defaultTitle = "Peluola David Adeoluwa | Full-stack developer";
 const defaultDescription =
-    "Web engineer building fast full-stack web apps, e-commerce stores and landing pages for startups and growing brands. React, Next.js, Node.js and Web3.";
+    "Full-stack developer in Nigeria. Fast web apps, stores and landing pages for businesses, and open-source privacy tools for Zcash and NEAR.";
 
 export default function SEO({
     title = defaultTitle,
@@ -35,7 +35,7 @@ export default function SEO({
             <meta name="twitter:title" content={title} />
             <meta name="twitter:description" content={description} />
             <meta name="twitter:image" content={defaultImage} />
-            <meta name="twitter:creator" content="@alphvibes" />
+            <meta name="twitter:creator" content="@0xdavee_" />
         </Helmet>
     );
 }
