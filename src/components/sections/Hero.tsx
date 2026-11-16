@@ -53,7 +53,7 @@ const Hero: React.FC = () => {
           >
             I&apos;m David Peluola, a full-stack developer in Nigeria. I ship
             fast, maintainable sites for businesses, and open-source tools for
-            the Zcash and NEAR ecosystems.
+            Zcash, NEAR and Parano1d.
           </motion.p>
 
           <motion.div

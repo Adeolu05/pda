@@ -33,11 +33,11 @@ const ToolRow: React.FC<{ tool: Tool; flip: boolean }> = ({ tool, flip }) => (
                     <WindowBar label={new URL(tool.live).host} />
                     <img
                         src={tool.shot.src}
-                        srcSet={`${tool.shot.src.replace('.webp', '-960.webp')} 960w, ${tool.shot.src} 1600w`}
-                        sizes="(min-width: 1536px) 760px, (min-width: 768px) 56vw, 100vw"
+                        srcSet={tool.shot.srcSet ? `${tool.shot.src.replace('.webp', '-960.webp')} 960w, ${tool.shot.src} 1600w` : undefined}
+                        sizes={tool.shot.srcSet ? '(min-width: 1536px) 760px, (min-width: 768px) 56vw, 100vw' : undefined}
                         alt={tool.shot.alt}
-                        width={1600}
-                        height={1000}
+                        width={tool.shot.width ?? 1600}
+                        height={tool.shot.height ?? 1000}
                         loading="lazy"
                         decoding="async"
                         className="block w-full"
@@ -87,7 +87,7 @@ const Tools: React.FC = () => (
         <div className="container-site">
             <Reveal>
                 <SectionHeader id="tools-title" eyebrow="Tools I built" title="Open-source privacy and security tools for crypto.">
-                    Built in public for the Zcash and NEAR ecosystems. Each one is live, open source and shows its evidence, so you can
+                    Built in public for Zcash, NEAR and Parano1d. Each one is live, open source and shows its evidence, so you can
                     check the work instead of taking my word for it.
                 </SectionHeader>
             </Reveal>

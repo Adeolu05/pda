@@ -14,7 +14,7 @@ export interface Tool {
     live: string;
     repo: string;
     /** Real screenshot of the product, or omitted when the card renders its own preview. */
-    shot?: { src: string; alt: string };
+    shot?: { src: string; alt: string; width?: number; height?: number; srcSet?: boolean };
 }
 
 export const TOOLS: Tool[] = [
@@ -45,7 +45,7 @@ export const TOOLS: Tool[] = [
         badge: 'NEAR HACKATHON 2026',
         live: 'https://drainproof-lemon.vercel.app',
         repo: 'https://github.com/Adeolu05/drainproof',
-        shot: { src: '/images/tools/drainproof.webp', alt: 'Drainproof dashboard overview showing test runs and recent findings' },
+        shot: { src: '/images/tools/drainproof.webp', alt: 'Drainproof dashboard overview showing test runs and recent findings', srcSet: true },
     },
     {
         slug: 'am-i-linkable',
@@ -58,7 +58,29 @@ export const TOOLS: Tool[] = [
         badge: 'ZECATHON 2026',
         live: 'https://am-i-linkable.vercel.app',
         repo: 'https://github.com/Adeolu05/am-i-linkable',
-        shot: { src: '/images/tools/am-i-linkable.webp', alt: 'Am I Linkable home page with an amount check and live stats' },
+        shot: { src: '/images/tools/am-i-linkable.webp', alt: 'Am I Linkable home page with an amount check and live stats', srcSet: true },
+    },
+    {
+        slug: 'noid-wallet',
+        name: 'NOID Wallet',
+        tagline: 'Your keys never leave the phone.',
+        summary:
+            'Android light wallet for the Parano1d proof-of-work chain. Every send is proven on the phone with a zero-knowledge proof, so the secret never leaves it. Built with Primal (@Solid_Primal).',
+        facts: [
+            'Gift cards and payment requests as links or QR codes',
+            'Look-alike address warnings and values in 41 currencies',
+            'Open source (Apache-2.0), launched 21 Oct 2026',
+        ],
+        stack: ['React Native', 'Expo', 'Rust core', 'TypeScript API'],
+        badge: 'Live on Android',
+        live: 'https://noidusa.com',
+        repo: 'https://github.com/noidwallet/noid-wallet',
+        shot: {
+            src: '/images/tools/noid-wallet.webp',
+            alt: 'NOID wallet share card showing the home screen with balance, send, receive, scan and gift buttons',
+            width: 1200,
+            height: 630,
+        },
     },
 ];
 
@@ -90,6 +112,23 @@ export interface FeaturedProject {
 
 export const FEATURED: FeaturedProject[] = [
     {
+        title: 'Titan Forge',
+        kind: 'Headless e-commerce · US LLC',
+        desc: 'Store for a US metal art brand: 114+ panels in 8 collections, card and crypto checkout, FedEx live rates. I am the only developer.',
+        link: 'https://titanforge.art',
+        img: '/images/work/titan-forge.webp',
+        stack: ['Next.js', 'TypeScript', 'WooCommerce + GraphQL', 'Stripe'],
+        caseStudy: {
+            problem:
+                'Titan Forge, a US LLC, sells metal art panels made in the USA. It needed a fast store its team could run without a developer for daily work: a large catalogue, card and crypto payments, real shipping costs, and a way to bring outside artists on board.',
+            solution:
+                'A headless Next.js storefront on WooCommerce through GraphQL, so the team manages products in WordPress while customers get a fast site. A 3-step checkout with Stripe and crypto payments, FedEx live rates, Google sign-in accounts synced to WooCommerce, artist profiles with a "Sell Your Art" flow, and coupon tracking for the team\'s affiliates.',
+            outcome:
+                'Launched on 14 Aug 2026 at the time the client asked for. I am retained for new artists, features and maintenance.',
+            metric: { value: '114+', label: 'products across 8 collections' },
+        },
+    },
+    {
         title: 'Hijo Lux Watches',
         kind: 'Luxury e-commerce',
         desc: 'Luxury watch catalogue with WhatsApp checkout. Stock and prices live in the CMS, so the team updates them without a developer.',
@@ -104,23 +143,6 @@ export const FEATURED: FeaturedProject[] = [
                 'A Next.js storefront with an editorial layout, stock and pricing managed in Sanity CMS, and WhatsApp as the checkout so every enquiry becomes a direct conversation. Trust signals sit on the homepage: the brand registration certificate, authentication, clear pricing and delivery terms.',
             outcome:
                 'The team updates inventory, prices and featured pieces in the CMS themselves, and buyers go from a product to a WhatsApp chat in one tap.',
-        },
-    },
-    {
-        title: 'PrintNest',
-        kind: 'Product landing page',
-        desc: 'Explains a new product to artists in one scroll, so the right people try it instead of bouncing.',
-        link: 'https://printnest.vercel.app',
-        img: '/images/work/printnest.webp',
-        video: { src: '/videos/work/printnest.mp4', poster: '/videos/work/printnest-poster.webp' },
-        stack: ['React', 'TypeScript', 'Tailwind CSS'],
-        caseStudy: {
-            problem:
-                'PrintNest turns an artist’s images into a shareable print store. The landing page had to explain a new product to non-technical artists quickly enough that they would try it instead of bouncing.',
-            solution:
-                'A single-scroll React page that shows the product working: a live storefront mockup, a three-step how-it-works, a before/after of the AI copy tool and a no-signup demo store. Built mobile-first because artists arrive from Instagram, TikTok and WhatsApp.',
-            outcome: 'The workflow is clear in one scroll, so artists can judge the fit before signing up.',
-            metric: { value: '96', label: 'Lighthouse mobile performance (Sept 2026)' },
         },
     },
     {
@@ -150,6 +172,7 @@ export interface Build {
 }
 
 export const MORE_BUILDS: Build[] = [
+    { title: 'PrintNest', kind: 'Product landing page', desc: 'Explains a print-store product to artists in one scroll, with a no-signup demo store.', link: 'https://printnest.vercel.app', img: '/images/work/printnest.webp' },
     { title: 'Chef Olamide', kind: 'Portfolio', desc: 'Culinary portfolio for a UK-based Chef de Partie.', link: 'https://chefolamide.com', img: '/images/work/chef-olamide.webp' },
     { title: 'RCCG Glorious Premier', kind: 'Church website', desc: 'Service times, ministries, events, giving details and a prayer-request form.', link: 'https://ogp12.vercel.app', img: '/images/work/ogp12-church.webp' },
     { title: 'Grok Freedom', kind: 'Web3 site', desc: 'Official site for the Grok Freedom community.', link: 'https://grokfreedom.com', img: '/images/work/grok-freedom.webp' },
