@@ -35,8 +35,7 @@ export const GOOGLE_REVIEWS = {
 
 /** Public filenames in /public */
 export const RESUME_FILES = {
-    pdf: "/Peluola_David_Resume.pdf",
-    docx: "/Peluola_David_Resume.docx",
+    pdf: "/David_Peluola_Resume.pdf",
 } as const;
 
 

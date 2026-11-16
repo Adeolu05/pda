@@ -53,11 +53,8 @@ const About: React.FC = () => (
                 </div>
 
                 <div className="mt-8 flex flex-wrap gap-3">
-                    <a href={RESUME_FILES.pdf} className="btn-secondary" download>
-                        <FileText className="h-4 w-4" aria-hidden /> Résumé (PDF)
-                    </a>
-                    <a href={RESUME_FILES.docx} className="btn-secondary" download>
-                        Word (.docx)
+                    <a href={RESUME_FILES.pdf} className="btn-secondary" download="David_Peluola_Resume.pdf">
+                        <FileText className="h-4 w-4" aria-hidden /> Download résumé (PDF, 1 page)
                     </a>
                 </div>
             </Reveal>
