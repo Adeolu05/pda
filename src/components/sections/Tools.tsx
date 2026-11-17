@@ -45,7 +45,23 @@ const ToolCard: React.FC<{ tool: Tool }> = ({ tool }) => (
             <h3 id={`tool-${tool.slug}`} className="mt-2 text-[18px] font-medium tracking-[-0.015em] text-ink">
                 {tool.name}
             </h3>
-            <p className="mt-2 flex-1 text-[14px] leading-relaxed text-muted">{tool.summary}</p>
+            <div className="mt-2 flex-1">
+                <p className="text-[14px] leading-relaxed text-muted">{tool.summary}</p>
+                {tool.zechub && (
+                    <p className="mt-3 text-[12.5px] text-faint">
+                        Live on{' '}
+                        <ExternalLink
+                            href={tool.zechub.href}
+                            className="inline-flex items-center gap-0.5 font-medium text-muted underline decoration-line underline-offset-2 hover:text-ink"
+                        >
+                            ZecHub
+                            <ArrowUpRight className="h-3 w-3" aria-hidden />
+                            <span className="sr-only"> wiki (opens in a new tab)</span>
+                        </ExternalLink>{' '}
+                        as {tool.zechub.name}
+                    </p>
+                )}
+            </div>
             <div className="mt-5 flex items-center gap-4 border-t border-line pt-4 text-[13.5px]">
                 <ExternalLink href={tool.live} className="inline-flex items-center gap-1 font-medium text-ink hover:text-accent">
                     Open <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />

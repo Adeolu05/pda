@@ -13,6 +13,8 @@ export interface Tool {
     badge: string;
     live: string;
     repo: string;
+    /** Where the tool also runs inside the ZecHub wiki, under ZecHub's own name for it. */
+    zechub?: { href: string; name: string };
     /** Real screenshot of the product, or omitted when the card renders its own preview. */
     shot?: { src: string; alt: string; width?: number; height?: number; srcSet?: boolean };
 }
@@ -32,6 +34,7 @@ export const TOOLS: Tool[] = [
         badge: 'Live',
         live: 'https://canishield.vercel.app',
         repo: 'https://github.com/Adeolu05/canishield',
+        zechub: { href: 'https://zechub.wiki/tools?tool=deposit-check', name: 'Deposit Check' },
     },
     {
         slug: 'drainproof',
@@ -55,6 +58,7 @@ export const TOOLS: Tool[] = [
         badge: 'ZECATHON 2026',
         live: 'https://am-i-linkable.vercel.app',
         repo: 'https://github.com/Adeolu05/am-i-linkable',
+        zechub: { href: 'https://zechub.wiki/tools?tool=linkability', name: 'Linkability Check' },
         shot: { src: '/images/tools/am-i-linkable.webp', alt: 'Am I Linkable home page with an amount check and live stats', srcSet: true },
     },
     {
