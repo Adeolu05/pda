@@ -1,92 +1,74 @@
 import React from 'react';
-import { SOCIAL_LINKS, CONTACT_INFO, NAV_ITEMS } from '../../config/constants';
-import { Github, Linkedin, Instagram, ArrowUp } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { Github, Linkedin, Mail } from 'lucide-react';
+import { CONTACT_INFO, NAV_ITEMS, SOCIAL_LINKS } from '../../config/constants';
+import { ExternalLink } from '../common/ui';
 import XIcon from '../common/XIcon';
-import { scrollToSection } from '../../utils/scrollToSection';
+import TelegramIcon from '../common/TelegramIcon';
 
-const Footer: React.FC = () => {
-    const socialLinks = [
-        { Icon: Github, href: SOCIAL_LINKS.github, label: 'GitHub' },
-        { Icon: Linkedin, href: SOCIAL_LINKS.linkedIn, label: 'LinkedIn' },
-        { Icon: XIcon, href: SOCIAL_LINKS.twitter, label: 'X (Twitter)' },
-        { Icon: Instagram, href: SOCIAL_LINKS.instagram, label: 'Instagram' },
-    ];
+const socials = [
+    { Icon: XIcon, href: SOCIAL_LINKS.twitter, label: 'X (@0xdavee_)' },
+    { Icon: TelegramIcon, href: SOCIAL_LINKS.telegram, label: 'Telegram (@dpeluola)' },
+    { Icon: Github, href: SOCIAL_LINKS.github, label: 'GitHub' },
+    { Icon: Linkedin, href: SOCIAL_LINKS.linkedIn, label: 'LinkedIn' },
+];
 
-    const scrollToTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+const iconBtn =
+    'flex h-9 w-9 items-center justify-center rounded-lg border border-line-2 text-muted transition-colors hover:bg-raised hover:text-ink';
 
-    return (
-        <footer className="relative border-t border-slate-200/80">
-            <span
-                className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-violet-500/40 to-transparent"
-                aria-hidden
-            />
-            <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 py-14 sm:px-6 md:py-16 lg:px-12">
-                <div className="flex flex-col items-center gap-8 text-center md:flex-row md:items-start md:justify-between md:text-left">
-                    <div className="flex flex-col items-center gap-3 md:items-start">
-                        <button
-                            type="button"
-                            onClick={scrollToTop}
-                            className="font-display text-4xl italic text-slate-900 transition-colors hover:text-violet-700"
-                            aria-label="Back to top"
-                        >
-                            {CONTACT_INFO.shortName}
-                        </button>
-                        <p className="max-w-sm text-[13px] leading-relaxed text-slate-500">
-                            A boutique web engineering practice crafting high-performance full-stack applications, interactive landing pages, and Web3 experiences for global brands and startups.
-                        </p>
-                    </div>
-
-                    <nav
-                        aria-label="Footer"
-                        className="flex flex-wrap items-center justify-center gap-x-6 gap-y-3 md:justify-end"
-                    >
-                        {NAV_ITEMS.map((item) => (
-                            <a
-                                key={item.label}
-                                href={item.href}
-                                onClick={(e) => scrollToSection(e, item.href)}
-                                className="text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-500 transition-colors hover:text-violet-700"
-                            >
-                                {item.label}
-                            </a>
-                        ))}
-                    </nav>
-                </div>
-
-                <div className="flex flex-col items-center gap-6 border-t border-slate-100 pt-8 sm:flex-row sm:justify-between">
-                    <p className="order-2 text-[10px] font-bold uppercase tracking-[0.34em] text-slate-400 sm:order-1">
-                        © {new Date().getFullYear()}, {CONTACT_INFO.label}
-                    </p>
-
-                    <div className="order-1 flex items-center gap-3 sm:order-2">
-                        {socialLinks.map(({ Icon, href, label }) => (
-                            <motion.a
-                                key={label}
-                                whileHover={{ y: -3 }}
-                                href={href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label={label}
-                                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-500 shadow-sm transition-colors hover:border-violet-300 hover:bg-violet-50 hover:text-violet-700"
-                            >
-                                <Icon className="h-[18px] w-[18px]" aria-hidden />
-                            </motion.a>
-                        ))}
-                    </div>
-                </div>
+const Footer: React.FC = () => (
+    <footer className="border-t border-line">
+        <div className="container-site flex flex-col gap-8 py-12 md:flex-row md:items-start md:justify-between">
+            <div>
+                <a href="#top" className="font-mono text-[14px] font-medium text-ink">
+                    dpeluola<span className="text-accent">.</span>com
+                </a>
+                <p className="mt-3 max-w-xs text-[14px] leading-relaxed text-muted">Online stores and web apps for businesses, plus open-source tools for crypto.</p>
+                <p className="mt-4 inline-flex items-center gap-2 text-[13px] text-muted">
+                    <span className="h-1.5 w-1.5 rounded-full bg-success" aria-hidden />
+                    Available for new projects
+                </p>
             </div>
 
-            <button
-                type="button"
-                onClick={scrollToTop}
-                aria-label="Back to top"
-                className="absolute bottom-6 right-4 hidden h-11 w-11 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-600 shadow-md transition-colors hover:border-violet-300 hover:text-violet-700 lg:right-12 lg:flex"
-            >
-                <ArrowUp className="h-4 w-4" aria-hidden />
-            </button>
-        </footer>
-    );
-};
+            <nav aria-label="Footer">
+                <ul className="flex flex-wrap gap-x-6 gap-y-3">
+                    {NAV_ITEMS.map((i) => (
+                        <li key={i.href}>
+                            <a href={i.href} className="text-[14px] text-muted hover:text-ink">
+                                {i.label}
+                            </a>
+                        </li>
+                    ))}
+                    <li>
+                        <ExternalLink href={SOCIAL_LINKS.dev} className="text-[14px] text-muted hover:text-ink">
+                            Writing on DEV
+                        </ExternalLink>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+
+        <div className="border-t border-line">
+            <div className="container-site flex flex-col-reverse gap-4 py-6 sm:flex-row sm:items-center sm:justify-between">
+                <p className="text-[13px] text-faint">
+                    <span suppressHydrationWarning>© {new Date().getFullYear()}</span> {CONTACT_INFO.label}
+                </p>
+                <ul className="flex gap-2" aria-label="Contact and social profiles">
+                    <li>
+                        <a href={`mailto:${CONTACT_INFO.email}`} aria-label={`Email ${CONTACT_INFO.email}`} className={iconBtn}>
+                            <Mail className="h-4 w-4" aria-hidden />
+                        </a>
+                    </li>
+                    {socials.map(({ Icon, href, label }) => (
+                        <li key={label}>
+                            <ExternalLink href={href} aria-label={label} className={iconBtn}>
+                                <Icon className="h-4 w-4" />
+                            </ExternalLink>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        </div>
+    </footer>
+);
 
 export default Footer;

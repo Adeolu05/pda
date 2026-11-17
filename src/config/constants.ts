@@ -1,39 +1,46 @@
-export const PROFILE_IMAGE = "/profile.jpg";
+export const PROFILE_IMAGE = "/profile.webp";
 
 /** Matches floating nav on scroll, keep labels short for the pill layout */
 export const NAV_ITEMS = [
     { label: 'Work', href: '#work' },
     { label: 'Services', href: '#services' },
+    { label: 'Tools', href: '#tools' },
     { label: 'About', href: '#about' },
-    { label: 'Journey', href: '#resume' },
     { label: 'Contact', href: '#contact' },
 ];
 
 export const SOCIAL_LINKS = {
     linkedIn: "https://www.linkedin.com/in/david-peluola-6b45761b4",
     github: "https://github.com/Adeolu05",
-    twitter: "https://twitter.com/alphvibes",
+    twitter: "https://x.com/0xdavee_",
     instagram: "https://www.instagram.com/_dpeluola",
+    telegram: "https://t.me/dpeluola",
+    dev: "https://dev.to/dpeluola",
 };
 
 export const CONTACT_INFO = {
     email: "hello@dpeluola.com",
-    label: "Peluola David Adeoluwa",
+    label: "David Peluola",
     shortName: "P.D.A",
     domain: "dpeluola.com",
-    websiteUrl: "https://dpeluola.com"
+    websiteUrl: "https://www.dpeluola.com",
+    /** Cal.com discovery call, offered next to the contact form */
+    bookingUrl: "https://cal.com/dpeluola/discovery",
+};
+
+/** Google Business Profile, source of the testimonials in ProofSection */
+export const GOOGLE_REVIEWS = {
+    url: "https://share.google/4c2Ccak3IPZaaCQxN",
+    rating: "5.0",
+    count: 8,
 };
 
 /** Public filenames in /public */
 export const RESUME_FILES = {
-    pdf: "/Peluola_David_Resume.pdf",
-    docx: "/Peluola_David_Resume.docx",
+    pdf: "/David_Peluola_Resume.pdf",
 } as const;
 
-/** Shown under Selected Work, hiring / freelance signal */
-export const PORTFOLIO_HIRE_SUBLINE =
-    'Limited concurrent builds, share scope and deadline for an honest fit check.';
 
 /** Shown on the contact form, no server-side storage */
 export const CONTACT_PRIVACY_NOTE =
-    'This form only opens your email app with your message; nothing you type is saved on this website.';
+    'Sent straight to my inbox. Nothing you type is stored on this site.';

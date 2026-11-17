@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dpeluola.com/sitemap.xml
+Sitemap: https://www.dpeluola.com/sitemap.xml
