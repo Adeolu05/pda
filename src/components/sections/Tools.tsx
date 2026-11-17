@@ -33,10 +33,10 @@ const ToolCard: React.FC<{ tool: Tool }> = ({ tool }) => (
                 height={tool.shot.height ?? 1000}
                 loading="lazy"
                 decoding="async"
-                className="block aspect-[16/10] w-full border-b border-line object-cover object-top"
+                className="hidden aspect-[16/10] w-full border-b border-line object-cover object-top sm:block"
             />
         ) : (
-            <div className="border-b border-line">
+            <div className="hidden border-b border-line sm:block">
                 <CanIShieldMini />
             </div>
         )}
@@ -45,8 +45,7 @@ const ToolCard: React.FC<{ tool: Tool }> = ({ tool }) => (
             <h3 id={`tool-${tool.slug}`} className="mt-2 text-[18px] font-medium tracking-[-0.015em] text-ink">
                 {tool.name}
             </h3>
-            <p className="mt-1 text-[14px] text-faint">{tool.tagline}</p>
-            <p className="mt-3 flex-1 text-[14px] leading-relaxed text-muted">{tool.summary}</p>
+            <p className="mt-2 flex-1 text-[14px] leading-relaxed text-muted">{tool.summary}</p>
             <div className="mt-5 flex items-center gap-4 border-t border-line pt-4 text-[13.5px]">
                 <ExternalLink href={tool.live} className="inline-flex items-center gap-1 font-medium text-ink hover:text-accent">
                     Open <ArrowUpRight className="h-3.5 w-3.5" aria-hidden />
@@ -62,15 +61,14 @@ const ToolCard: React.FC<{ tool: Tool }> = ({ tool }) => (
 );
 
 const Tools: React.FC = () => (
-    <section id="tools" aria-labelledby="tools-title" className="border-t border-line py-24 md:py-32">
+    <section id="tools" aria-labelledby="tools-title" className="border-t border-line py-16 sm:py-20 md:py-28">
         <div className="container-site">
             <Reveal>
                 <SectionHeader id="tools-title" eyebrow="Open source" title="I also build privacy and security tools for crypto.">
-                    Built in public for Zcash, NEAR and Parano1d. Each one is live, open source and shows its evidence, so you can check
-                    the work instead of taking my word for it.
+                    Built in public for Zcash, NEAR and Parano1d. Live, open source, and every result shows its proof.
                 </SectionHeader>
             </Reveal>
-            <div className="mt-12 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+            <div className="mt-12 grid gap-3 sm:grid-cols-2 sm:gap-4 xl:grid-cols-4">
                 {TOOLS.map((tool, i) => (
                     <Reveal key={tool.slug} delay={i * 0.05} className="h-full">
                         <ToolCard tool={tool} />

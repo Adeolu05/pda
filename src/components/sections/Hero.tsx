@@ -79,9 +79,7 @@ const Hero: React.FC = () => {
 
           <p className="hero-rise [animation-delay:120ms] mt-6 max-w-[54ch] text-[17px] leading-relaxed text-muted"
           >
-            I&apos;m David Peluola, a full-stack developer in Nigeria. Fast
-            stores, landing pages and web apps your team can update themselves,
-            plus open-source privacy tools for crypto.
+            I&apos;m David Peluola, a full-stack developer in Nigeria. Fast stores your team can run, plus open-source tools for crypto.
           </p>
 
           <div className="hero-rise [animation-delay:180ms] mt-9 flex flex-wrap items-center justify-center gap-3 lg:justify-start"

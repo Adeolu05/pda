@@ -63,7 +63,7 @@ const Contact: React.FC = () => {
     ];
 
     return (
-        <section id="contact" aria-labelledby="contact-title" className="border-t border-line py-24 md:py-32">
+        <section id="contact" aria-labelledby="contact-title" className="border-t border-line py-16 sm:py-20 md:py-28">
             <div className="container-site grid gap-12 lg:grid-cols-12 lg:gap-14">
                 <Reveal className="lg:col-span-5">
                     <span className="eyebrow">Contact</span>
@@ -71,8 +71,7 @@ const Contact: React.FC = () => {
                         Got a project? Let&apos;s talk.
                     </h2>
                     <p className="mt-5 text-[16px] leading-relaxed text-muted">
-                        Send your goals, links and timeline. You&apos;ll get an honest fit check, a price and what &ldquo;done&rdquo; includes
-                        before any code. I reply within two business days.
+                        Share what you need. You&apos;ll get a price and a plan before any code, and a reply within two business days.
                     </p>
 
                     <div className="mt-8 space-y-3">

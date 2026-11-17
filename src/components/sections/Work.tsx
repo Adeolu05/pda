@@ -86,13 +86,6 @@ const FeaturedCard: React.FC<{ project: FeaturedProject; delay: number }> = ({
         <p className="mt-2 text-[15px] leading-relaxed text-muted">
           {project.desc}
         </p>
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {project.stack.map((s) => (
-            <span key={s} className="pill">
-              {s}
-            </span>
-          ))}
-        </div>
 
         {project.quote && (
           <figure className="mt-5 rounded-lg border border-line bg-raised/60 px-4 py-3">
@@ -234,7 +227,7 @@ const LeadCaseStudy: React.FC<{ project: FeaturedProject }> = ({ project }) => {
                       className={`block aspect-[16/10] w-full rounded-md object-cover object-top transition-opacity ${on ? "" : "opacity-70 group-hover:opacity-100"}`}
                     />
                     <span
-                      className={`mt-1.5 block truncate px-0.5 text-[12px] ${on ? "text-ink" : "text-muted"}`}
+                      className={`mt-1.5 block truncate text-[11px] sm:px-0.5 sm:text-[12px] ${on ? "text-ink" : "text-muted"}`}
                     >
                       {sc.label}
                     </span>
@@ -330,7 +323,7 @@ const Work: React.FC = () => {
     <section
       id="work"
       aria-labelledby="work-title"
-      className="border-t border-line py-24 md:py-32"
+      className="border-t border-line py-16 sm:py-20 md:py-28"
     >
       <div className="container-site">
         <Reveal>
@@ -339,8 +332,7 @@ const Work: React.FC = () => {
             eyebrow="Client work"
             title="Sites that sell, for real businesses."
           >
-            Stores, landing pages and community sites. Every project below is
-            live, so you can judge the quality in your own browser.
+            Every project below is live. Open any of them and judge for yourself.
           </SectionHeader>
         </Reveal>
 
@@ -386,9 +378,6 @@ const Work: React.FC = () => {
                     </span>
                     <span className="mt-0.5 block font-mono text-[11px] uppercase tracking-[0.1em] text-faint">
                       {b.kind}
-                    </span>
-                    <span className="mt-1 line-clamp-2 block text-[13px] leading-snug text-muted">
-                      {b.desc}
                     </span>
                     <span className="sr-only"> (opens in a new tab)</span>
                   </span>

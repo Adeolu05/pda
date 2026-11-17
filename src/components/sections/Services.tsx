@@ -13,7 +13,7 @@ const ICONS: Record<string, React.FC<{ className?: string }>> = {
 const IconTile: React.FC<{ k: string }> = ({ k }) => {
     const Icon = ICONS[k] ?? Blocks;
     return (
-        <span className="flex h-10 w-10 items-center justify-center rounded-lg border border-line bg-raised text-accent">
+        <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-line bg-raised text-accent">
             <Icon className="h-5 w-5" aria-hidden />
         </span>
     );
@@ -23,12 +23,11 @@ const Services: React.FC = () => {
     const [main, ...rest] = SERVICES;
 
     return (
-        <section id="services" aria-labelledby="services-title" className="border-t border-line py-24 md:py-32">
+        <section id="services" aria-labelledby="services-title" className="border-t border-line py-16 sm:py-20 md:py-28">
             <div className="container-site">
                 <Reveal>
                     <SectionHeader id="services-title" eyebrow="Services" title="What I can build for you.">
-                        One developer from design to deploy. No hand-offs, no agency layers, and you talk to the person writing the
-                        code.
+                        One developer from design to launch. You talk to the person writing the code.
                     </SectionHeader>
                 </Reveal>
 
@@ -55,7 +54,7 @@ const Services: React.FC = () => {
                                 <p className="text-[13px] font-medium text-ink">What you get</p>
                                 <ul className="mt-4 grid gap-3 sm:grid-cols-2">
                                     {main.includes?.map((item) => (
-                                        <li key={item} className="flex gap-3 rounded-lg border border-line bg-bg/40 p-4 text-[14.5px] leading-relaxed text-muted">
+                                        <li key={item} className="flex items-start gap-2.5 text-[15px] leading-snug text-ink">
                                             <Check className="mt-0.5 h-4 w-4 shrink-0 text-success" aria-hidden />
                                             {item}
                                         </li>
@@ -69,21 +68,22 @@ const Services: React.FC = () => {
                 <div className="mt-4 grid gap-4 md:grid-cols-3">
                     {rest.map((s, i) => (
                         <Reveal key={s.title} delay={i * 0.06} className="flex">
-                            <div className="card card-hover flex w-full flex-col p-6">
+                            <div className="card card-hover flex w-full items-start gap-4 p-5 md:flex-col md:gap-0 md:p-6">
                                 <IconTile k={s.key} />
-                                <h3 className="mt-5 text-[16px] font-medium text-ink">{s.title}</h3>
-                                <p className="mt-2 flex-1 text-[14.5px] leading-relaxed text-muted">{s.body}</p>
-                                <p className="mt-5 font-mono text-[11.5px] text-faint">{s.stack}</p>
+                                <div className="md:mt-5">
+                                    <h3 className="text-[16px] font-medium text-ink">{s.title}</h3>
+                                    <p className="mt-1.5 text-[14.5px] leading-relaxed text-muted md:mt-2">{s.body}</p>
+                                </div>
                             </div>
                         </Reveal>
                     ))}
                 </div>
 
-                <div className="mt-20">
+                <div className="mt-16">
                     <h3 className="text-[18px] font-medium text-ink">How a project runs</h3>
-                    <ol className="mt-6 grid gap-px overflow-hidden rounded-card border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+                    <ol className="mt-6 grid grid-cols-2 gap-px overflow-hidden rounded-card border border-line bg-line lg:grid-cols-4">
                         {PROCESS.map((p) => (
-                            <li key={p.step} className="bg-bg p-6">
+                            <li key={p.step} className="bg-bg p-5 sm:p-6">
                                 <span className="font-mono text-[12px] text-accent">{p.step}</span>
                                 <p className="mt-3 text-[16px] font-medium text-ink">{p.title}</p>
                                 <p className="mt-2 text-[14.5px] leading-relaxed text-muted">{p.body}</p>

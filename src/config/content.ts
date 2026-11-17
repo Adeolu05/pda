@@ -22,8 +22,7 @@ export const TOOLS: Tool[] = [
         slug: 'canishield',
         name: 'Can I Shield?',
         tagline: 'Can I send shielded ZEC to this service?',
-        summary:
-            'A public registry of which Zcash wallets and exchanges really support shielded withdrawals. Every result carries proof anyone can re-check.',
+        summary: 'Which wallets and exchanges really support shielded ZEC, with proof for every result.',
         facts: [
             '40+ wallets and exchanges tracked',
             'On-chain tests with published viewing keys',
@@ -38,8 +37,7 @@ export const TOOLS: Tool[] = [
         slug: 'drainproof',
         name: 'Drainproof',
         tagline: 'Is your AI agent drainproof?',
-        summary:
-            'CI that red-teams an AI agent’s money rules on every pull request, against the policy engine and an on-chain NEAR vault. The PR fails if a change would let the agent be drained.',
+        summary: 'CI that red-teams an AI agent’s money rules on every pull request.',
         facts: ['40 attack scenarios per run', 'Ships as a GitHub Action', 'Vault refuses unlisted payees on NEAR testnet'],
         stack: ['TypeScript', 'Rust (NEAR)', 'GitHub Actions'],
         badge: 'NEAR HACKATHON 2026',
@@ -51,8 +49,7 @@ export const TOOLS: Tool[] = [
         slug: 'am-i-linkable',
         name: 'Am I Linkable?',
         tagline: 'Checked here. Sent nowhere.',
-        summary:
-            'Before you move ZEC out of a shielded pool, see whether the amount could be matched to a recent deposit. The check runs in your browser and sends nothing.',
+        summary: 'Checks if a ZEC amount links back to a recent deposit, right in your browser.',
         facts: ['Runs entirely client-side', 'Built on a live chain indexer', 'ZECATHON entry, Core & Tooling'],
         stack: ['TypeScript', 'Chain indexer', 'Zcash'],
         badge: 'ZECATHON 2026',
@@ -64,8 +61,7 @@ export const TOOLS: Tool[] = [
         slug: 'noid-wallet',
         name: 'NOID Wallet',
         tagline: 'Your keys never leave the phone.',
-        summary:
-            'Android light wallet for the Parano1d proof-of-work chain. Every send is proven on the phone with a zero-knowledge proof, so the secret never leaves it. Built with Primal (@Solid_Primal).',
+        summary: 'Android wallet for Parano1d where every send is proven on the phone. Built with Primal (@Solid_Primal).',
         facts: [
             'Gift cards and payment requests as links or QR codes',
             'Look-alike address warnings and values in 41 currencies',
@@ -120,7 +116,7 @@ export const FEATURED: FeaturedProject[] = [
     {
         title: 'Titan Forge',
         kind: 'Headless e-commerce · US LLC',
-        desc: 'Store for a US metal art brand: 250+ panels in 8 collections, card and crypto checkout, FedEx live rates. I am the only developer.',
+        desc: 'Online store for a US metal art brand. I am the only developer.',
         link: 'https://titanforge.art',
         img: '/images/work/titan-forge.webp',
         stack: ['Next.js', 'TypeScript', 'WooCommerce + GraphQL', 'Stripe'],
@@ -149,19 +145,16 @@ export const FEATURED: FeaturedProject[] = [
             },
         ],
         caseStudy: {
-            problem:
-                'Titan Forge, a US LLC, sells metal art panels made in the USA. It needed a fast store its team could run without a developer for daily work: a large catalogue, card and crypto payments, real shipping costs, and a way to bring outside artists on board.',
-            solution:
-                'A headless Next.js storefront on WooCommerce through GraphQL, so the team manages products in WordPress while customers get a fast site. A 2-step checkout (shipping, then payment) with Stripe and crypto payments, FedEx live rates, Google sign-in accounts synced to WooCommerce, artist profiles with a "Sell Your Art" flow, and coupon tracking for the team\'s affiliates.',
-            outcome:
-                'Launched on 14 Aug 2026 at the time the client asked for. I am retained for new artists, features and maintenance.',
+            problem: 'A US art brand needed a fast store its team could run without a developer.',
+            solution: 'Headless Next.js on WooCommerce: the team edits products in WordPress, buyers get a fast store.',
+            outcome: 'Launched on 14 Aug 2026, on the client’s schedule. I am retained for new features.',
             metric: { value: '250+', label: 'panels across 8 collections' },
         },
     },
     {
         title: 'Hijo Lux Watches',
         kind: 'Luxury e-commerce',
-        desc: 'Luxury watch catalogue with WhatsApp checkout. Stock and prices live in the CMS, so the team updates them without a developer.',
+        desc: 'Luxury watch store with WhatsApp checkout. The team edits stock and prices in the CMS.',
         link: 'https://hijoluxwatches.com',
         img: '/images/work/hijo-hijolux.webp',
         video: { src: '/videos/work/hijolux.mp4', poster: '/videos/work/hijolux-poster.webp' },
@@ -172,28 +165,23 @@ export const FEATURED: FeaturedProject[] = [
             source: 'Google review',
         },
         caseStudy: {
-            problem:
-                'Hijo Lux sells authenticated luxury watches, many priced in six figures, to buyers across Nigeria and the UAE. Buyers needed reasons to trust the dealer before sending a message, and the team needed to change stock and prices often without waiting on a developer.',
-            solution:
-                'A Next.js storefront with an editorial layout, stock and pricing managed in Sanity CMS, and WhatsApp as the checkout so every enquiry becomes a direct conversation. Trust signals sit on the homepage: the brand registration certificate, authentication, clear pricing and delivery terms.',
-            outcome:
-                'The team updates inventory, prices and featured pieces in the CMS themselves, and buyers go from a product to a WhatsApp chat in one tap.',
+            problem: 'Buyers spending six figures need to trust the dealer, and stock changes often.',
+            solution: 'A Next.js store with stock and prices in Sanity, trust signals up front, and WhatsApp as checkout.',
+            outcome: 'The team runs the catalogue themselves, and every order becomes a WhatsApp chat.',
         },
     },
     {
         title: 'BCCS Hub',
         kind: 'Web3 community site',
-        desc: 'A plain-language front door for a Web3 community, built for newcomers who are wary of crypto hype.',
+        desc: 'A plain-language home for a Web3 community, made for newcomers wary of crypto hype.',
         link: 'https://bccshub.com',
         img: '/images/work/bccs-hub.webp',
         video: { src: '/videos/work/bccshub.mp4', poster: '/videos/work/bccshub-poster.webp' },
         stack: ['React', 'TypeScript', 'Tailwind CSS'],
         caseStudy: {
-            problem:
-                'Blue Collar Crypto Society introduces tradespeople and working-class creators to Web3. Most of that audience is new to crypto and wary of hype, so the site had to feel clear and trustworthy rather than overwhelming.',
-            solution:
-                'A React and TypeScript site organised around plain-language sections (what BCCS is, education over hype, community first) and four clear paths: the 3,333-piece collection, utility and rewards, music on DigiBeatz, and partners.',
-            outcome: 'The community’s front door, with a simple hierarchy newcomers can follow instead of a wall of crypto jargon.',
+            problem: 'Tradespeople new to crypto needed a site that felt clear, not overwhelming.',
+            solution: 'Plain-language sections and four clear paths: the collection, rewards, music and partners.',
+            outcome: 'A simple front door newcomers can follow, without the jargon.',
         },
     },
 ];
@@ -235,36 +223,18 @@ export const MORE_BUILDS: Build[] = [
  */
 export const REVIEWS: { quote: string; name: string; context?: string }[] = [
     {
-        quote:
-            'Dave developed two websites for clients of mine, both delivered to a high professional standard. The first was an e-commerce platform for a watch retailer… He was consistently professional, communicative, and delivered on time.',
+        quote: 'Dave developed two websites for clients of mine, both delivered to a high professional standard.',
         name: 'Oyewole O.',
         context: 'Referred two client builds',
     },
     {
-        quote:
-            'Amazing web developer. Very talented… Was able to accomplish every task I gave him and deliver a final product that was highly polished. Everyone who visited my website has nothing but good things to say.',
+        quote: 'Amazing web developer. Very talented… Everyone who visited my website has nothing but good things to say.',
         name: 'G Solid Prime',
         context: 'Google Local Guide',
     },
     {
-        quote:
-            'A Very professional, patient website developer. He pays attention to details and grasps ideas shared quickly… I would use his services over and over again.',
+        quote: 'A Very professional, patient website developer. He pays attention to details and grasps ideas shared quickly…',
         name: 'Naomi D.',
-    },
-    {
-        quote: 'One of the best out there, very composed with attention to details. I recommend any day.',
-        name: 'Hijo',
-        context: 'Hijo Lux Watches',
-    },
-    {
-        quote: 'He made my portfolio and I must admit, it was a very clean job...love it!',
-        name: 'Olasubomi A.',
-        context: 'Portfolio site',
-    },
-    {
-        quote: 'He is faithful and diligent in web development… I hereby recommend him for who ever needs his service.',
-        name: 'Adeyemi A.',
-        context: 'Church website',
     },
 ];
 
@@ -277,40 +247,35 @@ export const SERVICES = [
     {
         key: 'ecommerce',
         title: 'E-commerce',
-        body: 'Online stores your team runs day to day, with the checkout your buyers actually use. Fast on phones, easy to update, ready to take orders.',
+        body: 'Stores your team can run day to day, with the checkout your buyers actually use.',
         stack: 'Next.js · WooCommerce · Sanity · Stripe',
-        includes: [
-            'Products, prices and stock your team edits in WooCommerce or Sanity',
-            'Card payments with Stripe, crypto payments, or orders sent to WhatsApp',
-            'Live shipping rates at checkout (FedEx on Titan Forge)',
-            'Customer accounts and discount codes, with every order recorded in WooCommerce',
-        ],
+        includes: ['Products and stock you edit yourself', 'Card, crypto or WhatsApp checkout', 'Live shipping rates', 'Customer accounts and discount codes'],
     },
     {
         key: 'webapps',
         title: 'Web apps',
-        body: 'Full-stack apps with auth, dashboards and a real database, built to be maintained.',
+        body: 'Apps with logins, dashboards and a real database.',
         stack: 'Next.js · TypeScript · Postgres',
     },
     {
         key: 'landing',
         title: 'Landing pages',
-        body: 'One page that explains the offer fast and loads fast. Built to turn visitors into enquiries.',
+        body: 'One fast page that turns visitors into enquiries.',
         stack: 'React · Tailwind · Vercel',
     },
     {
         key: 'crypto',
         title: 'Crypto tooling',
-        body: 'Wallet UX, Telegram bots, dashboards and on-chain checks for Zcash, NEAR and Parano1d teams.',
+        body: 'Wallets, Telegram bots and on-chain checks for Zcash, NEAR and Parano1d.',
         stack: 'TypeScript · Rust · Node',
     },
 ];
 
 export const PROCESS = [
-    { step: '01', title: 'Discover', body: 'I learn the brand, the audience and the one action the site needs visitors to take.' },
-    { step: '02', title: 'Design', body: 'A clear direction for layout, copy and user flow, agreed before the build.' },
-    { step: '03', title: 'Build', body: 'Responsive, fast and maintainable, from interface to backend.' },
-    { step: '04', title: 'Launch', body: 'Deployed, tested and refined so it is ready for customers.' },
+    { step: '01', title: 'Discover', body: 'Your goals and the one action that matters.' },
+    { step: '02', title: 'Design', body: 'Layout and copy, agreed before any code.' },
+    { step: '03', title: 'Build', body: 'Fast, responsive and easy to maintain.' },
+    { step: '04', title: 'Launch', body: 'Tested, deployed and ready for customers.' },
 ];
 
 export const STACK = ['React', 'Next.js', 'TypeScript', 'Node.js', 'Postgres', 'Python', 'Rust (NEAR)', 'Tailwind', 'Sanity', 'WooCommerce', 'Vercel', 'Railway'];

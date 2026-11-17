@@ -43,4 +43,4 @@ export const RESUME_FILES = {
 
 /** Shown on the contact form, no server-side storage */
 export const CONTACT_PRIVACY_NOTE =
-    'Your brief is emailed straight to my inbox; nothing you type is saved in a database on this website.';
+    'Sent straight to my inbox. Nothing you type is stored on this site.';

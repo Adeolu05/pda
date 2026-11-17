@@ -5,7 +5,7 @@ import { STACK, WRITING } from '../../config/content';
 import { ExternalLink, Reveal } from '../common/ui';
 
 const About: React.FC = () => (
-    <section id="about" aria-labelledby="about-title" className="border-t border-line py-24 md:py-32">
+    <section id="about" aria-labelledby="about-title" className="border-t border-line py-16 sm:py-20 md:py-28">
         <div className="container-site grid gap-12 md:grid-cols-12 md:gap-14">
             <Reveal className="md:col-span-5">
                 <div className="frame mx-auto max-w-sm md:mx-0">
@@ -30,15 +30,10 @@ const About: React.FC = () => (
                 </h2>
                 <div className="mt-6 space-y-4 text-[16.5px] leading-relaxed text-muted">
                     <p>
-                        I&apos;m a full-stack developer based in Nigeria, working with clients remotely. I also study Software Engineering
-                        at Miva Open University.
+                        Full-stack developer in Nigeria, working with clients remotely, and a Software Engineering student at Miva Open
+                        University.
                     </p>
-                    <p>
-                        Most of my work is for businesses: stores, landing pages and web apps that need to look sharp and load fast. The
-                        rest is open source: privacy and security tools for crypto, built in public and checked against real chain
-                        data.
-                    </p>
-                    <p>I also contribute to ZecHub, the Zcash community wiki, and make motion explainers for the ecosystem.</p>
+                    <p>Most of my work is stores and sites for businesses. The rest is open-source crypto tools, plus ZecHub, the Zcash wiki.</p>
                 </div>
 
                 <div className="mt-8">
