@@ -11,9 +11,9 @@ const About: React.FC = () => (
                 <div className="frame mx-auto max-w-sm md:mx-0">
                     <img
                         src={PROFILE_IMAGE}
-                        srcSet="/profile-480.webp 480w, /profile-800.webp 800w, /profile.webp 1400w"
+                        srcSet="/profile-480.webp 480w, /profile-800.webp 800w, /profile.webp 1100w"
                         sizes="(min-width: 768px) 384px, 90vw"
-                        alt="Portrait of David Peluola"
+                        alt="David Peluola smiling, outdoors in front of green trees"
                         width={800}
                         height={1000}
                         loading="lazy"

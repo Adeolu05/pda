@@ -108,6 +108,10 @@ export interface FeaturedProject {
     video?: { src: string; poster: string };
     stack: string[];
     caseStudy?: CaseStudy;
+    /** Screens for the full-width case study (first project only). Each has -640 and thumb- variants. */
+    screens?: { label: string; src: string; thumb: string; alt: string }[];
+    /** Short feature list for the lead case study, each checked in the project's code */
+    highlights?: string[];
     /** Verbatim client review shown on the card */
     quote?: { text: string; name: string; source: string };
 }
@@ -116,18 +120,42 @@ export const FEATURED: FeaturedProject[] = [
     {
         title: 'Titan Forge',
         kind: 'Headless e-commerce · US LLC',
-        desc: 'Store for a US metal art brand: 114+ panels in 8 collections, card and crypto checkout, FedEx live rates. I am the only developer.',
+        desc: 'Store for a US metal art brand: 250+ panels in 8 collections, card and crypto checkout, FedEx live rates. I am the only developer.',
         link: 'https://titanforge.art',
         img: '/images/work/titan-forge.webp',
         stack: ['Next.js', 'TypeScript', 'WooCommerce + GraphQL', 'Stripe'],
+        // Verified in the Titan Forge code: Stripe + NOWPayments routes, FedEx rates API, Google OAuth synced to WordPress, WooCommerce coupons.
+        highlights: ['Card and crypto checkout', 'Live FedEx shipping rates', 'Google sign-in, synced to WooCommerce', 'Affiliate discount codes'],
+        // Public pages, logged out. Checkout personal details and the coupon code are blurred.
+        screens: [
+            { label: 'Home', src: '/images/work/titan-forge.webp', thumb: '/images/work/titan-forge/thumb-home.webp', alt: 'Titan Forge homepage' },
+            {
+                label: 'Catalogue',
+                src: '/images/work/titan-forge/catalogue.webp',
+                thumb: '/images/work/titan-forge/thumb-catalogue.webp',
+                alt: 'All products page listing 251 metal art panels, with filters for category, price, size and finish',
+            },
+            {
+                label: 'Cart',
+                src: '/images/work/titan-forge/cart.webp',
+                thumb: '/images/work/titan-forge/thumb-cart.webp',
+                alt: 'Cart drawer with a free shipping notice, a reference number on each panel and the returns policy',
+            },
+            {
+                label: 'Checkout',
+                src: '/images/work/titan-forge/checkout.webp',
+                thumb: '/images/work/titan-forge/thumb-checkout.webp',
+                alt: 'Two-step checkout with an order summary and a discount code applied. Personal details are blurred',
+            },
+        ],
         caseStudy: {
             problem:
                 'Titan Forge, a US LLC, sells metal art panels made in the USA. It needed a fast store its team could run without a developer for daily work: a large catalogue, card and crypto payments, real shipping costs, and a way to bring outside artists on board.',
             solution:
-                'A headless Next.js storefront on WooCommerce through GraphQL, so the team manages products in WordPress while customers get a fast site. A 3-step checkout with Stripe and crypto payments, FedEx live rates, Google sign-in accounts synced to WooCommerce, artist profiles with a "Sell Your Art" flow, and coupon tracking for the team\'s affiliates.',
+                'A headless Next.js storefront on WooCommerce through GraphQL, so the team manages products in WordPress while customers get a fast site. A 2-step checkout (shipping, then payment) with Stripe and crypto payments, FedEx live rates, Google sign-in accounts synced to WooCommerce, artist profiles with a "Sell Your Art" flow, and coupon tracking for the team\'s affiliates.',
             outcome:
                 'Launched on 14 Aug 2026 at the time the client asked for. I am retained for new artists, features and maintenance.',
-            metric: { value: '114+', label: 'products across 8 collections' },
+            metric: { value: '250+', label: 'panels across 8 collections' },
         },
     },
     {
