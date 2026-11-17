@@ -11,11 +11,11 @@ const About: React.FC = () => (
                 <div className="frame mx-auto max-w-sm md:mx-0">
                     <img
                         src={PROFILE_IMAGE}
-                        srcSet="/profile-480.webp 480w, /profile-800.webp 800w, /profile.webp 1100w"
+                        srcSet="/profile-480.webp 480w, /profile.webp 720w"
                         sizes="(min-width: 768px) 384px, 90vw"
-                        alt="David Peluola smiling, outdoors in front of green trees"
-                        width={800}
-                        height={1000}
+                        alt="David Peluola smiling at the camera, outdoors in front of green trees"
+                        width={720}
+                        height={900}
                         loading="lazy"
                         decoding="async"
                         className="block aspect-[4/5] w-full object-cover"
