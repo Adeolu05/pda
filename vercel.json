@@ -50,5 +50,22 @@
                 }
             ]
         }
+    ],
+    "redirects": [
+        {
+            "source": "/Peluola_David_Resume.pdf",
+            "destination": "/David_Peluola_Resume.pdf",
+            "permanent": true
+        },
+        {
+            "source": "/Peluola_David_Resume.docx",
+            "destination": "/David_Peluola_Resume.pdf",
+            "permanent": true
+        },
+        {
+            "source": "/og-image.png",
+            "destination": "/og-image.jpg",
+            "permanent": true
+        }
     ]
 }
