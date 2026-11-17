@@ -13,13 +13,10 @@ const NotFound: React.FC = () => (
             </div>
         </header>
         <div className="container-site flex flex-1 flex-col items-start justify-center py-24">
-            <div className="frame w-full max-w-xl p-6 font-mono text-[13.5px] leading-7 sm:p-8">
-                <p>
-                    <span className="text-accent">$</span> <span className="text-ink">cd ./this-page</span>
-                </p>
-                <p className="text-danger">cd: no such file or directory (404)</p>
-            </div>
-            <h1 className="mt-10 text-[clamp(2rem,5vw,3rem)] font-medium leading-[1.1] tracking-[-0.03em] text-ink">Page not found.</h1>
+            <p className="bg-gradient-to-b from-white/25 to-white/5 bg-clip-text text-[clamp(5rem,18vw,9rem)] font-medium leading-none tracking-[-0.05em] text-transparent">
+                404
+            </p>
+            <h1 className="mt-6 text-[clamp(2rem,5vw,3rem)] font-medium leading-[1.1] tracking-[-0.03em] text-ink">Page not found.</h1>
             <p className="mt-4 max-w-md text-[16px] leading-relaxed text-muted">
                 The link may be old or mistyped. Everything lives on one page, so start there.
             </p>

@@ -169,9 +169,7 @@ const Navbar: React.FC = () => {
                         className="fixed inset-x-0 bottom-0 top-16 overflow-y-auto overscroll-contain bg-bg md:hidden"
                     >
                         <div className="container-site flex min-h-full flex-col pb-[max(2rem,env(safe-area-inset-bottom))] pt-4">
-                            <p className="font-mono text-[12px] text-faint">
-                                <span className="text-accent">$</span> ls ./sections
-                            </p>
+                            <p className="eyebrow">Menu</p>
                             <ul className="mt-3">
                                 {NAV_ITEMS.map((item, i) => {
                                     const isActive = active === item.href.slice(1);

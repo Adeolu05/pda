@@ -11,7 +11,7 @@ const Footer: React.FC = () => (
                     dpeluola<span className="text-accent">.</span>com
                 </a>
                 <p className="mt-3 max-w-xs text-[14px] leading-relaxed text-muted">
-                    Full-stack developer. Web apps for businesses, privacy tools for crypto.
+                    Full-stack developer. Online stores and web apps for businesses, plus privacy tools for crypto.
                 </p>
                 <p className="mt-4 inline-flex items-center gap-2 font-mono text-[12px] text-muted">
                     <span className="h-1.5 w-1.5 rounded-full bg-success" aria-hidden />

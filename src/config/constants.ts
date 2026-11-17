@@ -3,8 +3,8 @@ export const PROFILE_IMAGE = "/profile.webp";
 /** Matches floating nav on scroll, keep labels short for the pill layout */
 export const NAV_ITEMS = [
     { label: 'Work', href: '#work' },
-    { label: 'Tools', href: '#tools' },
     { label: 'Services', href: '#services' },
+    { label: 'Tools', href: '#tools' },
     { label: 'About', href: '#about' },
     { label: 'Contact', href: '#contact' },
 ];

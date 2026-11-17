@@ -84,12 +84,12 @@ export const TOOLS: Tool[] = [
     },
 ];
 
-/** Verified on canishield.vercel.app (Nov 2026). Shown in the Can I Shield card preview. */
+/** Re-verified on canishield.vercel.app/services/* on 17 Nov 2026 ("Rejects unified addresses", "Transparent only"). */
 export const CANISHIELD_PREVIEW = [
     { name: 'Trust Wallet', state: 'Transparent only', tone: 'warn' as const },
-    { name: 'Binance', state: 'Unified address rejected', tone: 'danger' as const },
-    { name: 'Bitget', state: 'Unified address rejected', tone: 'danger' as const },
-    { name: 'MEXC', state: 'Unified address rejected', tone: 'danger' as const },
+    { name: 'Binance', state: 'Rejects unified', tone: 'danger' as const },
+    { name: 'Bitget', state: 'Rejects unified', tone: 'danger' as const },
+    { name: 'MEXC', state: 'Rejects unified', tone: 'danger' as const },
 ];
 
 export interface CaseStudy {
@@ -240,23 +240,38 @@ export const REVIEWS: { quote: string; name: string; context?: string }[] = [
     },
 ];
 
+/**
+ * E-commerce first. "includes" lists features shipped on real projects:
+ * Titan Forge code (Stripe, NOWPayments, FedEx rates API, WooCommerce, accounts, coupons)
+ * and the live Hijo Lux site (Sanity CMS, cart that ends in WhatsApp), checked Nov 2026.
+ */
 export const SERVICES = [
     {
+        key: 'ecommerce',
+        title: 'E-commerce',
+        body: 'Online stores your team runs day to day, with the checkout your buyers actually use. Fast on phones, easy to update, ready to take orders.',
+        stack: 'Next.js · WooCommerce · Sanity · Stripe',
+        includes: [
+            'Products, prices and stock your team edits in WooCommerce or Sanity',
+            'Card payments with Stripe, crypto payments, or orders sent to WhatsApp',
+            'Live shipping rates at checkout (FedEx on Titan Forge)',
+            'Customer accounts and discount codes, with every order recorded in WooCommerce',
+        ],
+    },
+    {
+        key: 'webapps',
         title: 'Web apps',
         body: 'Full-stack apps with auth, dashboards and a real database, built to be maintained.',
         stack: 'Next.js · TypeScript · Postgres',
     },
     {
-        title: 'E-commerce',
-        body: 'Stores your team can run: products, prices and orders in a CMS or WooCommerce, checkout that converts.',
-        stack: 'Next.js · Sanity · WooCommerce',
-    },
-    {
+        key: 'landing',
         title: 'Landing pages',
         body: 'One page that explains the offer fast and loads fast. Built to turn visitors into enquiries.',
         stack: 'React · Tailwind · Vercel',
     },
     {
+        key: 'crypto',
         title: 'Crypto tooling',
         body: 'Wallet UX, Telegram bots, dashboards and on-chain checks for Zcash, NEAR and Parano1d teams.',
         stack: 'TypeScript · Rust · Node',

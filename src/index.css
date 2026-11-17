@@ -184,14 +184,41 @@
     }
 }
 
-@keyframes blink {
-    50% {
+/* Hero entrance. Pure CSS so it starts on first paint of the pre-rendered HTML,
+   without waiting for JavaScript. Text only moves (never fades) so it stays readable. */
+@keyframes hero-rise {
+    from {
+        transform: translateY(12px);
+    }
+    to {
+        transform: none;
+    }
+}
+
+@keyframes hero-fade-rise {
+    from {
         opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
     }
 }
 
 @media (prefers-reduced-motion: no-preference) {
-    .caret {
-        animation: blink 1.1s step-end infinite;
+    /* Longhands, so the [animation-delay:*] utilities keep their stagger */
+    .hero-rise,
+    .hero-fade-rise {
+        animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+        animation-fill-mode: both;
+    }
+    .hero-rise {
+        animation-name: hero-rise;
+        animation-duration: 0.6s;
+    }
+    .hero-fade-rise {
+        animation-name: hero-fade-rise;
+        animation-duration: 0.8s;
     }
 }

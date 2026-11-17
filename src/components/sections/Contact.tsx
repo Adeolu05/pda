@@ -5,7 +5,7 @@ import XIcon from '../common/XIcon';
 import TelegramIcon from '../common/TelegramIcon';
 import { ExternalLink, Reveal } from '../common/ui';
 
-const PROJECT_TYPES = ['Landing page', 'Web app', 'E-commerce store', 'Business website', 'Crypto / Web3 tooling', 'Other'];
+const PROJECT_TYPES = ['E-commerce store', 'Landing page', 'Business website', 'Web app', 'Crypto / Web3 tooling', 'Other'];
 
 /** Local clients see naira, international clients see USD; both land in the same email. */
 const BUDGET_GROUPS = [

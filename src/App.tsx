@@ -16,9 +16,9 @@ const App: React.FC = () => (
     <MainLayout>
         <Hero />
         <Work />
-        <Tools />
         <Reviews />
         <Services />
+        <Tools />
         <About />
         <Contact />
     </MainLayout>
